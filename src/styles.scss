@@ -1,10 +1,12 @@
 @use '../styles/color';
+@use '../styles/typography';
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
+    @extend .font-style-7;
     color: $main-color;
 }
 
