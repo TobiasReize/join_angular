@@ -1,0 +1,34 @@
+@mixin dFlex($fd: row, $jc: center, $ai: center) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.dF-row-cc {
+    @include dFlex();
+}
+
+.dF-jc-fs {
+    @include dFlex($jc: flex-start);
+}
+
+.dF-jc-fe {
+    @include dFlex($jc: flex-end);
+}
+
+.dF-jc-sb {
+    @include dFlex($jc: space-between);
+}
+
+.dF-column-cc {
+    @include dFlex($fd: column);
+}
+
+.dF-column-jc-fs {
+    @include dFlex($fd: column, $jc: flex-start);
+}
+
+.dF-column-jc-fe {
+    @include dFlex($fd: column, $jc: flex-end);
+}

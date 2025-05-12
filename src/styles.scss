@@ -10,6 +10,21 @@
     color: $main-color;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: color.$main-color;
+    border-radius: 4px;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -24,10 +39,22 @@ a {
     cursor: pointer;
 }
 
-// h1 {
+h1 {
+    @extend .font-style-0;
+}
 
-// }
+h2 {
+    @extend .font-style-1;
+}
 
-// h2 {
+h3 {
+    @extend .font-style-2;
+}
 
-// }
+h4 {
+    @extend .font-style-3;
+}
+
+h5 {
+    @extend .font-style-4;
+}
