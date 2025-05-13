@@ -1,0 +1,5 @@
+@use '../../../../styles/helper';
+
+:host {
+    @extend .host;
+}

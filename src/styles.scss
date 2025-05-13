@@ -7,7 +7,7 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
     @extend .font-style-7;
-    color: $main-color;
+    color: color.$main-color;
 }
 
 ::-webkit-scrollbar {
