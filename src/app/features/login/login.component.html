@@ -1,1 +1,17 @@
-<p>login works!</p>
+<form class="form" #loginForm="ngForm">
+    <h3>Log in</h3>
+    <div class="input-container">
+        <div class="input-style">
+            <input #email type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+            <img src="#" alt="email">
+        </div>
+        <p class="error-msg">Please enter a valid Email.</p>
+
+        <div class="input-style">
+            <input #password type="password" name="password" placeholder="Password" minlength="6" required>
+            <img src="#" alt="password">
+        </div>
+        <p class="error-msg">Check your password. Please try again.</p>
+    </div>
+
+</form>

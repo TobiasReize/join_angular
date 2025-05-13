@@ -1,5 +1,21 @@
 @use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
 
 :host {
     @extend .host;
+}
+
+h3 {
+    color: black;
+    background-image: linear-gradient(color.$hover-light-blue);
+    background-position: bottom center;
+    background-size: 150px 3px;
+    background-repeat: no-repeat;
+    padding-bottom: 16px
+}
+
+.input-container {
+    @extend .dF-column-cc;
+    width: 100%;
 }
