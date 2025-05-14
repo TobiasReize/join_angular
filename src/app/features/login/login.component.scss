@@ -1,6 +1,7 @@
 @use '../../../../styles/helper';
 @use '../../../../styles/color';
 @use '../../../../styles/layout';
+@use '../../../../styles/distance';
 
 :host {
     @extend .host;
@@ -17,5 +18,11 @@ h3 {
 
 .input-container {
     @extend .dF-column-cc;
+    width: 100%;
+}
+
+.btn-container {
+    @extend .dF-row-cc;
+    gap: 35px;
     width: 100%;
 }

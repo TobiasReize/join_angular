@@ -5,13 +5,15 @@
             <input #email type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
             <img src="#" alt="email">
         </div>
-        <p class="error-msg">Please enter a valid Email.</p>
-
+        <p class="error-msg m-btm-10">Please enter a valid Email.</p>
         <div class="input-style">
             <input #password type="password" name="password" placeholder="Password" minlength="6" required>
             <img src="#" alt="password">
         </div>
         <p class="error-msg">Check your password. Please try again.</p>
     </div>
-
+    <div class="btn-container">
+        <button class="btn-1-prim">Log In</button>
+        <button class="btn-1-sec">Guest Log In</button>
+    </div>
 </form>
