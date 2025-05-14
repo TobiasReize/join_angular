@@ -51,7 +51,10 @@
     color: color.$error-red;
     text-align: start;
     width: 100%;
-    visibility: hidden;
+}
+
+.error-input {
+    border: 1px solid color.$form-red;
 }
 
 .btn-1 {

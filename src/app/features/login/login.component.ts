@@ -1,13 +1,34 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+
+  isPasswordVisible: boolean = false;
+  passwordIconSrc: string = 'icon/visibility_off.svg';
+
+
+  showPassword(state: boolean, password: NgModel) {
+    if (state == true && password.value.length > 0) {
+      this.isPasswordVisible = true;
+      this.passwordIconSrc = 'icon/visibility.svg'
+    } else {
+      this.isPasswordVisible = false;
+      this.passwordIconSrc = 'icon/visibility_off.svg'
+    }
+  }
+  
+
+  onSubmit(ngForm: NgForm) {
+    console.log(ngForm);
+    console.log(ngForm.value);
+  }
 
 }
