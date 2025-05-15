@@ -16,6 +16,7 @@
                 (touchend)="showPassword(false, password)" 
                 (touchcancel)="showPassword(false, password)" 
                 [src]="password.value && password.value.length > 0 ? passwordIconSrc : 'icon/password.svg'" 
+                [ngClass]="{'pointer': password.value && password.value.length > 0}"
                 alt="password"
             >
         </div>
@@ -23,6 +24,6 @@
     </div>
     <div class="btn-container">
         <input [disabled]="email.invalid || password.invalid" class="btn-1-prim" type="submit" name="submit" value="Log In">
-        <button class="btn-1-sec">Guest Log In</button>
+        <button (click)="guestLogin()" class="btn-1-sec">Guest Log In</button>
     </div>
 </form>

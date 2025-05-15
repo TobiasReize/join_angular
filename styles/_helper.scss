@@ -46,6 +46,10 @@
     }
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .error-msg {
     @extend .font-style-10;
     color: color.$error-red;

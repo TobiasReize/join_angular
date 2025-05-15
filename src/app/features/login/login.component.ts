@@ -31,4 +31,10 @@ export class LoginComponent {
     console.log(ngForm.value);
   }
 
+
+  guestLogin() {
+    console.log('Gast Login');
+    // tbd.
+  }
+
 }
