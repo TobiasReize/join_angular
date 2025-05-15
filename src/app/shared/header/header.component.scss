@@ -1,0 +1,26 @@
+@use '../../../../styles/layout';
+@use '../../../../styles/helper';
+
+:host {
+    @extend .dF-row-cc;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+}
+
+header {
+    @extend .dF-jc-sb;
+    max-width: 1920px;
+    width: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: 122px
+}
+
+.signup-container {
+    @extend .dF-row-cc;
+    gap: 32px;
+}
