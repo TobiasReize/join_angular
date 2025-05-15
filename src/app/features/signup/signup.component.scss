@@ -1,0 +1,29 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+    position: relative;
+}
+
+h3 {
+    color: black;
+    background-image: linear-gradient(color.$hover-light-blue);
+    background-position: bottom center;
+    background-size: 150px 3px;
+    background-repeat: no-repeat;
+    padding-bottom: 16px
+}
+
+.input-container {
+    @extend .dF-column-cc;
+    width: 100%;
+}
+
+input[type="submit"]:disabled {
+    background-color: color.$icon-gray;
+    cursor: default;
+    box-shadow: unset;
+}

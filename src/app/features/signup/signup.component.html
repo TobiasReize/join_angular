@@ -1,0 +1,50 @@
+<app-header type="signup"></app-header>
+
+<form (ngSubmit)="onSubmit(loginForm)" class="form" #loginForm="ngForm">
+    <h3>Sign up</h3>
+    <div class="input-container">
+        <div [ngClass]="{'error-input': name.touched && name.invalid}" class="input-style">
+            <input #name="ngModel" type="text" name="name" placeholder="Name" minlength="3" maxlength="20" ngModel required>
+            <img src="icon/person.svg" alt="email">
+        </div>
+        <p [ngStyle]="{'visibility': name.touched && name.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid name.</p>
+        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="input-style">
+            <input #email="ngModel" type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" ngModel required>
+            <img src="icon/email.svg" alt="email">
+        </div>
+        <p [ngStyle]="{'visibility': email.touched && email.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid Email.</p>
+        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="input-style">
+            <input #password="ngModel" [type]="isPasswordVisible ? 'text' : 'password'" name="password" placeholder="Password" minlength="6" ngModel required>
+            <img 
+                (mousedown)="showPassword('password', true, password)" 
+                (mouseup)="showPassword('password', false, password)" 
+                (mouseleave)="showPassword('password', false, password)" 
+                (touchstart)="showPassword('password', true, password)" 
+                (touchend)="showPassword('password', false, password)" 
+                (touchcancel)="showPassword('password', false, password)" 
+                [src]="password.value && password.value.length > 0 ? passwordIconSrc : 'icon/password.svg'" 
+                [ngClass]="{'pointer': password.value && password.value.length > 0}"
+                alt="password"
+            >
+        </div>
+        <p [ngStyle]="{'visibility': password.touched && password.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Check your password. Please try again.</p>
+        <div [ngClass]="{'error-input': (passwordRepeat.touched && passwordRepeat.value !== password.value) || (passwordRepeat.touched && passwordRepeat.invalid)}" class="input-style">
+            <input #passwordRepeat="ngModel" [type]="isPasswordRepeatVisible ? 'text' : 'password'" name="passwordRepeat" placeholder="Confirm Password" minlength="6" ngModel required>
+            <img 
+                (mousedown)="showPassword('passwordRepeat', true, passwordRepeat)" 
+                (mouseup)="showPassword('passwordRepeat', false, passwordRepeat)" 
+                (mouseleave)="showPassword('passwordRepeat', false, passwordRepeat)" 
+                (touchstart)="showPassword('passwordRepeat', true, passwordRepeat)" 
+                (touchend)="showPassword('passwordRepeat', false, passwordRepeat)" 
+                (touchcancel)="showPassword('passwordRepeat', false, passwordRepeat)" 
+                [src]="passwordRepeat.value && passwordRepeat.value.length > 0 ? passwordRepeatIconSrc : 'icon/password.svg'" 
+                [ngClass]="{'pointer': passwordRepeat.value && passwordRepeat.value.length > 0}"
+                alt="passwordRepeat"
+            >
+        </div>
+        <p [ngStyle]="{'visibility': (passwordRepeat.touched && passwordRepeat.value !== password.value) || (passwordRepeat.touched && passwordRepeat.invalid) ? 'visible' : 'hidden'}" class="error-msg">Password invalid or don't match. Please try again.</p>
+    </div>
+    <input [disabled]="email.invalid || password.invalid || passwordRepeat.invalid || passwordRepeat.value !== password.value" class="btn-1-prim" type="submit" name="submit" value="Sign up">
+</form>
+
+<app-footer></app-footer>
