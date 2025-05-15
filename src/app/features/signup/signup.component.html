@@ -1,7 +1,11 @@
 <app-header type="signup"></app-header>
 
 <form (ngSubmit)="onSubmit(loginForm)" class="form" #loginForm="ngForm">
-    <h3>Sign up</h3>
+    <div class="headline-container">
+        <img (click)="goBack()" src="icon/arrow_back.svg" alt="arrow_back">
+        <h3>Sign up</h3>
+        <div class="spacer"></div>
+    </div>
     <div class="input-container">
         <div [ngClass]="{'error-input': name.touched && name.invalid}" class="input-style">
             <input #name="ngModel" type="text" name="name" placeholder="Name" minlength="3" maxlength="20" ngModel required>

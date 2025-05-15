@@ -8,6 +8,27 @@
     position: relative;
 }
 
+.headline-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+
+    > img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+
+        &:hover {
+            cursor: pointer;
+            background-color: color.$icon-hover-gray;
+            scale: 1.1;
+        }
+    }
+
+    > .spacer {
+        width: 32px;
+    }
+}
+
 h3 {
     color: black;
     background-image: linear-gradient(color.$hover-light-blue);

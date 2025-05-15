@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from "../../shared/header/header.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +17,12 @@ export class SignupComponent {
     isPasswordRepeatVisible: boolean = false;
     passwordIconSrc: string = 'icon/visibility_off.svg';
     passwordRepeatIconSrc: string = 'icon/visibility_off.svg';
-  
+    location = inject(Location);
+
+    
+    goBack() {
+      this.location.back();
+    }
   
     showPassword(name: string, state: boolean, password: NgModel) {
       if (state == true && password.value.length > 0) {
