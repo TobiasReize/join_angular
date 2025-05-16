@@ -1,0 +1,19 @@
+@use '../../../../../styles/helper';
+@use '../../../../../styles/animation';
+@use '../../../../../styles/variable';
+
+:host {
+    @extend .host;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    // opacity: 1;
+    // transition: all 500ms ease-out;
+}
+
+.logo {
+    width: 274px;
+    height: 334px;
+    animation: moveTopLeft variable.$animation-config, shrinkLogo variable.$animation-config;
+}

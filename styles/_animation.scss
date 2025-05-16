@@ -1,0 +1,24 @@
+@use '../styles/variable';
+
+@keyframes shrinkLogo {
+    from {
+        height: variable.$logo-start-height;
+        width: variable.$logo-start-width;
+    }
+
+    to {
+        height: variable.$logo-end-height;
+        width: variable.$logo-end-width;
+    }
+}
+
+@keyframes moveTopLeft {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+
+    to {
+        transform: translateY(calc(-50vh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + variable.$logo-end-width / 2));
+        transform: translateY(calc(-50svh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + variable.$logo-end-width / 2));
+    }
+}

@@ -31,3 +31,7 @@
 </form>
 
 <app-footer></app-footer>
+
+@if (showIntro) {
+    <app-intro (introFinished)="setIntroVariable($event)"></app-intro>
+}

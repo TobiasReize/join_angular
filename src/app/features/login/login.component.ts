@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { HeaderComponent } from '../../shared/header/header.component';
+import { IntroComponent } from './intro/intro.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent],
+  imports: [CommonModule, FormsModule, FooterComponent, HeaderComponent, IntroComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -15,6 +16,12 @@ export class LoginComponent {
 
   isPasswordVisible: boolean = false;
   passwordIconSrc: string = 'icon/visibility_off.svg';
+  showIntro: boolean = true;
+
+
+  setIntroVariable(introFinished: boolean) {
+    this.showIntro = !introFinished;    
+  }
 
 
   showPassword(state: boolean, password: NgModel) {
