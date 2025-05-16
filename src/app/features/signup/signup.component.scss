@@ -43,6 +43,37 @@ h3 {
     width: 100%;
 }
 
+.privacy-policy-container {
+    @extend .dF-row-cc;
+    gap: 8px;
+
+    &:hover > img {
+        background-color: color.$icon-hover-gray;
+    }
+
+    > img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    > p {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+
+        > span {
+            @extend .font-style-9;
+            color: color.$hover-light-blue;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
 input[type="submit"]:disabled {
     background-color: color.$icon-gray;
     cursor: default;

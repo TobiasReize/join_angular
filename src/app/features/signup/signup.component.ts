@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { HeaderComponent } from "../../shared/header/header.component";
-import { FooterComponent } from "../../shared/footer/footer.component";
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -17,9 +18,10 @@ export class SignupComponent {
     isPasswordRepeatVisible: boolean = false;
     passwordIconSrc: string = 'icon/visibility_off.svg';
     passwordRepeatIconSrc: string = 'icon/visibility_off.svg';
+    acceptedPrivacyPolicy: boolean = false;
     location = inject(Location);
 
-    
+
     goBack() {
       this.location.back();
     }
@@ -43,8 +45,13 @@ export class SignupComponent {
         }
       }
     }
-    
-  
+
+
+    toggleCheckbox() {
+      this.acceptedPrivacyPolicy = !this.acceptedPrivacyPolicy;
+    }
+
+
     onSubmit(ngForm: NgForm) {
       console.log(ngForm);
       console.log(ngForm.value);
