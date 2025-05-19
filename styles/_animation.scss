@@ -22,3 +22,13 @@
         transform: translateY(calc(-50svh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + variable.$logo-end-width / 2));
     }
 }
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(+100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}

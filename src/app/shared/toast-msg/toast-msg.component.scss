@@ -1,0 +1,22 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/animation';
+@use '../../../../styles/variable';
+
+:host {
+    @extend .host;
+    background-color: rgba(238, 238, 238, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: fadeIn variable.$intro-animation-config;
+}
+
+.content {
+    padding: 25px;
+    border-radius: 20px;
+    background-color: color.$main-color;
+    color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+}

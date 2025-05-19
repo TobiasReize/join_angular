@@ -15,5 +15,5 @@
 .logo {
     width: 274px;
     height: 334px;
-    animation: moveTopLeft variable.$animation-config, shrinkLogo variable.$animation-config;
+    animation: moveTopLeft variable.$intro-animation-config, shrinkLogo variable.$intro-animation-config;
 }

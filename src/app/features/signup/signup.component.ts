@@ -4,11 +4,12 @@ import { CommonModule, Location } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { ToastMsgComponent } from "../../shared/toast-msg/toast-msg.component";
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent, RouterLink],
+  imports: [CommonModule, FormsModule, HeaderComponent, FooterComponent, RouterLink, ToastMsgComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
