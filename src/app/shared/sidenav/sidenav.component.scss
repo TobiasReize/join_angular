@@ -1,0 +1,44 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/typography';
+
+:host {
+    height: 100vh;
+    height: 100svh;
+    width: 232px;
+    background-color: color.$main-color;
+}
+
+.content {
+    @extend .dF-column-cc;
+    padding: 64px 0;
+}
+
+.logo {
+    width: 100px;
+}
+
+.navigation {
+    @extend .dF-column-cc;
+    gap: 15px;
+    width: 100%;
+    margin-top: 114px;
+}
+
+.option {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0 8px 56px;
+
+    > img {
+        width: 30px;
+        height: 30px;
+    }
+
+    > span {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+    }
+}

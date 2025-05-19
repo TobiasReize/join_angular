@@ -17,7 +17,7 @@ footer {
 
     > a {
         @extend .font-style-9;
-        color: color.$icon-gray;
+        color: color.$form-icon-gray;
 
         &:hover {
             font-weight: 700;

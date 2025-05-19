@@ -28,7 +28,7 @@ h3 {
     width: 100%;
 
     > input[type="submit"]:disabled {
-        background-color: color.$icon-gray;
+        background-color: color.$form-icon-gray;
         cursor: default;
         box-shadow: unset;
     }

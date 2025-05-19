@@ -60,7 +60,7 @@ h3 {
 
     > p {
         @extend .font-style-9;
-        color: color.$icon-gray;
+        color: color.$form-icon-gray;
 
         > span {
             @extend .font-style-9;
@@ -75,7 +75,7 @@ h3 {
 }
 
 input[type="submit"]:disabled {
-    background-color: color.$icon-gray;
+    background-color: color.$form-icon-gray;
     cursor: default;
     box-shadow: unset;
 }

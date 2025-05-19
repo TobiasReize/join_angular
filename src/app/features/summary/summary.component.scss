@@ -1,0 +1,15 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+
+:host {
+    @extend .host;
+    // position: relative;
+}
+
+.content-wrapper {
+    @extend .dF-column-cc;
+    height: 100%;
+    flex: 1;
+    position: relative;
+}
