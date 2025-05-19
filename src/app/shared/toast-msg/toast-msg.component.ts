@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({
   selector: 'app-toast-msg',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './toast-msg.component.scss'
 })
 export class ToastMsgComponent {
+
+  toastMsgService = inject(ToastMsgService);
 
 }

@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { ToastMsgComponent } from "../../shared/toast-msg/toast-msg.component";
+import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({
   selector: 'app-signup',
@@ -21,12 +22,15 @@ export class SignupComponent {
     passwordRepeatIconSrc: string = 'icon/visibility_off.svg';
     acceptedPrivacyPolicy: boolean = false;
     location = inject(Location);
+    toastMsgService = inject(ToastMsgService);
+    private router = inject(Router);
 
 
     goBack() {
       this.location.back();
     }
   
+
     showPassword(name: string, state: boolean, password: NgModel) {
       if (state == true && password.value.length > 0) {
         if (name == 'password') {
@@ -54,8 +58,15 @@ export class SignupComponent {
 
 
     onSubmit(ngForm: NgForm) {
-      console.log(ngForm);
-      console.log(ngForm.value);
+      if (ngForm.submitted && ngForm.valid) {
+        console.log(ngForm);
+        console.log(ngForm.value);
+        this.toastMsgService.showToastMsg('You Signed up successfully');
+        setTimeout(() => {
+          this.toastMsgService.resetToastMsg();
+          this.router.navigateByUrl('');
+        }, 2000);
+      }
     }
 
 }
