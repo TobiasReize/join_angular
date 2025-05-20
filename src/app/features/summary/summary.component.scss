@@ -38,7 +38,7 @@ h2, h3 {
     gap: 30px;
 }
 
-.separator {
+.title-separator {
     width: 3px;
     height: 56px;
     background-color: color.$hover-light-blue;
@@ -77,6 +77,7 @@ h2, h3 {
     border-radius: 30px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
     flex: 1;
+    transition: all 80ms ease-in-out;
 
     &:hover {
         cursor: pointer;
@@ -92,6 +93,26 @@ h2, h3 {
 
             path {
                 fill: color.$main-color;
+            }
+        }
+    }
+
+    &:active {
+        background-color: #F9F9F9;
+
+        h2 {
+            color: black;
+        }
+
+        span {
+            color: color.$main-color;
+        }
+
+        .first-row-icon {
+            background-color: color.$main-color;
+
+            path {
+                fill: white;
             }
         }
     }
@@ -117,4 +138,39 @@ h2, h3 {
 
 .done-icon {
     padding: 8px;
+}
+
+.middle-row {
+    padding: 33px 0;
+}
+
+.urgent-icon {
+    width: 60px;
+    height: 60px;
+    padding: 13px;
+    background-color: color.$urgent-red;
+    border-radius: 50%;
+    margin-right: 18px;
+}
+
+.urgent-separator {
+    width: 2px;
+    height: 102px;
+    background-color: color.$form-gray;
+    margin-right: 61px;
+    margin-left: 61px;
+}
+
+.deadline-container {
+    @extend .dF-column-ai-fs;
+    gap: 13px;
+}
+
+.last-row-rectangle {
+    @extend .dF-column-cc;
+    padding: 21.5px 0;
+
+    > span {
+        text-align: center;
+    }
 }
