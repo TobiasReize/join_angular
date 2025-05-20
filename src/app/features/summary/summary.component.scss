@@ -174,3 +174,12 @@ h2, h3 {
         text-align: center;
     }
 }
+
+.greeting-container {
+    @extend .dF-column-ai-fs;
+    gap: 3px;
+}
+
+h1 {
+    color: color.$hover-light-blue;
+}
