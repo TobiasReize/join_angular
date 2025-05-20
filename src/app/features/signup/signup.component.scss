@@ -10,7 +10,10 @@
 
 app-header {
     @extend .dF-row-cc;
+    position: absolute;
+    left: 0;
     top: 60px;
+    width: 100%;
 }
 
 .headline-container {

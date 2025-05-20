@@ -3,12 +3,6 @@
 @use '../../../../styles/variable';
 @use '../../../../styles/color';
 
-:host {
-    width: 100%;
-    position: absolute;
-    left: 0;
-}
-
 .login-header {
     @extend .dF-jc-sb;
     max-width: 1920px;

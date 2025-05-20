@@ -1,6 +1,7 @@
 @use '../../../../styles/helper';
 @use '../../../../styles/color';
 @use '../../../../styles/layout';
+@use '../../../../styles/typography';
 
 :host {
     @extend .host;
@@ -15,7 +16,105 @@
 
 app-header {
     @extend .dF-jc-fs;
-    top: 0;
+    width: 100%;
     background-color: white;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.main-content {
+    @extend .dF-column-fs;
+    gap: 56px;
+    width: 100%;
+    flex: 1;
+    padding: 110px 0 0 96px;
+}
+
+h2, h3 {
+    color: black;
+}
+
+.title-container {
+    @extend .dF-row-cc;
+    gap: 30px;
+}
+
+.separator {
+    width: 3px;
+    height: 56px;
+    background-color: color.$hover-light-blue;
+}
+
+.title-text {
+    @extend .font-style-4;
+}
+
+.content-container {
+    @extend .dF-row-cc;
+    gap: 80px;
+}
+
+.key-metrics-container {
+    @extend .dF-column-cc;
+    gap: 28px;
+    width: 560px;
+}
+
+.first-row, .middle-row, .last-row {
+    @extend .dF-row-cc;
+    width: 100%;
+}
+
+.first-row {
+    gap: 32px;
+}
+
+.last-row {
+    gap: 28px;
+}
+
+.rectangle-style {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    flex: 1;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$main-color;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+        h2, span {
+            color: white;
+        }
+
+        .first-row-icon {
+            background-color: white;
+
+            path {
+                fill: color.$main-color;
+            }
+        }
+    }
+}
+
+.first-row-rectangle {
+    @extend .dF-row-cc;
+    gap: 18px;
+    padding: 33.5px 0;
+}
+
+.first-row-icon {
+    width: 69px;
+    height: 69px;
+    padding: 18.5px;
+    background-color: color.$main-color;
+    border-radius: 50%;
+
+    path {
+        fill: white;
+    }
+}
+
+.done-icon {
+    padding: 8px;
 }
