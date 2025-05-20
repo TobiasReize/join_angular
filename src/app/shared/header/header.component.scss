@@ -1,21 +1,21 @@
 @use '../../../../styles/layout';
 @use '../../../../styles/helper';
+@use '../../../../styles/variable';
+@use '../../../../styles/color';
 
 :host {
-    @extend .dF-row-cc;
     width: 100%;
     position: absolute;
-    top: 60px;
     left: 0;
 }
 
-header {
+.login-header {
     @extend .dF-jc-sb;
     max-width: 1920px;
     width: 100%;
 }
 
-.logo {
+.login-logo {
     width: 100px;
     height: 122px
 }
@@ -23,4 +23,47 @@ header {
 .signup-container {
     @extend .dF-row-cc;
     gap: 32px;
+}
+
+.main-header {
+    @extend .dF-jc-sb;
+    max-width: calc(1920px - variable.$sidenav-width);
+    width: 100%;
+    padding: 20px 40px 20px 116px;
+}
+
+.header-title {
+    color: black;
+}
+
+.help-container {
+    @extend .dF-row-cc;
+    gap: 16px;
+}
+
+.icon-help {
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.2;
+    }
+}
+
+.initials {
+    @extend .dF-row-cc;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid color.$main-color;
+    background-color: white;
+    font-weight: 700;
+    line-height: 1;
+    color: color.$hover-light-blue;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(12, 46, 98, 0.12);
+    }
 }

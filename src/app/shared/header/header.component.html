@@ -1,13 +1,21 @@
 @if (type == 'login') {
-    <header>
-        <img class="logo" src="icon/logo_dark.svg" alt="logo">
+    <header class="login-header">
+        <img class="login-logo" src="icon/logo_dark.svg" alt="logo">
         <div class="signup-container">
             <span>Not a Join User?</span>
             <button routerLink="signup" class="btn-1-prim">Sign up</button>
         </div>
     </header>
 } @else if (type == 'signup') {
-    <header>
-        <img class="logo" src="icon/logo_dark.svg" alt="logo">
+    <header class="login-header">
+        <img class="login-logo" src="icon/logo_dark.svg" alt="logo">
+    </header>
+} @else if (type == 'main') {
+    <header class="main-header">
+        <span class="header-title">Kanban Project Management Tool</span>
+        <div class="help-container">
+            <img class="icon-help" src="icon/help.svg" alt="help">
+            <div class="initials">SM</div>
+        </div>
     </header>
 }

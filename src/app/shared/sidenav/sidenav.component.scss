@@ -1,12 +1,13 @@
 @use '../../../../styles/helper';
 @use '../../../../styles/color';
 @use '../../../../styles/layout';
+@use '../../../../styles/variable';
 @use '../../../../styles/typography';
 
 :host {
     height: 100vh;
     height: 100svh;
-    width: 232px;
+    width: variable.$sidenav-width;
     background-color: color.$main-color;
 }
 

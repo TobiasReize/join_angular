@@ -8,6 +8,11 @@
     position: relative;
 }
 
+app-header {
+    @extend .dF-row-cc;
+    top: 60px;
+}
+
 .headline-container {
     @extend .dF-jc-sb;
     width: 100%;
