@@ -32,3 +32,7 @@
 .dF-column-jc-fe {
     @include dFlex($fd: column, $jc: flex-end);
 }
+
+.dF-column-ai-fs {
+    @include dFlex($fd: column, $ai: flex-start);
+}

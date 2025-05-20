@@ -13,6 +13,8 @@
 .content {
     @extend .dF-column-cc;
     padding: 64px 0;
+    width: 100%;
+    height: 100%;
 }
 
 .logo {
@@ -32,13 +34,55 @@
     width: 100%;
     padding: 8px 0 8px 56px;
 
-    > img {
+    &:hover {
+        cursor: pointer;
+        background-color: color.$hover-dark-blue;
+    }
+
+    > svg {
         width: 30px;
         height: 30px;
+    }
+
+    path {
+        fill: color.$icon-gray;
     }
 
     > span {
         @extend .font-style-9;
         color: color.$icon-gray;
+    }
+}
+
+.requirements-container {
+    @extend .dF-column-ai-fs;
+    gap: 4px;
+    width: 100%;
+    margin-top: auto;
+
+    > a {
+        @extend .font-style-9;
+        color: color.$form-icon-gray;
+        padding: 8px 0 8px 56px;
+        width: 100%;
+
+        &:hover {
+            font-weight: 700;
+            color: color.$hover-light-blue;
+        }
+    }
+}
+
+.selected {
+    background-color: color.$click-blue;
+}
+
+.white {
+    path {
+        fill: white;
+    }
+
+    span {
+        color: white;
     }
 }
