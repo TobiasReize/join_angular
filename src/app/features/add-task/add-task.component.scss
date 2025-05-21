@@ -1,0 +1,42 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/typography';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.content-container {
+    @extend .dF-jc-sb;
+}
+
+.addtask-left {
+    @extend .dF-column-cc;
+    gap: 16px;
+    width: 440px;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.title-container {
+    @extend .dF-column-ai-fs;
+}
+
+.title-input {
+    @extend .general-input-style;
+
+    &::placeholder {
+        color: color.$form-gray;
+    }
+}

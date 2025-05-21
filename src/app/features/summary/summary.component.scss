@@ -7,30 +7,11 @@
     @extend .host;
 }
 
-.content-wrapper {
-    @extend .dF-column-cc;
-    height: 100%;
-    flex: 1;
-    position: relative;
-}
-
 app-header {
     @extend .dF-jc-fs;
     width: 100%;
     background-color: white;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
-}
-
-.main-content {
-    @extend .dF-column-fs;
-    gap: 56px;
-    width: 100%;
-    flex: 1;
-    padding: 110px 0 0 96px;
-}
-
-h2, h3 {
-    color: black;
 }
 
 .title-container {
@@ -178,8 +159,4 @@ h2, h3 {
 .greeting-container {
     @extend .dF-column-ai-fs;
     gap: 3px;
-}
-
-h1 {
-    color: color.$hover-light-blue;
 }

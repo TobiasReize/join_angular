@@ -20,19 +20,25 @@
     width: 652px;
 }
 
-.input-style {
-    @extend .dF-row-cc;
-    gap: 16px;
+.general-input-style {
     border: 1px solid color.$form-gray;
     border-radius: 10px;
     outline: unset;
     padding: 12px 21px;
     width: 100%;
-    margin-bottom: 8px;
+    background-color: white;
+    color: black;
 
     &:focus-within {
         border: 1px solid color.$hover-light-blue;
     }
+}
+
+.icon-input-style {
+    @extend .general-input-style;
+    @extend .dF-row-cc;
+    gap: 16px;
+    margin-bottom: 8px;
 
     > input {
         color: black;

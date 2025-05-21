@@ -1,5 +1,6 @@
 @use '../styles/color';
 @use '../styles/typography';
+@use '../styles/layout';
 
 * {
     margin: 0;
@@ -40,14 +41,17 @@ a {
 
 h1 {
     @extend .font-style-0;
+    color: color.$hover-light-blue;
 }
 
 h2 {
     @extend .font-style-1;
+    color: black;
 }
 
 h3 {
     @extend .font-style-2;
+    color: black;
 }
 
 h4 {
@@ -56,4 +60,23 @@ h4 {
 
 h5 {
     @extend .font-style-4;
+}
+
+.content-wrapper {
+    @extend .dF-column-cc;
+    height: 100%;
+    flex: 1;
+    position: relative;
+}
+
+.main-content {
+    @extend .dF-column-fs;
+    gap: 56px;
+    width: 100%;
+    flex: 1;
+    padding: 110px 0 0 96px;
+}
+
+.red-color {
+    color: color.$error-red;
 }
