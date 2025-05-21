@@ -15,7 +15,15 @@
         <span class="header-title">Kanban Project Management Tool</span>
         <div class="help-container">
             <img class="icon-help" src="icon/help.svg" alt="help">
-            <div class="initials">SM</div>
+            <div (click)="showOverlay()" class="initials">SM</div>
+
+            @if (overlayVisible) {
+                <div class="overlay">
+                    <span routerLink="">Privacy policy</span>
+                    <span routerLink="">Imprint</span>
+                    <span>Log out</span>
+                </div>
+            }
         </div>
     </header>
 }

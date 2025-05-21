@@ -11,5 +11,11 @@ import { RouterLink } from '@angular/router';
 export class HeaderComponent {
 
   @Input() type: string = '';
+  overlayVisible: boolean = false;
+
+
+  showOverlay() {
+    this.overlayVisible = !this.overlayVisible;
+  }
 
 }

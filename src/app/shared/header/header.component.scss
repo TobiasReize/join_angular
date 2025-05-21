@@ -33,6 +33,7 @@
 .help-container {
     @extend .dF-row-cc;
     gap: 16px;
+    position: relative;
 }
 
 .icon-help {
@@ -59,5 +60,30 @@
     &:hover {
         cursor: pointer;
         background-color: rgba(12, 46, 98, 0.12);
+    }
+}
+
+.overlay {
+    @extend .dF-column-ai-fs;
+    padding: 10px;
+    border-radius: 20px 0 20px 20px;
+    background-color: color.$main-color;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    position: absolute;
+    right: 0;
+    top: 76px;
+    z-index: 5;
+
+    > span {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+        padding: 13px 16px;
+        white-space: nowrap;
+        width: 100%;
+
+        &:hover {
+            cursor: pointer;
+            background-color: color.$hover-dark-blue;
+        }
     }
 }
