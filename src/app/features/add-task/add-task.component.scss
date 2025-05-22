@@ -3,6 +3,7 @@
 @use '../../../../styles/layout';
 @use '../../../../styles/typography';
 @use '../../../../styles/distance';
+@use '../../../../styles/variable';
 
 :host {
     @extend .host;
@@ -15,8 +16,15 @@ app-header {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
 }
 
+.addtask-form {
+    @extend .dF-column-jc-sb-ai-fs;
+    max-width: calc(1920px - variable.$sidenav-width - 96px);
+    width: 100%;
+}
+
 .content-container {
     @extend .dF-jc-sb;
+    width: 100%;
 }
 
 .addtask-left {
@@ -29,14 +37,114 @@ app-header {
     }
 }
 
-.title-container {
+.title-container, .description-container, .date-container {
     @extend .dF-column-ai-fs;
 }
 
-.title-input {
+.input-style {
     @extend .general-input-style;
 
     &::placeholder {
         color: color.$form-gray;
     }
+}
+
+.description-container {
+    > textarea {
+        resize: none;
+    }
+}
+
+.separator {
+    width: 1px;
+    height: 424px;
+    background-color: color.$form-gray;
+}
+
+.addtask-right {
+    @extend .dF-column-cc;
+    gap: 24px;
+    width: 440px;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.priority-container, .assigned-container, .category-container, .subtask-container {
+    @extend .dF-column-ai-fs;
+}
+
+.priority-buttons {
+    @extend .dF-row-cc;
+    gap: 16px;
+    width: 100%;
+}
+
+.priority-btn {
+    @extend .dF-row-cc;
+    gap: 8px;
+    height: 56px;
+    flex: 1;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+
+    > span {
+        color: black;
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+
+.priority-icon {
+    width: 20px;
+    height: auto;
+}
+
+.icon-urgent {
+    path {
+        fill: color.$urgent-red;
+    }
+}
+
+.icon-medium {
+    path {
+        fill: color.$medium-orange;
+    }
+}
+
+.icon-low {
+    path {
+        fill: color.$low-green;
+    }
+}
+
+.selected-priority-btn {
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    path {
+        fill: white;
+    }
+}
+
+.btn-urgent-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$urgent-red;
+}
+
+.btn-medium-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$medium-orange;
+}
+
+.btn-low-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$low-green;
 }
