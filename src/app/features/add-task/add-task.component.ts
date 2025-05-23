@@ -13,7 +13,9 @@ import { CommonModule } from '@angular/common';
 export class AddTaskComponent {
 
   selectedPriority: string = 'medium';
+  selectedCategory: string = '';
   contactsVisible: boolean = false;
+  categoriesVisible: boolean = false;
   testContacts: string[] = [
     'Sophie Müller',
     'Hans Lustig',
@@ -35,7 +37,7 @@ export class AddTaskComponent {
   }
 
 
-  toggleContactsOverlay(event?: Event, state?: 'visible') {
+  toggleContactOverlay(event?: Event, state?: 'visible') {
     if (state == 'visible') {
       this.contactsVisible = true;
     } else {
@@ -62,6 +64,18 @@ export class AddTaskComponent {
   }
 
 
+  toggleCategoryOverlay() {
+    this.categoriesVisible = !this.categoriesVisible;
+  }
+
+
+  selectCategory(category: string) {
+    this.selectedCategory = category;
+    this.categoriesVisible = false;
+  }
+
+
+  // Hilfsfunktionen:
   getInitials(name: string) {
     const words = name.split(' ');
     const initials = words.map(word => word.charAt(0).toUpperCase()).join('');

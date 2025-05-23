@@ -51,14 +51,15 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="assigned-container">
                         <label class="m-btm-8" for="contacts">Assigned to</label>
-                        <div (click)="toggleContactsOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
-                            <input (input)="filterContacts(contactInput.value)" #contactInput type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                        <div (click)="toggleContactOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
+                            <input (input)="filterContacts(contactInput.value)" #contactInput class="pointer" type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
                             @if (contactsVisible) {
-                                <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
+                                <img (click)="toggleContactOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
-                                <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
+                                <img (click)="toggleContactOverlay($event)" class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
                         <div class="selected-contacts-container">
@@ -71,7 +72,7 @@
                                 <div class="remaining-contacts">+{{ selectedContacts.length - 5 }}</div>
                             }
                         </div>
-                        <div class="contacts-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
+                        <div class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                             @for (contact of filteredContacts; track contact) {
                                 <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
                                     <div class="initials">{{ getInitials(contact) }}</div>
@@ -90,8 +91,27 @@
                             }
                         </div>
                     </div>
-                    <div class="category-container"></div>
-                    <div class="subtask-container"></div>
+
+                    <div class="category-container">
+                        <label class="m-btm-8" for="categoryInput">Category<span class="red-color">*</span></label>
+                        <div (click)="toggleCategoryOverlay()" class="icon-input-style icon-input-hover m-btm-8">
+                            <input [value]="selectedCategory" class="pointer" type="text" name="categoryInput" id="categoryInput" placeholder="Select task category" readonly required>
+                            @if (categoriesVisible) {
+                                <img class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
+                            } @else {
+                                <img class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
+                            }
+                        </div>
+                        <span class="error-msg m-top-4">This field is required</span>
+                        <div class="category-overlay" [ngStyle]="{'max-height': categoriesVisible ? '96px' : '0px'}">
+                            <span (click)="selectCategory('Technical Task')" class="category-item">Technical Task</span>
+                            <span (click)="selectCategory('User Story')" class="category-item">User Story</span>
+                        </div>
+                    </div>
+
+                    <div class="subtask-container">
+                        
+                    </div>
                 </div>
             </section>
 

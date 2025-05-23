@@ -150,7 +150,7 @@ app-header {
     background-color: color.$low-green;
 }
 
-.assigned-container {
+.assigned-container, .category-container {
     position: relative;
 }
 
@@ -176,7 +176,7 @@ app-header {
     height: 42px;
 }
 
-.contacts-overlay {
+.overlay-style {
     @extend .dF-column-jc-fs;
     position: absolute;
     top: 82px;
@@ -186,21 +186,29 @@ app-header {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
-    overflow-y: auto;
     z-index: 5;
     transition: max-height 80ms ease-in-out;
 }
 
-.contact-card {
-    @extend .dF-row-cc;
+.contact-overlay {
+    @extend .overlay-style;
+    overflow-y: auto;
+}
+
+.overlay-item {
+    @extend .dF-jc-fs;
     width: 100%;
-    padding: 7px 16px;
     border-radius: 10px;
 
     &:hover {
         cursor: pointer;
         background-color: color.$icon-hover-gray;
     }
+}
+
+.contact-card {
+    @extend .overlay-item;
+    padding: 7px 16px;
 }
 
 .initial-style {
@@ -255,4 +263,14 @@ app-header {
     &:hover {
         background-color: color.$click-blue;
     }
+}
+
+.category-overlay {
+    @extend .overlay-style;
+    overflow-y: hidden;
+}
+
+.category-item {
+    @extend .overlay-item;
+    padding: 12px 16px;
 }
