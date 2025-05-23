@@ -23,7 +23,8 @@ app-header {
 }
 
 .content-container {
-    @extend .dF-jc-sb;
+    @extend .dF-jc-fs;
+    gap: 48px;
     width: 100%;
 }
 
@@ -147,4 +148,94 @@ app-header {
 .btn-low-selected {
     @extend .selected-priority-btn;
     background-color: color.$low-green;
+}
+
+.assigned-container {
+    position: relative;
+}
+
+.icon-input-hover:hover {
+    border: 1px solid color.$form-icon-gray;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+}
+
+.contacts-overlay {
+    @extend .dF-column-jc-fs;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 168px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    overflow-y: auto;
+    transition: height 100ms ease-in-out;
+}
+
+.contact {
+    @extend .dF-row-cc;
+    width: 100%;
+    padding: 7px 16px;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+}
+
+.initials {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: #FF7A00;
+    color: white;
+}
+
+.contact-name {
+    margin-left: 16px;
+    margin-right: auto;
+}
+
+.checkbox-checked, .checkbox-unchecked {
+    width: 24px;
+    height: 24px;
+}
+
+.checkbox-unchecked {
+    rect {
+        stroke: color.$main-color;
+    }
+}
+
+.checkbox-checked {
+    path {
+        stroke: white;
+    }
+}
+
+.contact-selected {
+    background-color: color.$main-color;
+    
+    > .contact-name {
+        color: white;
+    }
+
+    &:hover {
+        background-color: color.$click-blue;
+    }
 }

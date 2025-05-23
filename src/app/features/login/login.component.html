@@ -3,12 +3,12 @@
 <form (ngSubmit)="onSubmit(loginForm)" class="form" #loginForm="ngForm">
     <h3>Log in</h3>
     <div class="input-container">
-        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="icon-input-style">
+        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="icon-input-style m-btm-8">
             <input #email="ngModel" type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" ngModel required>
             <img src="icon/email.svg" alt="email">
         </div>
         <p [ngStyle]="{'visibility': email.touched && email.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid Email.</p>
-        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="icon-input-style">
+        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="icon-input-style m-btm-8">
             <input #password="ngModel" [type]="isPasswordVisible ? 'text' : 'password'" name="password" placeholder="Password" minlength="6" ngModel required>
             <img 
                 (mousedown)="showPassword(true, password)" 

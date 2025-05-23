@@ -7,17 +7,17 @@
         <div class="spacer"></div>
     </div>
     <div class="input-container">
-        <div [ngClass]="{'error-input': name.touched && name.invalid}" class="icon-input-style">
+        <div [ngClass]="{'error-input': name.touched && name.invalid}" class="icon-input-style m-btm-8">
             <input #name="ngModel" type="text" name="name" placeholder="Name" minlength="3" maxlength="20" ngModel required>
             <img src="icon/person.svg" alt="email">
         </div>
         <p [ngStyle]="{'visibility': name.touched && name.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid name.</p>
-        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="icon-input-style">
+        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="icon-input-style m-btm-8">
             <input #email="ngModel" type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" ngModel required>
             <img src="icon/email.svg" alt="email">
         </div>
         <p [ngStyle]="{'visibility': email.touched && email.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid Email.</p>
-        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="icon-input-style">
+        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="icon-input-style m-btm-8">
             <input #password="ngModel" [type]="isPasswordVisible ? 'text' : 'password'" name="password" placeholder="Password" minlength="6" ngModel required>
             <img 
                 (mousedown)="showPassword('password', true, password)" 
@@ -32,7 +32,7 @@
             >
         </div>
         <p [ngStyle]="{'visibility': password.touched && password.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Check your password. Please try again.</p>
-        <div [ngClass]="{'error-input': (passwordRepeat.touched && passwordRepeat.value !== password.value) || (passwordRepeat.touched && passwordRepeat.invalid)}" class="icon-input-style">
+        <div [ngClass]="{'error-input': (passwordRepeat.touched && passwordRepeat.value !== password.value) || (passwordRepeat.touched && passwordRepeat.invalid)}" class="icon-input-style m-btm-8">
             <input #passwordRepeat="ngModel" [type]="isPasswordRepeatVisible ? 'text' : 'password'" name="passwordRepeat" placeholder="Confirm Password" minlength="6" ngModel required>
             <img 
                 (mousedown)="showPassword('passwordRepeat', true, passwordRepeat)" 

@@ -51,7 +51,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="assigned-container"></div>
+                    <div class="assigned-container">
+                        <label class="m-btm-8" for="contacts">Assigned to</label>
+                        <div (click)="toggleContactsOverlay($event, 'visible')" class="icon-input-style icon-input-hover">
+                            <input type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                            @if (contactsVisible) {
+                                <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
+                            } @else {
+                                <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
+                            }
+                        </div>
+
+                        <div class="contacts-overlay" [ngStyle]="{'height': contactsVisible ? 'auto' : '0px'}">
+                            @for (contact of testContacts; track contact) {
+                                <div (click)="selectContact(contact)" class="contact" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
+                                    <div class="initials">{{ getInitials(contact )}}</div>
+                                    <div class="contact-name">{{ contact }}</div>
+                                    @if (selectedContacts.includes(contact)) {
+                                        <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                                            <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke-width="2" stroke-linecap="round"/>
+                                            <path d="M8 12.9658L12 16.9658L20 5.46582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    } @else {
+                                        <svg class="checkbox-unchecked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                                            <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke-width="2"/>
+                                        </svg>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
                     <div class="category-container"></div>
                     <div class="subtask-container"></div>
                 </div>
