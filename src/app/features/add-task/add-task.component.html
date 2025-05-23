@@ -54,7 +54,7 @@
                     <div class="assigned-container">
                         <label class="m-btm-8" for="contacts">Assigned to</label>
                         <div (click)="toggleContactsOverlay($event, 'visible')" class="icon-input-style icon-input-hover">
-                            <input type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                            <input (input)="filterContacts(contactInput.value)" #contactInput type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
                             @if (contactsVisible) {
                                 <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="contacts-overlay" [ngStyle]="{'height': contactsVisible ? 'auto' : '0px'}">
-                            @for (contact of testContacts; track contact) {
+                            @for (contact of filteredContacts; track contact) {
                                 <div (click)="selectContact(contact)" class="contact" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
                                     <div class="initials">{{ getInitials(contact )}}</div>
                                     <div class="contact-name">{{ contact }}</div>

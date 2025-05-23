@@ -24,6 +24,7 @@ export class AddTaskComponent {
     'Eva Klein'
   ];
   selectedContacts: string[] = [];
+  filteredContacts: string[] = [...this.testContacts];
 
 
   choosePriority(priority: string) {
@@ -49,6 +50,12 @@ export class AddTaskComponent {
     } else {
       this.selectedContacts.splice(index, 1);
     }
+  }
+
+
+  filterContacts(searchTerm: string) {
+    const term = searchTerm.toLowerCase();
+    this.filteredContacts = this.testContacts.filter(contact => contact.toLowerCase().includes(term));
   }
 
 
