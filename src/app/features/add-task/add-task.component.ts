@@ -21,7 +21,10 @@ export class AddTaskComponent {
     'Erika Musterfrau',
     'Gast',
     'Tim Gross',
-    'Eva Klein'
+    'Eva Klein',
+    'Klaus Bott',
+    'Hanna Seelig',
+    'Gustaf Konrad'
   ];
   selectedContacts: string[] = [];
   filteredContacts: string[] = [...this.testContacts];

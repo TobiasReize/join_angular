@@ -53,7 +53,7 @@
                     </div>
                     <div class="assigned-container">
                         <label class="m-btm-8" for="contacts">Assigned to</label>
-                        <div (click)="toggleContactsOverlay($event, 'visible')" class="icon-input-style icon-input-hover">
+                        <div (click)="toggleContactsOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
                             <input (input)="filterContacts(contactInput.value)" #contactInput type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
                             @if (contactsVisible) {
                                 <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
@@ -61,11 +61,20 @@
                                 <img (click)="toggleContactsOverlay($event)" class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
-
-                        <div class="contacts-overlay" [ngStyle]="{'height': contactsVisible ? 'auto' : '0px'}">
+                        <div class="selected-contacts-container">
+                            @for (contact of selectedContacts; track $index) {
+                                @if ($index < 5) {
+                                    <div class="initials">{{ getInitials(contact) }}</div>
+                                }
+                            }
+                            @if (selectedContacts.length > 5) {
+                                <div class="remaining-contacts">+{{ selectedContacts.length - 5 }}</div>
+                            }
+                        </div>
+                        <div class="contacts-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                             @for (contact of filteredContacts; track contact) {
-                                <div (click)="selectContact(contact)" class="contact" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
-                                    <div class="initials">{{ getInitials(contact )}}</div>
+                                <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
+                                    <div class="initials">{{ getInitials(contact) }}</div>
                                     <div class="contact-name">{{ contact }}</div>
                                     @if (selectedContacts.includes(contact)) {
                                         <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
