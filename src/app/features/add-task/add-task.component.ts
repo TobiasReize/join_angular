@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
 import { HeaderComponent } from "../../shared/header/header.component";
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,8 @@ export class AddTaskComponent {
   selectedCategory: string = '';
   contactsVisible: boolean = false;
   categoriesVisible: boolean = false;
+  subtaskAddable: boolean = false;
+  @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   testContacts: string[] = [
     'Sophie Müller',
     'Hans Lustig',
@@ -30,6 +32,7 @@ export class AddTaskComponent {
   ];
   selectedContacts: string[] = [];
   filteredContacts: string[] = [...this.testContacts];
+  addedSubtasks: string[] = [];
 
 
   choosePriority(priority: string) {
@@ -72,6 +75,27 @@ export class AddTaskComponent {
   selectCategory(category: string) {
     this.selectedCategory = category;
     this.categoriesVisible = false;
+  }
+
+
+  checkSubtask(subtask: string) {
+    if (subtask.length > 2) {
+      this.subtaskAddable = true;
+    } else {
+      this.subtaskAddable = false;
+    }
+  }
+
+
+  addSubtask(subtask: string) {
+    this.addedSubtasks.push(subtask);
+    this.clearSubtask();
+  }
+
+
+  clearSubtask() {
+    this.subtaskInputRef.nativeElement.value = '';
+    this.subtaskAddable = false;
   }
 
 

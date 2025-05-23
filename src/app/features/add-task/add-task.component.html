@@ -57,9 +57,9 @@
                         <div (click)="toggleContactOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
                             <input (input)="filterContacts(contactInput.value)" #contactInput class="pointer" type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
                             @if (contactsVisible) {
-                                <img (click)="toggleContactOverlay($event)" class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
+                                <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
-                                <img (click)="toggleContactOverlay($event)" class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
+                                <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
                         <div class="selected-contacts-container">
@@ -93,13 +93,13 @@
                     </div>
 
                     <div class="category-container">
-                        <label class="m-btm-8" for="categoryInput">Category<span class="red-color">*</span></label>
+                        <label class="m-btm-8" for="category">Category<span class="red-color">*</span></label>
                         <div (click)="toggleCategoryOverlay()" class="icon-input-style icon-input-hover m-btm-8">
-                            <input [value]="selectedCategory" class="pointer" type="text" name="categoryInput" id="categoryInput" placeholder="Select task category" readonly required>
+                            <input [value]="selectedCategory" class="pointer" type="text" name="category" id="category" placeholder="Select task category" readonly required>
                             @if (categoriesVisible) {
-                                <img class="arrow" src="icon/arrow_up.svg" alt="arrow_up">
+                                <img class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
-                                <img class="arrow" src="icon/arrow_down.svg" alt="arrow_down">
+                                <img class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
                         <span class="error-msg m-top-4">This field is required</span>
@@ -110,7 +110,24 @@
                     </div>
 
                     <div class="subtask-container">
-                        
+                        <label class="m-btm-8" for="subtask">Subtasks</label>
+                        <div class="icon-input-style m-btm-8">
+                            <input (input)="checkSubtask(subtaskInput.value)" #subtaskInput class="pointer" type="text" name="subtask" id="subtask" placeholder="Add new subtask">
+                            @if (subtaskAddable) {
+                                <div class="dF-row-cc gap-4">
+                                    <img (click)="clearSubtask()" class="input-icon-style" src="icon/close.svg" alt="cancel">
+                                    <div class="small-separator"></div>
+                                    <img (click)="addSubtask(subtaskInput.value)" class="input-icon-style" src="icon/ok.svg" alt="add">
+                                </div>
+                            } @else {
+                                <img (click)="subtaskInput.focus()" class="input-icon-style" src="icon/add.svg" alt="add">
+                            }
+                        </div>
+                        <ul class="added-subtasks-container">
+                            @for (subtask of addedSubtasks; track $index) {
+                                <li>{{ subtask }}</li>
+                            }
+                        </ul>
                     </div>
                 </div>
             </section>
