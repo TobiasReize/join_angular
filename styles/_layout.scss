@@ -21,6 +21,10 @@
     @include dFlex($jc: space-between);
 }
 
+.dF-jc-sb-ai-fe {
+    @include dFlex($jc: space-between, $ai: flex-end);
+}
+
 .dF-column-cc {
     @include dFlex($fd: column);
 }

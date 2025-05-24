@@ -19,7 +19,7 @@ app-header {
 .addtask-form {
     @extend .dF-column-jc-sb-ai-fs;
     max-width: calc(1920px - variable.$sidenav-width - 96px);
-    width: 100%;
+    flex: 1;
 }
 
 .content-container {
@@ -345,4 +345,14 @@ app-header {
     background-color: white;
     color: black;
     flex: 1;
+}
+
+.bottom-section {
+    @extend .dF-jc-sb-ai-fe;
+    width: 100%;
+}
+
+.btn-container {
+    @extend .dF-row-cc;
+    gap: 16px;
 }

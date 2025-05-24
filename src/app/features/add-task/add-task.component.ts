@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
 import { HeaderComponent } from "../../shared/header/header.component";
 
@@ -13,7 +13,7 @@ import { HeaderComponent } from "../../shared/header/header.component";
 })
 export class AddTaskComponent {
 
-  selectedPriority: string = 'medium';
+  selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
   contactsVisible: boolean = false;
   categoriesVisible: boolean = false;
@@ -38,7 +38,7 @@ export class AddTaskComponent {
   addedSubtasks: string[] = [];
 
 
-  choosePriority(priority: string) {
+  choosePriority(priority: 'low' | 'medium' | 'urgent') {
     this.selectedPriority = priority;
   }
 
@@ -119,6 +119,21 @@ export class AddTaskComponent {
     this.editedSubtaskIndex = null;
   }
 
+
+  clearForm(addTaskForm: NgForm) {
+    addTaskForm.resetForm();
+    this.selectedPriority = 'medium';
+    this.selectedContacts = [];
+    this.selectedCategory = '';
+    this.addedSubtasks = [];
+    console.log('Form cleared!');    
+  }
+
+
+  onSubmit(addTaskForm: NgForm) {
+    console.log('addTaskForm: ', addTaskForm);
+    this.clearForm(addTaskForm);
+  }
 
   // Hilfsfunktionen:
   getInitials(name: string) {

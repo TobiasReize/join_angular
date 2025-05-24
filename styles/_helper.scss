@@ -119,10 +119,18 @@
 
 .btn-2-prim {
     @extend .btn-2;
-    @extend .font-style-6;
     border: unset;
     background-color: color.$main-color;
-    color: white;
+
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    > img {
+        width: 24px;
+        height: 24px;
+    }
 
     &:hover {
         cursor: pointer;
@@ -141,16 +149,41 @@
     background-color: unset;
     color: color.$main-color;
 
+    > svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    path {
+        fill: color.$main-color;
+    }
+
     &:hover {
         cursor: pointer;
         border: 1px solid color.$hover-light-blue;
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
         color: color.$hover-light-blue;
+
+        > span {
+            color: color.$hover-light-blue;
+        }
+
+        path {
+            fill: color.$hover-light-blue;
+        }
     }
 
     &:active {
         border: 1px solid color.$click-blue;
         color: color.$click-blue;
+
+        > span {
+            color: color.$click-blue;
+        }
+
+        path {
+            fill: color.$click-blue;
+        }
     }
 }
 
