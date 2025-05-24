@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
 import { HeaderComponent } from "../../shared/header/header.component";
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent],
+  imports: [CommonModule, FormsModule, SidenavComponent, HeaderComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -17,6 +18,8 @@ export class AddTaskComponent {
   contactsVisible: boolean = false;
   categoriesVisible: boolean = false;
   subtaskAddable: boolean = false;
+  editedSubtaskIndex: number | null = null;
+  editedSubtaskContent: string = '';
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   testContacts: string[] = [
     'Sophie Müller',
@@ -96,6 +99,24 @@ export class AddTaskComponent {
   clearSubtask() {
     this.subtaskInputRef.nativeElement.value = '';
     this.subtaskAddable = false;
+  }
+
+
+  deleteSubtask(index: number) {
+    this.addedSubtasks.splice(index, 1);
+    this.editedSubtaskIndex = null;
+  }
+
+
+  editSubtask(index: number) {
+    this.editedSubtaskIndex = index;
+    this.editedSubtaskContent = this.addedSubtasks[index];
+  }
+
+
+  saveSubtask(index: number) {
+    this.addedSubtasks[index] = this.editedSubtaskContent;
+    this.editedSubtaskIndex = null;
   }
 
 

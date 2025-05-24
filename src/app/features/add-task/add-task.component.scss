@@ -283,10 +283,66 @@ app-header {
 
 .added-subtasks-container {
     width: 100%;
-    
-    > li {
-        @extend .font-style-9;
-        padding: 6px 16px;
-        width: 100%;
+}
+
+.subtask-item {
+    @extend .dF-row-cc;
+    padding: 6px 21px;
+    width: 100%;
+    border-radius: 10px;
+
+    &::before {
+        content: '•';
+        color: black;
+        margin-right: 8px;
+        font-size: 20px;
+        line-height: 1;
     }
+
+    &:hover {
+        background-color: color.$icon-hover-gray;
+
+        > .edit-icon-container {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.subtask-content {
+    @extend .font-style-9;
+    flex: 1;
+}
+
+.subtask-icon-container-style {
+    @extend .dF-row-cc;
+    gap: 4px;
+
+    > .small-separator {
+        background-color: color.$form-icon-gray;
+    }
+}
+
+.edit-icon-container {
+    @extend .subtask-icon-container-style;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
+}
+
+.subtask-edit-item {
+    @extend .dF-row-cc;
+    padding: 6px 21px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid color.$hover-light-blue;
+}
+
+.edit-subtask-input {
+    @extend .font-style-9;
+    outline: unset;
+    border: unset;
+    background-color: white;
+    color: black;
+    flex: 1;
 }

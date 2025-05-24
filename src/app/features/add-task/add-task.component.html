@@ -125,7 +125,25 @@
                         </div>
                         <ul class="added-subtasks-container">
                             @for (subtask of addedSubtasks; track $index) {
-                                <li>{{ subtask }}</li>
+                                @if (editedSubtaskIndex === $index) {
+                                    <li class="subtask-edit-item">
+                                        <input [(ngModel)]="editedSubtaskContent" class="edit-subtask-input" type="text" name="editSubtask">
+                                        <div class="subtask-icon-container-style">
+                                            <img (click)="deleteSubtask($index)" class="input-icon-style" src="icon/delete.svg" alt="delete">
+                                            <div class="small-separator"></div>
+                                            <img (click)="saveSubtask($index)" class="input-icon-style" src="icon/ok.svg" alt="add">
+                                        </div>
+                                    </li>
+                                } @else {
+                                    <li class="subtask-item">
+                                        <span class="subtask-content">{{ subtask }}</span>
+                                        <div class="edit-icon-container">
+                                            <img (click)="deleteSubtask($index)" class="input-icon-style" src="icon/delete.svg" alt="delete">
+                                            <div class="small-separator"></div>
+                                            <img (click)="editSubtask($index)" class="input-icon-style" src="icon/edit.svg" alt="edit">
+                                        </div>
+                                    </li>
+                                }
                             }
                         </ul>
                     </div>
