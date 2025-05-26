@@ -34,3 +34,10 @@ h3 {
     gap: 35px;
     width: 100%;
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1952px) {
+    app-header {
+        padding: 0 16px;
+    }
+}
