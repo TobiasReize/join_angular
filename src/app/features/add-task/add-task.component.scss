@@ -7,6 +7,7 @@
 
 :host {
     @extend .host;
+    position: relative;
 }
 
 app-header {

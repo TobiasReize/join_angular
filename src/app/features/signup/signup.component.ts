@@ -61,11 +61,11 @@ export class SignupComponent {
       if (ngForm.submitted && ngForm.valid) {
         console.log(ngForm);
         console.log(ngForm.value);
-        this.toastMsgService.showToastMsg('You Signed up successfully');
+        this.toastMsgService.showToastMsg('You signed up successfully');
         setTimeout(() => {
           this.toastMsgService.resetToastMsg();
           this.router.navigateByUrl('');
-        }, 2000);
+        }, 1500);
       }
     }
 

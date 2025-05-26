@@ -1,18 +1,23 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
 import { HeaderComponent } from "../../shared/header/header.component";
+import { ToastMsgComponent } from "../../shared/toast-msg/toast-msg.component";
+import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, SidenavComponent, HeaderComponent],
+  imports: [CommonModule, FormsModule, SidenavComponent, HeaderComponent, ToastMsgComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
 
+  toastMsgService = inject(ToastMsgService);
+  router = inject(Router);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
   contactsVisible: boolean = false;
@@ -151,6 +156,11 @@ export class AddTaskComponent {
       console.log('selectedCategory: ', this.selectedCategory);
       console.log('addedSubtasks: ', this.addedSubtasks);
       this.clearForm(addTaskForm);
+      this.toastMsgService.showToastMsg('Task added to board');
+        setTimeout(() => {
+          this.toastMsgService.resetToastMsg();
+          // this.router.navigateByUrl('');
+        }, 1500);
     } else {
       console.log('Form invalid!!!');
       console.log('addTaskForm: ', addTaskForm);

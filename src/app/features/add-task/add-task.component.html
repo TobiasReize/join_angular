@@ -176,3 +176,7 @@
         </form>
     </main>
 </div>
+
+@if (toastMsgService.toastState() == 'active') {
+    <app-toast-msg></app-toast-msg>
+}

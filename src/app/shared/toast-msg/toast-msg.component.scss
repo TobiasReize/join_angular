@@ -11,7 +11,8 @@
     top: 0;
     left: 0;
     z-index: 10;
-    animation: fadeIn variable.$toastmsg-animation-config;
+    opacity: 0;
+    animation: opacity variable.$toastmsg-opacity-animation-config;
 }
 
 .content {
@@ -20,4 +21,6 @@
     background-color: color.$main-color;
     color: white;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+    transform: translateY(+100vh);
+    animation: fadeIn variable.$toastmsg-fadein-animation-config;
 }
