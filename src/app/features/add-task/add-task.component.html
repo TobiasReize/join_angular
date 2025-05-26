@@ -74,7 +74,7 @@
                                 }
                             </div>
                         }
-                        <div class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
+                        <div (click)="$event.stopPropagation()" class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                             @for (contact of filteredContacts; track contact) {
                                 <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
                                     <div class="initials">{{ getInitials(contact) }}</div>
@@ -96,7 +96,7 @@
 
                     <div class="category-container">
                         <label class="m-btm-8" for="category">Category<span class="red-color">*</span></label>
-                        <div (click)="toggleCategoryOverlay()" class="icon-input-style icon-input-hover">
+                        <div (click)="toggleCategoryOverlay($event)" class="icon-input-style icon-input-hover">
                             <input [ngModel]="selectedCategory" class="pointer" type="text" name="category" id="category" placeholder="Select task category" readonly required>
                             @if (categoriesVisible) {
                                 <img class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">

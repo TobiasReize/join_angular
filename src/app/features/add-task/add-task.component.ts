@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
@@ -42,17 +42,25 @@ export class AddTaskComponent {
   addedSubtasks: string[] = [];
 
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    this.categoriesVisible = false;
+    this.contactsVisible = false;
+  }
+
+
   choosePriority(priority: 'low' | 'medium' | 'urgent') {
     this.selectedPriority = priority;
   }
 
 
-  toggleContactOverlay(event?: Event, state?: 'visible') {
+  toggleContactOverlay(event: Event, state?: 'visible') {
     if (state == 'visible') {
+      event.stopPropagation();
       this.contactsVisible = true;
     } else {
       this.contactsVisible = !this.contactsVisible;
-      event?.stopPropagation();
+      event.stopPropagation();
     }
   }
 
@@ -74,14 +82,14 @@ export class AddTaskComponent {
   }
 
 
-  toggleCategoryOverlay() {
+  toggleCategoryOverlay(event: Event) {
+    event.stopPropagation();
     this.categoriesVisible = !this.categoriesVisible;
   }
 
 
   selectCategory(category: string) {
     this.selectedCategory = category;
-    this.categoriesVisible = false;
   }
 
 
