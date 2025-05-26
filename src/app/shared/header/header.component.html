@@ -15,7 +15,7 @@
         <span class="header-title">Kanban Project Management Tool</span>
         <div class="help-container">
             <img class="icon-help" src="icon/help.svg" alt="help">
-            <div (click)="showOverlay()" class="initials">SM</div>
+            <div (click)="toggleOverlay($event)" class="initials">SM</div>
 
             @if (overlayVisible) {
                 <div class="overlay">

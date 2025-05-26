@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,7 +14,14 @@ export class HeaderComponent {
   overlayVisible: boolean = false;
 
 
-  showOverlay() {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    this.overlayVisible = false;
+  }
+
+
+  toggleOverlay(event: Event) {
+    event.stopPropagation();
     this.overlayVisible = !this.overlayVisible;
   }
 
