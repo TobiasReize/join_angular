@@ -25,3 +25,17 @@ footer {
         }
     }
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    :host {
+        position: unset;
+        height: auto;
+    }
+}
+
+@media(max-width: 500px) {
+    footer {
+        width: 170px;
+    }
+}

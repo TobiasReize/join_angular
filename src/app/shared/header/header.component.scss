@@ -87,3 +87,15 @@
         }
     }
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    .signup-container {
+        display: none;
+    }
+
+    .login-logo {
+        width: 64px;
+        height: auto;
+    }
+}
