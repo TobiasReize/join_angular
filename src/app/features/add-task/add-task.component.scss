@@ -17,9 +17,9 @@ app-header {
 }
 
 .addtask-form {
-    @extend .dF-column-jc-sb-ai-fs;
-    max-width: calc(1920px - variable.$sidenav-width - 96px);
-    flex: 1;
+    @extend .dF-column-jc-sb;
+    gap: 8px;
+    height: 650px;
 }
 
 .content-container {
@@ -284,6 +284,8 @@ app-header {
 
 .added-subtasks-container {
     width: 100%;
+    max-height: 108px;
+    overflow-y: auto;
 }
 
 .subtask-item {
