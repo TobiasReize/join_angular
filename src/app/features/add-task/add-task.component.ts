@@ -21,6 +21,10 @@ export class AddTaskComponent {
   editedSubtaskIndex: number | null = null;
   editedSubtaskContent: string = '';
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
+  categories: string[] = [
+    'Technical Task',
+    'User Story'
+  ];
   testContacts: string[] = [
     'Sophie Müller',
     'Hans Lustig',
@@ -131,8 +135,18 @@ export class AddTaskComponent {
 
 
   onSubmit(addTaskForm: NgForm) {
-    console.log('addTaskForm: ', addTaskForm);
-    this.clearForm(addTaskForm);
+    if (addTaskForm.submitted && addTaskForm.valid) {
+      console.log('addTaskForm: ', addTaskForm);
+      console.log('values: ', addTaskForm.form.value);
+      console.log('selectedPriority: ', this.selectedPriority);
+      console.log('selectedContacts: ', this.selectedContacts);
+      console.log('selectedCategory: ', this.selectedCategory);
+      console.log('addedSubtasks: ', this.addedSubtasks);
+      this.clearForm(addTaskForm);
+    } else {
+      console.log('Form invalid!!!');
+      console.log('addTaskForm: ', addTaskForm);
+    }
   }
 
   // Hilfsfunktionen:

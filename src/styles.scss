@@ -84,3 +84,15 @@ h5 {
 .red-color {
     color: color.$error-red;
 }
+
+button[type="submit"]:disabled {
+    background-color: color.$form-icon-gray;
+    box-shadow: unset;
+
+    &:hover, &:active {
+        cursor: default;
+        background-color: color.$form-icon-gray;
+        border: unset;
+        box-shadow: unset;
+    }
+}

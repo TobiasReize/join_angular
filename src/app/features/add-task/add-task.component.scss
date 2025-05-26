@@ -23,7 +23,7 @@ app-header {
 }
 
 .content-container {
-    @extend .dF-jc-fs;
+    @extend .dF-ai-fs;
     gap: 48px;
     width: 100%;
 }
@@ -58,13 +58,14 @@ app-header {
 
 .separator {
     width: 1px;
-    height: 424px;
+    max-height: 490px;
+    height: 100%;
     background-color: color.$form-gray;
 }
 
 .addtask-right {
     @extend .dF-column-cc;
-    gap: 24px;
+    gap: 16px;
     width: 440px;
 
     > div {

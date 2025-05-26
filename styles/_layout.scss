@@ -13,6 +13,10 @@
     @include dFlex($jc: flex-start);
 }
 
+.dF-ai-fs {
+    @include dFlex($ai: flex-start);
+}
+
 .dF-jc-fe {
     @include dFlex($jc: flex-end);
 }

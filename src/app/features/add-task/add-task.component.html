@@ -8,24 +8,24 @@
                 <div class="addtask-left">
                     <div class="title-container">
                         <label class="m-btm-8" for="title">Title<span class="red-color">*</span></label>
-                        <input class="input-style" type="text" name="title" id="title" minlength="3" maxlength="40" placeholder="Enter a title" required>
-                        <span class="error-msg m-top-4">This field is required</span>
+                        <input #title="ngModel" class="input-style" type="text" name="title" id="title" minlength="3" maxlength="40" placeholder="Enter a title" ngModel required>
+                        <span [ngStyle]="{'visibility': addTaskForm.submitted && title.invalid ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
                     </div>
                     <div class="description-container">
                         <label class="m-btm-8" for="description">Description</label>
-                        <textarea class="input-style" name="description" id="description" maxlength="60" rows="3" placeholder="Enter a description"></textarea>
+                        <textarea class="input-style" name="description" id="description" maxlength="60" rows="3" placeholder="Enter a description" ngModel></textarea>
                     </div>
                     <div class="date-container">
                         <label class="m-btm-8" for="date">Due date<span class="red-color">*</span></label>
-                        <input class="input-style" type="date" name="date" id="date" required>
-                        <span class="error-msg m-top-4">This field is required</span>
+                        <input #date="ngModel" class="input-style" type="date" name="date" id="date" ngModel required>
+                        <span [ngStyle]="{'visibility': addTaskForm.submitted && date.invalid ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
                     </div>
                 </div>
 
                 <div class="separator"></div>
 
                 <div class="addtask-right">
-                    <div class="priority-container">
+                    <div class="priority-container m-btm-8">
                         <span class="m-btm-8">Priority</span>
                         <div class="priority-buttons">
                             <div (click)="choosePriority('urgent')" class="priority-btn" [ngClass]="{'btn-urgent-selected': selectedPriority == 'urgent'}">
@@ -62,16 +62,18 @@
                                 <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
-                        <div class="selected-contacts-container">
-                            @for (contact of selectedContacts; track $index) {
-                                @if ($index < 5) {
-                                    <div class="initials">{{ getInitials(contact) }}</div>
+                        @if (selectedContacts.length > 0) {
+                            <div class="selected-contacts-container">
+                                @for (contact of selectedContacts; track $index) {
+                                    @if ($index < 5) {
+                                        <div class="initials">{{ getInitials(contact) }}</div>
+                                    }
                                 }
-                            }
-                            @if (selectedContacts.length > 5) {
-                                <div class="remaining-contacts">+{{ selectedContacts.length - 5 }}</div>
-                            }
-                        </div>
+                                @if (selectedContacts.length > 5) {
+                                    <div class="remaining-contacts">+{{ selectedContacts.length - 5 }}</div>
+                                }
+                            </div>
+                        }
                         <div class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                             @for (contact of filteredContacts; track contact) {
                                 <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
@@ -94,18 +96,19 @@
 
                     <div class="category-container">
                         <label class="m-btm-8" for="category">Category<span class="red-color">*</span></label>
-                        <div (click)="toggleCategoryOverlay()" class="icon-input-style icon-input-hover m-btm-8">
-                            <input [value]="selectedCategory" class="pointer" type="text" name="category" id="category" placeholder="Select task category" readonly required>
+                        <div (click)="toggleCategoryOverlay()" class="icon-input-style icon-input-hover">
+                            <input [ngModel]="selectedCategory" class="pointer" type="text" name="category" id="category" placeholder="Select task category" readonly required>
                             @if (categoriesVisible) {
                                 <img class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
                                 <img class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
                             }
                         </div>
-                        <span class="error-msg m-top-4">This field is required</span>
+                        <span [ngStyle]="{'visibility': addTaskForm.submitted && selectedCategory == '' ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
                         <div class="category-overlay" [ngStyle]="{'max-height': categoriesVisible ? '96px' : '0px'}">
-                            <span (click)="selectCategory('Technical Task')" class="category-item">Technical Task</span>
-                            <span (click)="selectCategory('User Story')" class="category-item">User Story</span>
+                            @for (category of categories; track $index) {
+                                <span (click)="selectCategory(category)" class="category-item">{{ category }}</span>
+                            }
                         </div>
                     </div>
 
@@ -153,7 +156,7 @@
             <section class="bottom-section">
                 <span class="font-style-9"><span class="red-color">*</span>This field is required</span>
                 <div class="btn-container">
-                    <button (click)="clearForm(addTaskForm)" class="btn-2-sec" type="reset">
+                    <button (click)="clearForm(addTaskForm)" class="btn-2-sec" type="button">
                         <span>Clear</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
                             <mask id="mask0_71720_5473" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
@@ -164,7 +167,7 @@
                             </g>
                         </svg>
                     </button>
-                    <button class="btn-2-prim" type="submit">
+                    <button [disabled]="title.invalid || date.invalid || selectedCategory.length < 1" class="btn-2-prim" type="submit">
                         <span>Create Task</span>
                         <img src="icon/ok_white.svg" alt="add">
                     </button>

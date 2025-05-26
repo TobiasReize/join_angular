@@ -52,7 +52,7 @@
         <img (click)="toggleCheckbox()" [src]="acceptedPrivacyPolicy ? 'icon/checkbox_checked.svg' : 'icon/checkbox.svg'" alt="checkbox">
         <p>I accept the <span routerLink="">Privacy policy</span></p>
     </div>
-    <input [disabled]="email.invalid || password.invalid || passwordRepeat.invalid || passwordRepeat.value !== password.value || !acceptedPrivacyPolicy" class="btn-1-prim" type="submit" name="submit" value="Sign up">
+    <button [disabled]="email.invalid || password.invalid || passwordRepeat.invalid || passwordRepeat.value !== password.value || !acceptedPrivacyPolicy" class="btn-1-prim" type="submit">Sign up</button>
 </form>
 
 <app-footer></app-footer>
