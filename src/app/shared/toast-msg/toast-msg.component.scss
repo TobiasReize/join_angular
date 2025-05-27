@@ -8,7 +8,7 @@
     @extend .host;
     height: 100%;
     background-color: rgba(180, 180, 180, 0.5);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 10;
@@ -23,5 +23,5 @@
     color: white;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
     transform: translateY(+100vh);
-    animation: fadeIn variable.$toastmsg-fadein-animation-config;
+    animation: slideUp variable.$toastmsg-slideup-animation-config;
 }
