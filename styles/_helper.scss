@@ -210,6 +210,7 @@
 @media(max-width: 684px) {
     .form {
         width: 100%;
+        padding: 48px 80px;
 
         input {
             width: 100%;
@@ -221,10 +222,6 @@
     .form {
         padding: 32px 16px;
         gap: 24px;
-    }
-
-    h3 {
-        font-size: 47px;
     }
 
     .btn-1 {

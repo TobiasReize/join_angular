@@ -87,3 +87,17 @@ h3 {
         padding: 0 16px;
     }
 }
+
+@media(max-width: 1024px) {
+    :host {
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px 16px;
+        gap: 16px;
+    }
+
+    app-header {
+        position: unset;
+        padding: 0;
+    }
+}

@@ -96,3 +96,14 @@ button[type="submit"]:disabled {
         box-shadow: unset;
     }
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 500px) {
+    * {
+        font-size: 18px;
+    }
+    
+    h3 {
+        font-size: 47px;
+    }
+}
