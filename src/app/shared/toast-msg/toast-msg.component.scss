@@ -6,6 +6,7 @@
 
 :host {
     @extend .host;
+    height: 100%;
     background-color: rgba(180, 180, 180, 0.5);
     position: absolute;
     top: 0;
