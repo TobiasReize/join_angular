@@ -1,30 +1,22 @@
 @use '../styles/variable';
 
-@media(min-width: 1024px) {     // Intro: für Bildschirmbreite > 1024px
-    @keyframes shrinkLogo {
-        from {
-            height: variable.$logo-start-height;
-            width: variable.$logo-start-width;
-        }
+@keyframes coverUp {
+    from {
+        opacity: 0;
+    }
 
-        to {
-            height: variable.$logo-end-height;
-            width: variable.$logo-end-width;
-        }
+    to {
+        opacity: 1;
     }
 }
 
-@media(max-width: 1024px) {     // Intro: für Bildschirmbreite <= 1024px
-    @keyframes shrinkLogo {
-        from {
-            height: variable.$logo-mobile-start-height;
-            width: variable.$logo-mobile-start-width
-        }
+@keyframes fadeIn {
+    from {
+        transform: translateY(+100vh);
+    }
 
-        to {
-            height: variable.$logo-mobile-end-height;
-            width: variable.$logo-mobile-end-width;
-        }
+    to {
+        transform: translateY(0);
     }
 }
 
@@ -54,7 +46,31 @@
     }
 }
 
-@media(max-width: 1024px) {    // Intro: für Bildschirmbreite <= 1024px
+@media(min-width: 1024px) {     // Intro: für Bildschirmbreite > 1024px
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-start-height;
+            width: variable.$logo-start-width;
+        }
+
+        to {
+            height: variable.$logo-end-height;
+            width: variable.$logo-end-width;
+        }
+    }
+
+    @keyframes vanish {
+        from {
+            background-color: #F6F7F8;
+        }
+
+        to {
+            background-color: transparent;
+        }
+    }
+}
+
+@media(max-width: 1024px) {     // Intro: für Bildschirmbreite <= 1024px
     @keyframes moveTopLeft {
         from {
             transform: translateY(0) translateX(0);
@@ -65,24 +81,36 @@
             transform: translateY(calc(-50svh + variable.$mobile-padding-top + variable.$logo-mobile-end-height / 2)) translateX(calc(-50vw + variable.$mobile-padding-left + variable.$logo-mobile-end-width / 2));
         }
     }
-}
+    
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-mobile-start-height;
+            width: variable.$logo-mobile-start-width;
+        }
 
-@keyframes opacity {
-    from {
-        opacity: 0;
+        to {
+            height: variable.$logo-mobile-end-height;
+            width: variable.$logo-mobile-end-width;
+        }
     }
 
-    to {
-        opacity: 1;
-    }
-}
+    @keyframes vanish {
+        from {
+            background-color: #2A3647;
+        }
 
-@keyframes fadeIn {
-    from {
-        transform: translateY(+100vh);
+        to {
+            background-color: transparent;
+        }
     }
 
-    to {
-        transform: translateY(0);
+    @keyframes colorLogo {
+        from {
+            fill: white;
+        }
+
+        to {
+            fill: #2A3647;
+        }
     }
 }

@@ -9,6 +9,7 @@
     top: 0;
     left: 0;
     z-index: 5;
+    animation: vanish variable.$intro-animation-config;
 }
 
 .logo {
@@ -17,14 +18,23 @@
     animation: moveTopLeft variable.$intro-animation-config, shrinkLogo variable.$intro-animation-config;
 }
 
+.main-color {
+    fill: color.$main-color;
+}
+
 // -------------------------- Responsive Design --------------------------- \\
 @media(max-width: 1024px) {
-    // :host {
-    //     background-color: color.$main-color;
-    // }
+    :host {
+        background-color: color.$main-color;
+    }
 
     .logo {
         width: variable.$logo-mobile-start-width;
         height: variable.$logo-mobile-start-height;
+    }
+
+    .main-color {
+        fill: white;
+        animation: colorLogo variable.$intro-animation-config;
     }
 }
