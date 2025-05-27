@@ -10,8 +10,8 @@
 }
 
 .login-logo {
-    width: 100px;
-    height: 122px
+    width: variable.$logo-end-width;
+    height: variable.$logo-end-height;
 }
 
 .signup-container {
@@ -95,7 +95,7 @@
     }
 
     .login-logo {
-        width: 64px;
-        height: auto;
+        width: variable.$logo-mobile-end-width;
+        height: variable.$logo-mobile-end-height;
     }
 }

@@ -1,6 +1,7 @@
 @use '../../../../../styles/helper';
 @use '../../../../../styles/animation';
 @use '../../../../../styles/variable';
+@use '../../../../../styles/color';
 
 :host {
     @extend .host;
@@ -11,7 +12,19 @@
 }
 
 .logo {
-    width: 274px;
-    height: 334px;
+    width: variable.$logo-start-width;
+    height: variable.$logo-start-height;
     animation: moveTopLeft variable.$intro-animation-config, shrinkLogo variable.$intro-animation-config;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    // :host {
+    //     background-color: color.$main-color;
+    // }
+
+    .logo {
+        width: variable.$logo-mobile-start-width;
+        height: variable.$logo-mobile-start-height;
+    }
 }

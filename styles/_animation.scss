@@ -1,14 +1,30 @@
 @use '../styles/variable';
 
-@keyframes shrinkLogo {
-    from {
-        height: variable.$logo-start-height;
-        width: variable.$logo-start-width;
-    }
+@media(min-width: 1024px) {     // Intro: für Bildschirmbreite > 1024px
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-start-height;
+            width: variable.$logo-start-width;
+        }
 
-    to {
-        height: variable.$logo-end-height;
-        width: variable.$logo-end-width;
+        to {
+            height: variable.$logo-end-height;
+            width: variable.$logo-end-width;
+        }
+    }
+}
+
+@media(max-width: 1024px) {     // Intro: für Bildschirmbreite <= 1024px
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-mobile-start-height;
+            width: variable.$logo-mobile-start-width
+        }
+
+        to {
+            height: variable.$logo-mobile-end-height;
+            width: variable.$logo-mobile-end-width;
+        }
     }
 }
 
@@ -25,7 +41,7 @@
     }
 }
 
-@media(max-width: 1952px) {    // Intro: für Bildschirmbreite < 1952px
+@media(max-width: 1952px) {    // Intro: für Bildschirmbreite <= 1952px
     @keyframes moveTopLeft {
         from {
             transform: translateY(0) translateX(0);
@@ -34,6 +50,19 @@
         to {
             transform: translateY(calc(-50vh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + 16px + variable.$logo-end-width / 2));
             transform: translateY(calc(-50svh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + 16px + variable.$logo-end-width / 2));
+        }
+    }
+}
+
+@media(max-width: 1024px) {    // Intro: für Bildschirmbreite <= 1024px
+    @keyframes moveTopLeft {
+        from {
+            transform: translateY(0) translateX(0);
+        }
+
+        to {
+            transform: translateY(calc(-50vh + variable.$mobile-padding-top + variable.$logo-mobile-end-height / 2)) translateX(calc(-50vw + variable.$mobile-padding-left + variable.$logo-mobile-end-width / 2));
+            transform: translateY(calc(-50svh + variable.$mobile-padding-top + variable.$logo-mobile-end-height / 2)) translateX(calc(-50vw + variable.$mobile-padding-left + variable.$logo-mobile-end-width / 2));
         }
     }
 }
