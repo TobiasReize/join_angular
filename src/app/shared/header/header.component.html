@@ -12,6 +12,7 @@
     </header>
 } @else if (type == 'main') {
     <header class="main-header">
+        <img class="mobile-logo" src="icon/logo_dark.svg" alt="logo">
         <span class="header-title">Kanban Project Management Tool</span>
         <div class="help-container">
             <img class="icon-help" src="icon/help.svg" alt="help">
@@ -19,6 +20,7 @@
 
             @if (overlayVisible) {
                 <div class="overlay">
+                    <span routerLink="">Help</span>
                     <span routerLink="">Privacy policy</span>
                     <span routerLink="">Imprint</span>
                     <span>Log out</span>

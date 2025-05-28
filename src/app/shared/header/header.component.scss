@@ -26,6 +26,12 @@
     padding: 20px 40px 20px 116px;
 }
 
+.mobile-logo {
+    height: 40px;
+    width: auto;
+    display: none;
+}
+
 .header-title {
     color: black;
 }
@@ -78,6 +84,7 @@
         @extend .font-style-9;
         color: color.$icon-gray;
         padding: 13px 16px;
+        border-radius: 8px;
         white-space: nowrap;
         width: 100%;
 
@@ -86,6 +93,10 @@
             background-color: color.$hover-dark-blue;
         }
     }
+
+    > span:first-child {
+        display: none;
+    }
 }
 
 // -------------------------- Responsive Design --------------------------- \\
@@ -93,6 +104,7 @@
     .main-header {
         padding-right: 16px;
         padding-left: 48px;
+        max-width: unset;
     }
 }
 
@@ -110,5 +122,33 @@
     .login-logo {
         width: variable.$logo-mobile-end-width;
         height: variable.$logo-mobile-end-height;
+    }
+
+    .main-header {
+        height: 80px;
+        padding: 0 16px;
+    }
+
+    .mobile-logo {
+        display: block;
+    }
+
+    .header-title, .icon-help {
+        display: none;
+    }
+
+    .initials {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+        font-size: 17px;
+    }
+
+    .overlay {
+        top: 60px;
+
+        > span:first-child {
+            display: block;
+        }
     }
 }

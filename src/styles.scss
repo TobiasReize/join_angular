@@ -110,6 +110,16 @@ button[type="submit"]:disabled {
     }
 }
 
+@media(max-width: 1024px) {
+    .content-wrapper {
+        height: 100vh;
+        height: 100svh;
+        width: 100%;
+        flex: unset;
+        padding-bottom: 80px;
+    }
+}
+
 @media(max-width: 500px) {
     * {
         font-size: 18px;
