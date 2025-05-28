@@ -89,6 +89,19 @@
 }
 
 // -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px) {
+    .main-header {
+        padding-right: 16px;
+        padding-left: 48px;
+    }
+}
+
+@media(max-width: 1300px) {
+    .main-header {
+        padding-left: 24px;
+    }
+}
+
 @media(max-width: 1024px) {
     .signup-container {
         display: none;

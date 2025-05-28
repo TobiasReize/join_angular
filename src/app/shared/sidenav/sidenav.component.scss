@@ -5,8 +5,7 @@
 @use '../../../../styles/typography';
 
 :host {
-    height: 100vh;
-    height: 100svh;
+    height: 100%;
     width: variable.$sidenav-width;
     background-color: color.$main-color;
 }
@@ -85,5 +84,22 @@
 
     span {
         color: white;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1300px) {
+    :host {
+        width: auto;
+    }
+
+    .option {
+        padding: 8px 24px;
+    }
+
+    .requirements-container {
+        > a {
+            padding-left: 24px;
+        }
     }
 }

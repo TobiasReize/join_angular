@@ -102,7 +102,7 @@ app-header {
 .first-row-rectangle {
     @extend .dF-row-cc;
     gap: 18px;
-    padding: 33.5px 0;
+    padding: 33.5px;
 }
 
 .first-row-icon {
@@ -122,7 +122,7 @@ app-header {
 }
 
 .middle-row {
-    padding: 33px 0;
+    padding: 33px;
 }
 
 .urgent-icon {
@@ -149,7 +149,7 @@ app-header {
 
 .last-row-rectangle {
     @extend .dF-column-cc;
-    padding: 21.5px 0;
+    padding: 21.5px;
 
     > span {
         text-align: center;
@@ -159,4 +159,33 @@ app-header {
 .greeting-container {
     @extend .dF-column-ai-fs;
     gap: 3px;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px) {
+    .content-container {
+        gap: 16px;
+    }
+
+    h1 {
+        font-size: 56px;
+    }
+
+    h4 {
+        font-size: 38px;
+    }
+}
+
+@media(max-width: 1300px) {
+    .key-metrics-container {
+        width: auto;
+    }
+    
+    h1 {
+        font-size: 47px;
+    }
+
+    h4 {
+        font-size: 36px;
+    }
 }

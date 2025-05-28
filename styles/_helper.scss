@@ -4,8 +4,8 @@
 
 .host {
     @extend .dF-row-cc;
-    min-height: 100vh;
-    min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
     width: 100%;
     background-color: color.$bg-gray;
 }
@@ -207,6 +207,13 @@
 }
 
 // -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    .host {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
 @media(max-width: 684px) {
     .form {
         width: 100%;
