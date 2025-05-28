@@ -5,6 +5,7 @@
 @use '../../../../styles/typography';
 
 :host {
+    @extend .dF-row-cc;
     height: 100%;
     width: variable.$sidenav-width;
     background-color: color.$main-color;
@@ -100,6 +101,52 @@
     .requirements-container {
         > a {
             padding-left: 24px;
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    :host {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        z-index: 5;
+    }
+
+    .content {
+        padding: 0 16px;
+        flex-direction: row;
+    }
+
+    .logo, .requirements-container {
+        display: none;
+    }
+
+    .navigation {
+        gap: unset;
+        margin: 0;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .option {
+        width: 80px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        padding: 15.5px 0;
+        border-radius: 16px;
+
+        > svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        > span {
+            font-size: 14px;
+            text-align: center;
         }
     }
 }
