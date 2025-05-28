@@ -111,12 +111,23 @@ button[type="submit"]:disabled {
 }
 
 @media(max-width: 1024px) {
+    h2 {
+        font-size: 47px;
+    }
+    
     .content-wrapper {
         height: 100vh;
         height: 100svh;
         width: 100%;
         flex: unset;
         padding-bottom: 80px;
+    }
+
+    .main-content {
+        align-items: center;
+        padding: 48px 16px 16px 16px;
+        gap: 40px;
+        overflow-y: auto;
     }
 }
 
@@ -127,5 +138,13 @@ button[type="submit"]:disabled {
     
     h3 {
         font-size: 47px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    .main-content {
+        align-items: flex-start;
     }
 }

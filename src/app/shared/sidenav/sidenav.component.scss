@@ -151,3 +151,24 @@
         }
     }
 }
+
+@media(max-width: 500px) {
+    .content {
+        padding: 2px 16px;
+    }
+
+    .navigation {
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .option {
+        width: 70px;
+        height: 100%;
+        padding: 0;
+
+        > span {
+            white-space: nowrap;
+        }
+    }
+}

@@ -26,10 +26,6 @@ app-header {
     background-color: color.$hover-light-blue;
 }
 
-.title-text {
-    @extend .font-style-4;
-}
-
 .content-container {
     @extend .dF-row-cc;
     gap: 80px;
@@ -188,5 +184,113 @@ app-header {
 
     h4 {
         font-size: 36px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .title-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        background-image: linear-gradient(#29ABE2);
+        background-position: bottom left;
+        background-size: 90px 3px;
+        background-repeat: no-repeat;
+        padding-bottom: 16px;
+    }
+
+    .title-separator, .greeting-container {
+        display: none;
+    }
+
+    .key-metrics-container {
+        gap: 18px;
+    }
+
+    .first-row, .last-row {
+        gap: 24px;
+    }
+
+    .rectangle-style {
+        border-radius: 20px;
+    }
+
+    .first-row-rectangle {
+        gap: 10px;
+        padding: 18.5px;
+    }
+
+    .first-row-icon, .urgent-icon {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+
+    .done-icon {
+        padding: 4px;
+    }
+
+    .font-size {
+        font-size: 16px;
+    }
+
+    .middle-row {
+        padding: 21px 32px;
+    }
+
+    .urgent-separator {
+        height: 68px;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .deadline-container {
+        gap: 8px;
+    }
+
+    .last-row-rectangle {
+        padding: 13px 28px;
+    }
+}
+
+@media(max-width: 500px) {
+    .content-container, .key-metrics-container {
+        width: 100%;
+    }
+
+    .first-row {
+        gap: unset;
+        justify-content: space-around;
+    }
+
+    .middle-row {
+        padding: 16px;
+        justify-content: space-evenly;
+    }
+
+    .last-row {
+        gap: unset;
+        justify-content: space-between;
+    }
+
+    .first-row-rectangle {
+        padding: 16px;
+    }
+
+    .last-row-rectangle {
+        padding: 8px 16px;
+    }
+
+    .urgent-icon, .urgent-separator {
+        margin: 0;
+    }
+
+    .font-style-6 {
+        font-size: 16px;
+    }
+
+    .font-size, .font-style-9 {
+        font-size: 14px;
+        white-space: nowrap;
     }
 }
