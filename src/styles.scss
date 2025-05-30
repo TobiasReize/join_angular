@@ -43,6 +43,12 @@ ul {
     list-style-position: inside;
 }
 
+input {
+    color: black;
+    border: unset;
+    outline: unset;
+}
+
 h1 {
     @extend .font-style-0;
     color: color.$hover-light-blue;

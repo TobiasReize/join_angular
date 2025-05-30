@@ -100,7 +100,7 @@
 }
 
 // -------------------------- Responsive Design --------------------------- \\
-@media(max-width: 1500px) {
+@media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
     .main-header {
         padding-right: 16px;
         padding-left: 48px;
