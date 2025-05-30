@@ -43,6 +43,7 @@
         color: black;
         border: unset;
         outline: unset;
+        width: 0;
         flex: 1;
 
         &::placeholder {
@@ -232,7 +233,17 @@
         gap: 24px;
     }
 
+    .icon-input-style {
+        gap: 8px;
+    }
+
     .btn-1 {
         font-size: 16px;
+    }
+
+    .btn-2 {
+        > span {
+            font-size: 16px;
+        }
     }
 }

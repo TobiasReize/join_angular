@@ -360,3 +360,86 @@ app-header {
     @extend .dF-row-cc;
     gap: 16px;
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-height: 1000px) {
+    .addtask-form {
+        height: auto;
+        flex: 1;
+    }
+}
+
+@media(max-width: 1300px) {
+    .addtask-left, .addtask-right {
+        width: 350px;
+    }
+
+    .priority-buttons {
+        gap: 8px;
+    }
+
+    .priority-btn {
+        gap: 4px;
+    }
+}
+
+@media(max-width: 1024px) {
+    h3, .addtask-form {
+        width: 100%;
+    }
+
+    .content-container {
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .addtask-left, .addtask-right {
+        width: unset;
+        flex: 1;
+    }
+}
+
+@media(max-width: 750px) {
+    .addtask-form {
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .addtask-left, .addtask-right {
+        width: 100%;
+    }
+
+    .separator {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .priority-btn {
+        > span {
+            font-size: 16px;
+        }
+    }
+
+    .selected-contacts-container {
+        gap: 4px;
+    }
+
+    .bottom-section {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .btn-container {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

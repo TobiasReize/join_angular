@@ -78,7 +78,8 @@ h5 {
     gap: 56px;
     width: 100%;
     flex: 1;
-    padding: 110px 0 0 96px;
+    padding: 110px 0 16px 96px;
+    overflow-y: auto;
 }
 
 .red-color {
@@ -98,9 +99,9 @@ button[type="submit"]:disabled {
 }
 
 // -------------------------- Responsive Design --------------------------- \\
-@media(max-width: 1500px) {
+@media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
     .main-content {
-        padding: 48px 16px 0 48px;
+        padding: 48px 16px 16px 48px;
     }
 }
 
@@ -127,7 +128,6 @@ button[type="submit"]:disabled {
         align-items: center;
         padding: 48px 16px 16px 16px;
         gap: 40px;
-        overflow-y: auto;
     }
 }
 
