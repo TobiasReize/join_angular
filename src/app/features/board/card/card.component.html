@@ -12,7 +12,12 @@
         <div class="card-contacts-prio-container">
             <div class="contacts-container">
                 @for (contact of task.contacts; track $index) {
-                    <div class="card-contact">{{ getInitials(contact) }}</div>
+                    @if ($index < 4) {
+                        <div class="card-contact">{{ getInitials(contact) }}</div>
+                    }
+                }
+                @if (task.contacts.length > 4) {
+                    <div class="remaining-contacts">+{{ task.contacts.length - 4 }}</div>
                 }
             </div>
             <img class="card-prio-icon" src="icon/{{ task.priority }}.svg" alt="priority">

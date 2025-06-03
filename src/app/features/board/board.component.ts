@@ -58,7 +58,9 @@ export class BoardComponent {
         'Amelie Müller',
         'Hans Klein',
         'Max Mustermann',
-        'Eva Gross'
+        'Eva Gross',
+        'Kim Lanig',
+        'Xaver Super'
       ]
     }
   ];

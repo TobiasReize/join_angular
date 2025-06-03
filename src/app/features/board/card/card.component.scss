@@ -80,20 +80,30 @@
     @extend .dF-row-cc;
 }
 
-.card-contact {
+.card-contact-style {
     @extend .dF-row-cc;
     @extend .font-style-10;
     width: 32px;
     height: 32px;
     border-radius: 50%;
     border: 1px solid white;
-    background-color: #FF7A00;
     color: white;
     text-align: center;
+}
+
+.card-contact {
+    @extend .card-contact-style;
+    background-color: #FF7A00;
 
     &:not(:first-child) {
         margin-left: -8px;
     }
+}
+
+.remaining-contacts {
+    @extend .card-contact-style;
+    background-color: color.$icon-gray;
+    margin-left: -8px;
 }
 
 .card-prio-icon {
