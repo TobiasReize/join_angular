@@ -62,7 +62,6 @@
 
 .bar-of-progress {
     height: 100%;
-    width: 50%;
     border-radius: 4px;
     background-color: color.$subtask-blue;
 }
@@ -98,5 +97,5 @@
 }
 
 .card-prio-icon {
-    padding: 7.5px;
+    width: 20px;
 }

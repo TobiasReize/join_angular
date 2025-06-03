@@ -5,9 +5,9 @@
         <p class="card-description m-btm-24">{{ task.description }}</p>
         <div class="card-subtasks-container m-btm-24">
             <div class="progress-bar">
-                <div class="bar-of-progress"></div>
+                <div class="bar-of-progress" [ngStyle]="{'width': (getSubtasksDone(task) / task.subtasks.length * 100) + '%'}"></div>
             </div>
-            <div class="subtask">{{ getSubtasksDone(task) }}/{{task.subtasks.length}} Subtasks</div>
+            <div class="subtask">{{ getSubtasksDone(task) }}/{{ task.subtasks.length }} Subtasks</div>
         </div>
         <div class="card-contacts-prio-container">
             <div class="contacts-container">
@@ -15,7 +15,7 @@
                     <div class="card-contact">{{ getInitials(contact) }}</div>
                 }
             </div>
-            <img class="card-prio-icon" src="icon/medium.svg" alt="medium">
+            <img class="card-prio-icon" src="icon/{{ task.priority }}.svg" alt="priority">
         </div>
     </div>
 } @else {

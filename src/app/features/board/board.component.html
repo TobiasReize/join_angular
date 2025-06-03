@@ -35,7 +35,7 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-                    @for (task of getTasks('To do'); track $index) {
+                    @for (task of getFilteredTasks('To do'); track $index) {
                         <app-card [task]="task"></app-card>
                     } @empty {
                         <app-card column="To do"></app-card>
@@ -53,7 +53,7 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-                    @for (task of getTasks('In progress'); track $index) {
+                    @for (task of getFilteredTasks('In progress'); track $index) {
                         <app-card [task]="task"></app-card>
                     } @empty {
                         <app-card column="In progress"></app-card>
@@ -70,7 +70,7 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-                    @for (task of getTasks('Await feedback'); track $index) {
+                    @for (task of getFilteredTasks('Await feedback'); track $index) {
                         <app-card [task]="task"></app-card>
                     } @empty {
                         <app-card column="Await feedback"></app-card>
@@ -82,7 +82,7 @@
                     <span class="column-title">Done</span>
                 </div>
                 <div class="cards-container">
-                    @for (task of getTasks('Done'); track $index) {
+                    @for (task of getFilteredTasks('Done'); track $index) {
                         <app-card [task]="task"></app-card>
                     } @empty {
                         <app-card column="Done"></app-card>

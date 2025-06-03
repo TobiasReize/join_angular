@@ -13,12 +13,14 @@ import { TaskInterface } from '../../interfaces/task.interface';
 })
 export class BoardComponent {
 
-  tasks: TaskInterface[] = [
+  allTasks: TaskInterface[] = [
     {
       column: 'In progress',
       category: 'User Story',
       title: 'Kochwelt Page',
       description: 'Build start page with recipe recommendation',
+      date: '2025-06-21',
+      priority: 'low',
       subtasks: [
         {
           title: 'Subtask 1',
@@ -30,9 +32,9 @@ export class BoardComponent {
         }
       ],
       contacts: [
-        'Amelie Müller',
+        'Max Mustermann',
         'Hans Klein',
-        'Max Mustermann'
+        'Amelie Müller'
       ]
     },
     {
@@ -40,10 +42,12 @@ export class BoardComponent {
       category: 'User Story',
       title: 'Kochwelt Page',
       description: 'Build start page with recipe recommendation',
+      date: '2025-07-13',
+      priority: 'urgent',
       subtasks: [
         {
           title: 'Subtask 1',
-          status: 'open'
+          status: 'done'
         },
         {
           title: 'Subtask 2',
@@ -60,8 +64,8 @@ export class BoardComponent {
   ];
 
 
-  getTasks(column: string) {
-    return this.tasks.filter(task => task.column === column);
+  getFilteredTasks(column: string): TaskInterface[] {
+    return this.allTasks.filter(task => task.column === column);
   }
 
 }

@@ -3,6 +3,8 @@ export interface TaskInterface {
     category: string,
     title: string,
     description: string,
+    date: string,
+    priority: 'low' | 'medium' | 'urgent',
     subtasks: {
         title: string,
         status: 'open' | 'done'
