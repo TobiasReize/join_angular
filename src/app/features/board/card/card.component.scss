@@ -1,0 +1,102 @@
+@use '../../../../../styles/layout';
+@use '../../../../../styles/color';
+@use '../../../../../styles/distance';
+@use '../../../../../styles/typography';
+
+:host {
+    @extend .dF-row-cc;
+    width: 100%;
+}
+
+.empty-card {
+    @extend .dF-row-cc;
+    @extend .font-style-9;
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px dashed color.$form-icon-gray;
+    background-color: color.$task-gray;
+    color: color.$form-icon-gray;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.card {
+    @extend .dF-column-ai-fs;
+    width: 100%;
+    padding: 16px;
+    border-radius: 24px;
+    background-color: white;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-category {
+    @extend .font-style-9;
+    padding: 4px 16px;
+    border-radius: 8px;
+    background-color: color.$cat-blue;
+    color: white;
+}
+
+.card-title {
+    @extend .font-style-8;
+    color: color.$main-color;
+}
+
+.card-description {
+    @extend .font-style-9;
+    color: color.$form-icon-gray;
+}
+
+.card-subtasks-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.progress-bar {
+    @extend .dF-jc-fs;
+    width: 128px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: color.$subtask-gray;
+}
+
+.bar-of-progress {
+    height: 100%;
+    width: 50%;
+    border-radius: 4px;
+    background-color: color.$subtask-blue;
+}
+
+.subtask {
+    @extend .font-style-10;
+    color: black;
+}
+
+.card-contacts-prio-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.contacts-container {
+    @extend .dF-row-cc;
+}
+
+.card-contact {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: #FF7A00;
+    color: white;
+    text-align: center;
+
+    &:not(:first-child) {
+        margin-left: -8px;
+    }
+}
+
+.card-prio-icon {
+    padding: 7.5px;
+}

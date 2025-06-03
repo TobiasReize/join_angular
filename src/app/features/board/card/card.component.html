@@ -1,0 +1,23 @@
+@if (task) {
+    <div class="card">
+        <span class="card-category m-btm-24">{{ task.category }}</span>
+        <span class="card-title m-btm-8">{{ task.title }}</span>
+        <p class="card-description m-btm-24">{{ task.description }}</p>
+        <div class="card-subtasks-container m-btm-24">
+            <div class="progress-bar">
+                <div class="bar-of-progress"></div>
+            </div>
+            <div class="subtask">{{ getSubtasksDone(task) }}/{{task.subtasks.length}} Subtasks</div>
+        </div>
+        <div class="card-contacts-prio-container">
+            <div class="contacts-container">
+                @for (contact of task.contacts; track $index) {
+                    <div class="card-contact">{{ getInitials(contact) }}</div>
+                }
+            </div>
+            <img class="card-prio-icon" src="icon/medium.svg" alt="medium">
+        </div>
+    </div>
+} @else {
+    <div class="empty-card">No tasks {{ column }}</div>
+}

@@ -6,7 +6,7 @@
             <h3>Board</h3>
             <div class="search-container">
                 <div class="search-input-style">
-                    <input type="text" placeholder="Find task">
+                    <input type="text" name="search" id="search" maxlength="30" placeholder="Find task">
                     <div class="search-separator"></div>
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
                         <mask id="mask0_75609_16019" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -17,7 +17,7 @@
                         </g>
                     </svg>
                 </div>
-                <button class="btn-3">
+                <button class="btn-3" type="button">
                     <span>Add task</span>
                     <img src="icon/add_white.svg" alt="add">
                 </button>
@@ -35,25 +35,11 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-                    <div class="card">
-                        <span class="card-category m-btm-24">User Story</span>
-                        <span class="card-title m-btm-8">Kochwelt Page & Recipe Recommender</span>
-                        <p class="card-description m-btm-24">Build start page with recipe recommendation</p>
-                        <div class="card-subtasks-container m-btm-24">
-                            <div class="progress-bar">
-                                <div class="bar-of-progress"></div>
-                            </div>
-                            <div class="subtask">1/2 Subtasks</div>
-                        </div>
-                        <div class="card-contacts-prio-container">
-                            <div class="contacts-container">
-                                <div class="card-contact">AW</div>
-                                <div class="card-contact">EM</div>
-                                <div class="card-contact">MB</div>
-                            </div>
-                            <img class="card-prio-icon" src="icon/medium.svg" alt="medium">
-                        </div>
-                    </div>
+                    @for (task of getTasks('To do'); track $index) {
+                        <app-card [task]="task"></app-card>
+                    } @empty {
+                        <app-card column="To do"></app-card>
+                    }
                 </div>
             </div>
 
@@ -67,7 +53,11 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-                    <div class="empty-card">No tasks In progress</div>
+                    @for (task of getTasks('In progress'); track $index) {
+                        <app-card [task]="task"></app-card>
+                    } @empty {
+                        <app-card column="In progress"></app-card>
+                    }
                 </div>
             </div>
             <div class="column-style">
@@ -80,7 +70,11 @@
                     </svg>
                 </div>
                 <div class="cards-container">
-
+                    @for (task of getTasks('Await feedback'); track $index) {
+                        <app-card [task]="task"></app-card>
+                    } @empty {
+                        <app-card column="Await feedback"></app-card>
+                    }
                 </div>
             </div>
             <div class="column-style">
@@ -88,7 +82,11 @@
                     <span class="column-title">Done</span>
                 </div>
                 <div class="cards-container">
-
+                    @for (task of getTasks('Done'); track $index) {
+                        <app-card [task]="task"></app-card>
+                    } @empty {
+                        <app-card column="Done"></app-card>
+                    }
                 </div>
             </div>
         </section>
