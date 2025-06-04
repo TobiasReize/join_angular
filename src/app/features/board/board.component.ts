@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { CardComponent } from './card/card.component';
 import { TaskInterface } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task-service/task.service';
-import { CommonModule } from '@angular/common';
+import { CardDetailViewComponent } from './card-detail-view/card-detail-view.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent],
+  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -75,17 +76,8 @@ export class BoardComponent {
   }
 
 
-  deselectTask() {
-    this.taskService.resetActiveTask();
-  }
-
-
   getFilteredTasks(column: string): TaskInterface[] {
     return this.allTasks.filter(task => task.column === column);
-  }
-
-  getInitials(contact: string): string {
-    return contact.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
   }
 
 }
