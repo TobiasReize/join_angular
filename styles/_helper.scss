@@ -215,6 +215,18 @@
     }
 }
 
+.cat-user-story {
+    background-color: color.$cat-blue;
+}
+
+.cat-technical-task {
+    background-color: color.$cat-mint;
+}
+
+.cat-bug-fix {
+    background-color: color.$cat-red;
+}
+
 // -------------------------- Responsive Design --------------------------- \\
 @media(max-width: 1024px) {
     .host {

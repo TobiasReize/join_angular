@@ -1,6 +1,6 @@
 @if (task) {
     <div class="card">
-        <span class="card-category m-btm-24">{{ task.category }}</span>
+        <span class="card-category m-btm-24" [ngClass]="{'cat-user-story': task.category == 'User Story', 'cat-technical-task': task.category == 'Technical Task', 'cat-bug-fix': task.category == 'Bug Fix'}">{{ task.category }}</span>
         <span class="card-title m-btm-8">{{ task.title }}</span>
         <p class="card-description m-btm-24">{{ task.description }}</p>
         <div class="card-subtasks-container m-btm-24">

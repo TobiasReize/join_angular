@@ -2,6 +2,7 @@
 @use '../../../../../styles/color';
 @use '../../../../../styles/distance';
 @use '../../../../../styles/typography';
+@use '../../../../../styles/helper';
 
 :host {
     @extend .dF-row-cc;
@@ -33,7 +34,6 @@
     @extend .font-style-9;
     padding: 4px 16px;
     border-radius: 8px;
-    background-color: color.$cat-blue;
     color: white;
 }
 
@@ -96,14 +96,14 @@
     background-color: #FF7A00;
 
     &:not(:first-child) {
-        margin-left: -8px;
+        margin-left: -6px;
     }
 }
 
 .remaining-contacts {
     @extend .card-contact-style;
     background-color: color.$icon-gray;
-    margin-left: -8px;
+    margin-left: -6px;
 }
 
 .card-prio-icon {
