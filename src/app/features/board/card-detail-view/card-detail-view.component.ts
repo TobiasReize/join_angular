@@ -23,4 +23,13 @@ export class CardDetailViewComponent {
     return contact.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
   }
 
+
+  firstLetterUppercase(word: string | undefined): string {
+    if (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    } else {
+      return '';
+    }
+  }
+
 }

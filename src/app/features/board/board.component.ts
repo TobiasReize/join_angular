@@ -56,6 +56,10 @@ export class BoardComponent {
         {
           title: 'Subtask 2',
           status: 'done'
+        },
+        {
+          title: 'Subtask 3',
+          status: 'done'
         }
       ],
       contacts: [

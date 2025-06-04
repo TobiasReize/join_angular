@@ -7,30 +7,34 @@
     <span class="black-color">{{ taskService.activeTask()?.description }}</span>
     <div class="dF-jc-fs">
         <span>Due date:</span>
-        <span class="black-color">{{ taskService.activeTask()?.date }}</span>
+        <span class="black-color m-left-25">{{ taskService.activeTask()?.date }}</span>
     </div>
     <div class="dF-jc-fs">
         <span>Priority:</span>
-        <span class="black-color">{{ taskService.activeTask()?.priority }}</span>
+        <span class="black-color m-left-43">{{ firstLetterUppercase(taskService.activeTask()?.priority) }}</span>
         <img class="prio-icon m-left-10" src="icon/{{ taskService.activeTask()?.priority }}.svg" alt="priority">
     </div>
     <div class="dF-column-ai-fs">
         <span class="m-btm-8">Assigned to:</span>
-        @for (contact of taskService.activeTask()?.contacts; track $index) {
-            <div class="active-task-contact">
-                <div class="initials">{{ getInitials(contact) }}</div>
-                <span class="black-color">{{ contact }}</span>
-            </div>
-        }
+        <div class="contact-overflow-wrapper">
+            @for (contact of taskService.activeTask()?.contacts; track $index) {
+                <div class="active-task-contact">
+                    <div class="initials">{{ getInitials(contact) }}</div>
+                    <span class="black-color">{{ contact }}</span>
+                </div>
+            }
+        </div>
     </div>
     <div class="dF-column-ai-fs">
         <span class="m-btm-8">Subtasks:</span>
-        @for (subtask of taskService.activeTask()?.subtasks; track $index) {
-            <div class="active-task-subtask">
-                <img class="checkbox" [src]="subtask.status == 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
-                <span class="black-color font-style-9">{{ subtask.title }}</span>
-            </div>
-        }
+        <div class="subtask-overflow-wrapper">
+            @for (subtask of taskService.activeTask()?.subtasks; track $index) {
+                <div class="active-task-subtask">
+                    <img class="checkbox" [src]="subtask.status == 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
+                    <span class="black-color font-style-9">{{ subtask.title }}</span>
+                </div>
+            }
+        </div>
     </div>
     <div class="active-task-button-container">
         <div class="active-task-icon-container">
