@@ -149,3 +149,10 @@
     height: 24px;
     background-color: color.$form-gray;
 }
+
+.edit-task-overflow-wrapper {
+    @extend .dF-column-ai-fs;
+    gap: 24px;
+    overflow-y: auto;
+}
+

@@ -122,12 +122,12 @@ app-header {
     flex: 1;
 }
 
-app-card {
+.app-card {
     cursor: pointer;
     transform-origin: bottom left;
     transition: all 200ms ease-out;
-}
 
-app-card:active {
-    transform: rotate(5deg);
+    &:active {
+        transform: rotate(5deg);
+    }
 }

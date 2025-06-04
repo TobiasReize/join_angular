@@ -16,6 +16,12 @@ export class CardDetailViewComponent {
 
   deselectTask() {
     this.taskService.resetActiveTask();
+    this.taskService.setEditTask(false);
+  }
+
+
+  editTask() {
+    this.taskService.setEditTask(true);
   }
 
 
