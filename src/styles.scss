@@ -49,6 +49,10 @@ input, textarea {
     outline: unset;
 }
 
+textarea {
+    resize: none;
+}
+
 h1 {
     @extend .font-style-0;
     color: color.$hover-light-blue;
@@ -105,6 +109,95 @@ button[type="submit"]:disabled {
         background-color: color.$form-icon-gray;
         border: unset;
         box-shadow: unset;
+    }
+}
+
+.priority-buttons {
+    @extend .dF-row-cc;
+    gap: 16px;
+    width: 100%;
+}
+
+.priority-btn {
+    @extend .dF-row-cc;
+    gap: 8px;
+    height: 56px;
+    flex: 1;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+
+    > span {
+        color: black;
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+
+.priority-icon {
+    width: 20px;
+    height: auto;
+}
+
+.icon-urgent {
+    path {
+        fill: color.$urgent-red;
+    }
+}
+
+.icon-medium {
+    path {
+        fill: color.$medium-orange;
+    }
+}
+
+.icon-low {
+    path {
+        fill: color.$low-green;
+    }
+}
+
+.selected-priority-btn {
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    path {
+        fill: white;
+    }
+}
+
+.btn-urgent-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$urgent-red;
+}
+
+.btn-medium-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$medium-orange;
+}
+
+.btn-low-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$low-green;
+}
+
+.icon-input-hover:hover {
+    border: 1px solid color.$form-icon-gray !important;
+}
+
+.input-icon-style {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
     }
 }
 

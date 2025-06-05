@@ -154,5 +154,9 @@
     @extend .dF-column-ai-fs;
     gap: 24px;
     overflow-y: auto;
+
+    > * {
+        width: 100%;
+    }
 }
 

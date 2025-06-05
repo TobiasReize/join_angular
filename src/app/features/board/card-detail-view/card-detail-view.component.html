@@ -69,6 +69,57 @@
             <img (click)="deselectTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
         <div class="edit-task-overflow-wrapper">
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="title">Title<span class="red-color">*</span></label>
+                <input class="general-input-style" type="text" name="title" id="title" [value]="taskService.activeTask()?.title">
+                <span class="error-msg m-top-4">This field is required</span>
+            </div>
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="description">Description</label>
+                <textarea class="general-input-style" name="description" id="description" maxlength="60" rows="3">{{ taskService.activeTask()?.description }}</textarea>
+            </div>
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="date">Due date<span class="red-color">*</span></label>
+                <input class="general-input-style" type="date" name="date" id="date" [value]="taskService.activeTask()?.date">
+                <span class="error-msg m-top-4">This field is required</span>
+            </div>
+            <div class="dF-column-ai-fs">
+                <span class="m-btm-8">Priority</span>
+                <div class="priority-buttons">
+                    <div (click)="choosePriority('urgent')" class="priority-btn" [ngClass]="{'btn-urgent-selected': taskService.activeTask()?.priority == 'urgent'}">
+                        <span>Urgent</span>
+                        <svg class="priority-icon icon-urgent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 26" fill="none">
+                            <path d="M33.0159 25.9714C32.6149 25.9721 32.2242 25.8425 31.9014 25.6018L17.7961 15.0719L3.69086 25.6018C3.49283 25.7499 3.26792 25.8571 3.02896 25.9172C2.78999 25.9774 2.54166 25.9893 2.29814 25.9524C2.05462 25.9154 1.82068 25.8302 1.60967 25.7018C1.39867 25.5733 1.21473 25.4041 1.06837 25.2037C0.922001 25.0033 0.816072 24.7757 0.756628 24.5339C0.697184 24.2921 0.68539 24.0408 0.721918 23.7944C0.79569 23.2967 1.06181 22.849 1.46174 22.5499L16.6816 11.1765C17.0041 10.9349 17.3948 10.8044 17.7961 10.8044C18.1974 10.8044 18.5881 10.9349 18.9107 11.1765L34.1305 22.5499C34.4483 22.7869 34.684 23.1194 34.8039 23.5001C34.9238 23.8807 34.9218 24.2899 34.7982 24.6693C34.6746 25.0487 34.4357 25.3789 34.1157 25.6127C33.7956 25.8466 33.4107 25.9721 33.0159 25.9714Z"/>
+                            <path d="M33.0159 16.0195C32.6149 16.0202 32.2242 15.8906 31.9014 15.6499L17.7961 5.11998L3.69087 15.6499C3.29094 15.949 2.78996 16.0751 2.29815 16.0004C1.80634 15.9258 1.36397 15.6565 1.06837 15.2518C0.772775 14.8471 0.648154 14.3401 0.721925 13.8425C0.795697 13.3448 1.06182 12.8971 1.46175 12.598L16.6816 1.22459C17.0041 0.98296 17.3948 0.852539 17.7961 0.852539C18.1974 0.852539 18.5881 0.98296 18.9107 1.22459L34.1305 12.598C34.4483 12.835 34.684 13.1675 34.8039 13.5482C34.9238 13.9288 34.9218 14.338 34.7982 14.7174C34.6746 15.0968 34.4357 15.427 34.1157 15.6608C33.7956 15.8947 33.4107 16.0202 33.0159 16.0195Z"/>
+                        </svg>
+                    </div>
+                    <div (click)="choosePriority('medium')" class="priority-btn" [ngClass]="{'btn-medium-selected': taskService.activeTask()?.priority == 'medium'}">
+                        <span>Medium</span>
+                        <svg class="priority-icon icon-medium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 8" fill="none">
+                            <path d="M19.7596 7.91693H1.95136C1.66071 7.91693 1.38197 7.80063 1.17645 7.59362C0.970928 7.3866 0.855469 7.10584 0.855469 6.81308C0.855469 6.52032 0.970928 6.23955 1.17645 6.03254C1.38197 5.82553 1.66071 5.70923 1.95136 5.70923H19.7596C20.0502 5.70923 20.329 5.82553 20.5345 6.03254C20.74 6.23955 20.8555 6.52032 20.8555 6.81308C20.8555 7.10584 20.74 7.3866 20.5345 7.59362C20.329 7.80063 20.0502 7.91693 19.7596 7.91693Z"/>
+                            <path d="M19.7596 2.67376H1.95136C1.66071 2.67376 1.38197 2.55746 1.17645 2.35045C0.970928 2.14344 0.855469 1.86267 0.855469 1.56991C0.855469 1.27715 0.970928 0.996386 1.17645 0.789374C1.38197 0.582363 1.66071 0.466064 1.95136 0.466064L19.7596 0.466064C20.0502 0.466064 20.329 0.582363 20.5345 0.789374C20.74 0.996386 20.8555 1.27715 20.8555 1.56991C20.8555 1.86267 20.74 2.14344 20.5345 2.35045C20.329 2.55746 20.0502 2.67376 19.7596 2.67376Z"/>
+                        </svg>
+                    </div>
+                    <div (click)="choosePriority('low')" class="priority-btn" [ngClass]="{'btn-low-selected': taskService.activeTask()?.priority == 'low'}">
+                        <span>Low</span>
+                        <svg class="priority-icon icon-low" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 16" fill="none">
+                            <path d="M10.8555 9.69779C10.6209 9.69819 10.3923 9.62335 10.2035 9.48427L1.30038 2.91453C1.18454 2.82898 1.0867 2.72146 1.01245 2.59812C0.938193 2.47478 0.888977 2.33803 0.867609 2.19569C0.824455 1.90821 0.897354 1.61537 1.07027 1.3816C1.24319 1.14782 1.50196 0.992265 1.78965 0.949143C2.07734 0.906021 2.3704 0.978866 2.60434 1.15165L10.8555 7.23414L19.1066 1.15165C19.2224 1.0661 19.354 1.00418 19.4938 0.969432C19.6336 0.934685 19.7788 0.927791 19.9213 0.949143C20.0637 0.970495 20.2006 1.01967 20.324 1.09388C20.4474 1.16808 20.555 1.26584 20.6407 1.3816C20.7263 1.49735 20.7883 1.62882 20.823 1.7685C20.8578 1.90818 20.8647 2.05334 20.8433 2.19569C20.822 2.33803 20.7727 2.47478 20.6985 2.59812C20.6242 2.72146 20.5264 2.82898 20.4106 2.91453L11.5075 9.48427C11.3186 9.62335 11.0901 9.69819 10.8555 9.69779Z"/>
+                            <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="contacts">Assigned to</label>
+                <div (click)="toggleContactOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
+                    <input #contactInput class="pointer" type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                    @if (contactsVisible) {
+                        <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
+                    } @else {
+                        <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
+                    }
+                </div>
+            </div>
 
         </div>
         <div class="dF-jc-fe">

@@ -12,6 +12,8 @@ import { TaskService } from '../../../services/task-service/task.service';
 export class CardDetailViewComponent {
 
   taskService = inject(TaskService);
+  selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
+  contactsVisible: boolean = false;
 
 
   deselectTask() {
@@ -22,6 +24,22 @@ export class CardDetailViewComponent {
 
   editTask() {
     this.taskService.setEditTask(true);
+  }
+
+
+  choosePriority(priority: 'low' | 'medium' | 'urgent') {
+    this.selectedPriority = priority;
+  }
+
+
+  toggleContactOverlay(event: Event, state?: 'visible') {
+    if (state == 'visible') {
+      event.stopPropagation();
+      this.contactsVisible = true;
+    } else {
+      this.contactsVisible = !this.contactsVisible;
+      event.stopPropagation();
+    }
   }
 
 
