@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
-import { HeaderComponent } from "../../shared/header/header.component";
+import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
   selector: 'app-summary',

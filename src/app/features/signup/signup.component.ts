@@ -4,7 +4,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { ToastMsgComponent } from "../../shared/toast-msg/toast-msg.component";
+import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
 import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({

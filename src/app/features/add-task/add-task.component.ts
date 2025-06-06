@@ -2,9 +2,9 @@ import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SidenavComponent } from "../../shared/sidenav/sidenav.component";
-import { HeaderComponent } from "../../shared/header/header.component";
-import { ToastMsgComponent } from "../../shared/toast-msg/toast-msg.component";
+import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
+import { HeaderComponent } from '../../shared/header/header.component';
+import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
 import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({
