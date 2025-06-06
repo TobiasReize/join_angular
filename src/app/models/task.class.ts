@@ -26,7 +26,7 @@ export class Task {
     }
 
 
-    toJson():TaskInterface {
+    toJson(): TaskInterface {
         return {
             column: this.column,
             category: this.category,

@@ -11,9 +11,9 @@
         </div>
         <div class="card-contacts-prio-container">
             <div class="contacts-container">
-                @for (contact of task.contacts; track $index) {
+                @for (contactId of task.contacts; track $index) {
                     @if ($index < 4) {
-                        <div class="card-contact">{{ getInitials(contact) }}</div>
+                        <div class="card-contact">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
                     }
                 }
                 @if (task.contacts.length > 4) {

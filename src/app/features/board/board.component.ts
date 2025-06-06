@@ -8,6 +8,7 @@ import { TaskInterface } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task-service/task.service';
 import { CardDetailViewComponent } from './card-detail-view/card-detail-view.component';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
+import { ContactService } from '../../services/contact-service/contact.service';
 
 @Component({
   selector: 'app-board',
@@ -19,69 +20,17 @@ import { FirebaseService } from '../../services/firebase-service/firebase.servic
 export class BoardComponent implements OnInit, OnDestroy {
 
   taskService = inject(TaskService);
+  contactService = inject(ContactService);
   firebaseService = inject(FirebaseService);
   unsubTaskCol!: Unsubscribe;
-  
-  allTasks: TaskInterface[] = [
-    {
-      column: 'In progress',
-      category: 'User Story',
-      title: 'Kochwelt Page',
-      description: 'Build start page with recipe recommendation',
-      date: '2025-06-21',
-      priority: 'low',
-      subtasks: [
-        {
-          title: 'Subtask 1',
-          status: 'open'
-        },
-        {
-          title: 'Subtask 2',
-          status: 'done'
-        }
-      ],
-      contacts: [
-        'Max Mustermann',
-        'Hans Klein',
-        'Amelie Müller'
-      ]
-    },
-    {
-      column: 'Await feedback',
-      category: 'Technical Task',
-      title: 'Kochwelt Page',
-      description: 'Build start page with recipe recommendation',
-      date: '2025-07-13',
-      priority: 'urgent',
-      subtasks: [
-        {
-          title: 'Subtask 1',
-          status: 'done'
-        },
-        {
-          title: 'Subtask 2',
-          status: 'done'
-        },
-        {
-          title: 'Subtask 3',
-          status: 'done'
-        }
-      ],
-      contacts: [
-        'Amelie Müller',
-        'Hans Klein',
-        'Max Mustermann',
-        'Eva Gross',
-        'Kim Lanig',
-        'Xaver Super'
-      ]
-    }
-  ];
+  unsubContactCol!: Unsubscribe;
 
 
   ngOnInit(): void {
     this.unsubTaskCol = this.taskService.subTaskCol();
+    this.unsubContactCol = this.contactService.subContactCol();
     console.log('allTasks: ', this.taskService.allTasks());
+    console.log('allContacts: ', this.contactService.allContacts());
   }
 
 
@@ -93,12 +42,13 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubTaskCol();
+    this.unsubContactCol();
   }
 
 
   // Hilfsfunktionen:
   getFilteredTasks(column: string): TaskInterface[] {
-    return this.allTasks.filter(task => task.column === column);
+    return this.taskService.allTasks().filter(task => task.column === column);
   }
 
 }

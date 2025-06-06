@@ -18,10 +18,10 @@
         <div class="dF-column-ai-fs">
             <span class="m-btm-8">Assigned to:</span>
             <div class="contact-overflow-wrapper">
-                @for (contact of taskService.activeTask()?.contacts; track $index) {
+                @for (contactId of taskService.activeTask()?.contacts; track $index) {
                     <div class="active-task-contact">
-                        <div class="initials">{{ getInitials(contact) }}</div>
-                        <span class="black-color">{{ contact }}</span>
+                        <div class="initials">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
+                        <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
                     </div>
                 }
             </div>

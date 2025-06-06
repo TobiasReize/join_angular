@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../../services/task-service/task.service';
+import { Contact } from '../../../models/contact.class';
+import { ContactService } from '../../../services/contact-service/contact.service';
 
 @Component({
   selector: 'app-card-detail-view',
@@ -12,6 +14,7 @@ import { TaskService } from '../../../services/task-service/task.service';
 export class CardDetailViewComponent {
 
   taskService = inject(TaskService);
+  contactService = inject(ContactService);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   contactsVisible: boolean = false;
 
@@ -43,8 +46,12 @@ export class CardDetailViewComponent {
   }
 
 
-  getInitials(contact: string): string {
-    return contact.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
+  getInitials(contact: Contact | undefined): string {
+    if (contact) {
+      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
+    } else {
+      return '';
+    }
   }
 
 
