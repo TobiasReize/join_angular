@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Unsubscribe } from '@angular/fire/firestore';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { CardComponent } from './card/card.component';
 import { TaskInterface } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task-service/task.service';
 import { CardDetailViewComponent } from './card-detail-view/card-detail-view.component';
+import { FirebaseService } from '../../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-board',
@@ -14,9 +16,12 @@ import { CardDetailViewComponent } from './card-detail-view/card-detail-view.com
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit, OnDestroy {
 
   taskService = inject(TaskService);
+  firebaseService = inject(FirebaseService);
+  unsubTaskCol!: Unsubscribe;
+  
   allTasks: TaskInterface[] = [
     {
       column: 'In progress',
@@ -74,12 +79,24 @@ export class BoardComponent {
   ];
 
 
+  ngOnInit(): void {
+    this.unsubTaskCol = this.taskService.subTaskCol();
+    console.log('allTasks: ', this.taskService.allTasks());
+  }
+
+
   selectTask(task: TaskInterface) {
     this.taskService.setActiveTask(task);
     console.log('active Task:', task);
   }
 
 
+  ngOnDestroy(): void {
+    this.unsubTaskCol();
+  }
+
+
+  // Hilfsfunktionen:
   getFilteredTasks(column: string): TaskInterface[] {
     return this.allTasks.filter(task => task.column === column);
   }
