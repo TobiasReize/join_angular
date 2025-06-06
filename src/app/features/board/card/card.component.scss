@@ -93,7 +93,6 @@
 
 .card-contact {
     @extend .card-contact-style;
-    background-color: #FF7A00;
 
     &:not(:first-child) {
         margin-left: -6px;

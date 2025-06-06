@@ -20,7 +20,7 @@
             <div class="contact-overflow-wrapper">
                 @for (contactId of taskService.activeTask()?.contacts; track $index) {
                     <div class="active-task-contact">
-                        <div class="initials">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
+                        <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
                         <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
                     </div>
                 }
