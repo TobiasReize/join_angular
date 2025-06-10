@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TaskService } from '../../../services/task-service/task.service';
 import { Contact } from '../../../models/contact.class';
 import { ContactService } from '../../../services/contact-service/contact.service';
+import { FirebaseService } from '../../../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-card-detail-view',
@@ -15,6 +16,7 @@ export class CardDetailViewComponent {
 
   taskService = inject(TaskService);
   contactService = inject(ContactService);
+  firebaseService = inject(FirebaseService);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   contactsVisible: boolean = false;
 
@@ -22,6 +24,17 @@ export class CardDetailViewComponent {
   deselectTask() {
     this.taskService.resetActiveTask();
     this.taskService.setEditTask(false);
+  }
+
+
+  toggleCheckbox(index: number) {
+    const currentTask = this.taskService.activeTask();
+    if (currentTask) {
+      const currentStatus = currentTask.subtasks[index].status;
+      const newStatus = currentStatus === 'open' ? 'done' : 'open';
+      const data = {status: newStatus};
+      // this.firebaseService.updateDocData('tasks', currentTask.id, data);
+    }
   }
 
 
@@ -46,6 +59,7 @@ export class CardDetailViewComponent {
   }
 
 
+  // Hilfsfunktionen:
   getInitials(contact: Contact | undefined): string {
     if (contact) {
       return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');

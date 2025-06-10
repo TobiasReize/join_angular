@@ -16,10 +16,12 @@ export class ContactService {
 
   subContactCol() {
     return onSnapshot(this.firebaseService.getCollectionRef('contacts'), contactsCollection => {
+      this.allContactsSignal.set([]);
       contactsCollection.forEach(contact => {
         const data = new Contact(contact.data(), contact.id);
         this.allContactsSignal().push(data);
       });
+      // console.log('allContacts: ', this.allContacts());
     });
   }
 

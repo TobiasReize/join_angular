@@ -1,6 +1,7 @@
 import { TaskInterface } from '../interfaces/task.interface';
 
 export class Task {
+    id: string;
     column: string;
     category: string;
     title: string;
@@ -14,7 +15,8 @@ export class Task {
     contacts: string[];
 
 
-    constructor(obj?: any) {
+    constructor(obj?: any, id?: string) {
+        this.id = id ? id : '';
         this.column = obj ? obj.column : '';
         this.category = obj ? obj.category : '';
         this.title = obj ? obj.title : '';

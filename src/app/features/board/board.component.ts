@@ -4,7 +4,7 @@ import { Unsubscribe } from '@angular/fire/firestore';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { CardComponent } from './card/card.component';
-import { TaskInterface } from '../../interfaces/task.interface';
+import { Task } from '../../models/task.class';
 import { TaskService } from '../../services/task-service/task.service';
 import { CardDetailViewComponent } from './card-detail-view/card-detail-view.component';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
@@ -29,14 +29,12 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.unsubTaskCol = this.taskService.subTaskCol();
     this.unsubContactCol = this.contactService.subContactCol();
-    console.log('allTasks: ', this.taskService.allTasks());
-    console.log('allContacts: ', this.contactService.allContacts());
   }
 
 
-  selectTask(task: TaskInterface) {
-    this.taskService.setActiveTask(task);
-    console.log('active Task:', task);
+  selectTask(id: string) {
+    this.taskService.setActiveTask(id);
+    // console.log('active Task:', this.taskService.getTaskFromId(id));
   }
 
 
@@ -47,7 +45,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 
   // Hilfsfunktionen:
-  getFilteredTasks(column: string): TaskInterface[] {
+  getFilteredTasks(column: string): Task[] {
     return this.taskService.allTasks().filter(task => task.column === column);
   }
 

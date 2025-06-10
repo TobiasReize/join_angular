@@ -36,7 +36,7 @@
                 </div>
                 <div class="cards-container">
                     @for (task of getFilteredTasks('To do'); track $index) {
-                        <app-card (click)="selectTask(task)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
                     } @empty {
                         <app-card column="To do"></app-card>
                     }
@@ -54,7 +54,7 @@
                 </div>
                 <div class="cards-container">
                     @for (task of getFilteredTasks('In progress'); track $index) {
-                        <app-card (click)="selectTask(task)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
                     } @empty {
                         <app-card column="In progress"></app-card>
                     }
@@ -71,7 +71,7 @@
                 </div>
                 <div class="cards-container">
                     @for (task of getFilteredTasks('Await feedback'); track $index) {
-                        <app-card (click)="selectTask(task)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
                     } @empty {
                         <app-card column="Await feedback"></app-card>
                     }
@@ -83,7 +83,7 @@
                 </div>
                 <div class="cards-container">
                     @for (task of getFilteredTasks('Done'); track $index) {
-                        <app-card (click)="selectTask(task)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
                     } @empty {
                         <app-card column="Done"></app-card>
                     }
