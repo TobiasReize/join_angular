@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { getDocs, onSnapshot } from '@angular/fire/firestore';
+import { onSnapshot } from '@angular/fire/firestore';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { Task } from '../../models/task.class';
 
@@ -44,12 +44,14 @@ export class TaskService {
     return onSnapshot(this.firebaseService.getCollectionRef('tasks'), tasksCollection => {
       this.allTasksSignal.set([]);
       tasksCollection.forEach(async task => {
-        // console.log('task: ', task.data());
         const data = new Task(task.data(), task.id);
         data.subtasks = [];
-        const subtaskSnap = await getDocs(this.firebaseService.getSubcollectionRef('tasks', task.id, 'subtasks'));
+        const subtaskSnap = await this.firebaseService.getMultipleDocs(this.firebaseService.getSubcollectionRef('tasks', task.id, 'subtasks'));
         subtaskSnap.forEach(subtask => {
-          const subtaskData = {title: subtask.data()['title'], status: subtask.data()['status']};
+          const subtaskData = {
+            title: subtask.data()['title'],
+            status: subtask.data()['status']
+          };
           data.subtasks.push(subtaskData);
         });
         this.allTasksSignal().push(data);

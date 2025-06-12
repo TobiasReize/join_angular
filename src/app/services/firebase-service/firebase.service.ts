@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDocs, Query, updateDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,11 @@ export class FirebaseService {
 
   getDocRef(colName: string, docId: string) {
     return doc(this.getCollectionRef(colName), docId);
+  }
+
+
+  async getMultipleDocs(query: Query) {
+    return await getDocs(query);
   }
 
 
