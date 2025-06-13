@@ -3,6 +3,8 @@
 @use '../../../../../styles/layout';
 @use '../../../../../styles/distance';
 @use '../../../../../styles/typography';
+@use '../../../../../styles/animation';
+@use '../../../../../styles/variable';
 
 :host {
     @extend .dF-column-cc;
@@ -26,6 +28,15 @@
     > * {
         width: 100%;
     }
+}
+
+.fly-in-animation {
+    transform: translateX(100vw);
+    animation: flyIn variable.$flyin-animation-config;
+}
+
+.fly-out-animation {
+    animation: flyOut variable.$flyout-animation-config;
 }
 
 .active-task-category {

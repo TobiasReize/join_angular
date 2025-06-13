@@ -19,11 +19,20 @@ export class CardDetailViewComponent {
   firebaseService = inject(FirebaseService);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   contactsVisible: boolean = false;
+  taskClosed: boolean = false;
 
 
-  deselectTask() {
-    this.taskService.resetActiveTask();
-    this.taskService.setEditTask(false);
+  closeTask() {
+    this.taskClosed = true;
+    setTimeout(() => {
+      this.taskService.resetActiveTask();
+      this.taskService.setEditTask(false);
+    }, 200);
+  }
+
+
+  editTask() {
+    this.taskService.setEditTask(true);
   }
 
 
@@ -40,11 +49,6 @@ export class CardDetailViewComponent {
         this.firebaseService.updateDocData(`tasks/${currentTask.id}/subtasks`, currentSubtask.id, data);
       }
     }
-  }
-
-
-  editTask() {
-    this.taskService.setEditTask(true);
   }
 
 

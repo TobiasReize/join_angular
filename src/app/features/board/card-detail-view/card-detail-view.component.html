@@ -1,8 +1,8 @@
 @if (!taskService.editTask()) {
-    <section class="active-task-content">
+    <section class="active-task-content" [ngClass]="taskClosed ? 'fly-out-animation' : 'fly-in-animation'">
         <div class="dF-jc-sb">
             <span class="active-task-category" [ngClass]="{'cat-user-story': taskService.activeTask()?.category === 'User Story', 'cat-technical-task': taskService.activeTask()?.category === 'Technical Task', 'cat-bug-fix': taskService.activeTask()?.category === 'Bug Fix'}">{{ taskService.activeTask()?.category }}</span>
-            <img (click)="deselectTask()" class="close-icon" src="icon/close.svg" alt="close">
+            <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
         <h3>{{ taskService.activeTask()?.title }}</h3>
         <span class="black-color">{{ taskService.activeTask()?.description }}</span>
@@ -63,10 +63,11 @@
             </div>
         </div>
     </section>
+
 } @else if (taskService.editTask()) {
-    <section class="active-task-content">
+    <section class="active-task-content" [ngClass]="{'fly-out-animation': taskClosed}">
         <div class="dF-jc-fe">
-            <img (click)="deselectTask()" class="close-icon" src="icon/close.svg" alt="close">
+            <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
         <div class="edit-task-overflow-wrapper">
             <div class="dF-column-ai-fs">

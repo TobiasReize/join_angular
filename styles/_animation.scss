@@ -20,6 +20,26 @@
     }
 }
 
+@keyframes flyIn {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes flyOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100vw);
+    }
+}
+
 @keyframes slideUp {
     from {
         transform: translateY(+100vh);
