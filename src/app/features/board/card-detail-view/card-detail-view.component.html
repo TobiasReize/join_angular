@@ -31,7 +31,7 @@
             <div class="subtask-overflow-wrapper">
                 @for (subtask of taskService.activeTask()?.subtasks; track $index) {
                     <div class="active-task-subtask">
-                        <img (click)="toggleCheckbox($index)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
+                        <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
                         <span class="black-color font-style-9">{{ subtask.title }}</span>
                     </div>
                 }

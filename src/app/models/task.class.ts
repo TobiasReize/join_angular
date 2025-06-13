@@ -10,7 +10,8 @@ export class Task {
     priority: 'low' | 'medium' | 'urgent';
     subtasks: {
         title: string,
-        status: 'open' | 'done'
+        status: 'open' | 'done',
+        id: string
     }[];
     contacts: string[];
 
@@ -23,8 +24,8 @@ export class Task {
         this.description = obj ? obj.description : '';
         this.date = obj ? obj.date : '';
         this.priority = obj ? obj.priority : 'medium';
-        this.subtasks = obj ? obj.subtasks : [];
-        this.contacts = obj ? obj.contacts : [];
+        this.subtasks = obj.subtasks ? obj.subtasks : [];
+        this.contacts = obj.contacts ? obj.contacts : [];
     }
 
 

@@ -27,13 +27,18 @@ export class CardDetailViewComponent {
   }
 
 
-  toggleCheckbox(index: number) {
+  toggleCheckbox(subtaskId: string) {
     const currentTask = this.taskService.activeTask();
     if (currentTask) {
-      const currentStatus = currentTask.subtasks[index].status;
-      const newStatus = currentStatus === 'open' ? 'done' : 'open';
-      const data = {status: newStatus};
-      // this.firebaseService.updateDocData('tasks', currentTask.id, data);
+      const currentSubtask = currentTask.subtasks.find(subtask => subtask.id === subtaskId);
+      if (currentSubtask) {
+        const newStatus = currentSubtask.status === 'open' ? 'done' : 'open';
+        const data = {
+          title: currentSubtask.title,
+          status: newStatus
+        };
+        this.firebaseService.updateDocData(`tasks/${currentTask.id}/subtasks`, currentSubtask.id, data);
+      }
     }
   }
 

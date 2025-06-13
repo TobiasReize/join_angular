@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { onSnapshot } from '@angular/fire/firestore';
+import { onSnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { Task } from '../../models/task.class';
 
@@ -23,11 +23,6 @@ export class TaskService {
   setActiveTask(id: string) {
     this.activeTaskSignal.set(this.getTaskFromId(id));
   }
-
-
-  getTaskFromId(id: string) {
-    return this.allTasks().find(task => task.id === id);
-  }
   
   
   resetActiveTask() {
@@ -41,23 +36,34 @@ export class TaskService {
 
 
   subTaskCol() {
-    return onSnapshot(this.firebaseService.getCollectionRef('tasks'), tasksCollection => {
+    return onSnapshot(this.firebaseService.getCollectionRef('tasks'), async tasksCollection => {
       this.allTasksSignal.set([]);
-      tasksCollection.forEach(async task => {
+      const tasks: Task[] = [];
+      tasksCollection.forEach(task => {
         const data = new Task(task.data(), task.id);
-        data.subtasks = [];
-        const subtaskSnap = await this.firebaseService.getMultipleDocs(this.firebaseService.getSubcollectionRef('tasks', task.id, 'subtasks'));
-        subtaskSnap.forEach(subtask => {
-          const subtaskData = {
-            title: subtask.data()['title'],
-            status: subtask.data()['status']
-          };
-          data.subtasks.push(subtaskData);
-        });
-        this.allTasksSignal().push(data);
+        this.subSubtaskCol(data, task);
+        tasks.push(data);
       });
+      this.allTasksSignal.set([...tasks])
       console.log('allTasks: ', this.allTasks());
     });
+  }
+
+
+  subSubtaskCol(data: Task, task: QueryDocumentSnapshot) {
+    onSnapshot(this.firebaseService.getSubcollectionRef('tasks', task.id, 'subtasks'), subtasksCollection => {
+      data.subtasks = subtasksCollection.docs.map(subtask => ({
+        title: subtask.data()['title'],
+        status: subtask.data()['status'],
+        id: subtask.id
+      }));
+    });
+  }
+
+
+  // Hilfsfunktionen:
+  getTaskFromId(id: string) {
+    return this.allTasks().find(task => task.id === id);
   }
 
 }
