@@ -17,6 +17,7 @@ export class CardDetailViewComponent {
   taskService = inject(TaskService);
   contactService = inject(ContactService);
   firebaseService = inject(FirebaseService);
+  activeTask = this.taskService.activeTask;
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   contactsVisible: boolean = false;
   taskClosed: boolean = false;
@@ -37,7 +38,7 @@ export class CardDetailViewComponent {
 
 
   toggleCheckbox(subtaskId: string) {
-    const currentTask = this.taskService.activeTask();
+    const currentTask = this.activeTask();
     if (currentTask) {
       const currentSubtask = currentTask.subtasks.find(subtask => subtask.id === subtaskId);
       if (currentSubtask) {

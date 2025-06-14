@@ -128,11 +128,6 @@ app-header {
     color: white; 
 }
 
-.initials {
-    @extend .initial-style;
-    background-color: #FF7A00;
-}
-
 .remaining-contacts {
     @extend .initial-style;
     background-color: color.$icon-gray;

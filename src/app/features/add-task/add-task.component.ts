@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
 import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
+import { ContactService } from '../../services/contact-service/contact.service';
+import { Contact } from '../../models/contact.class';
 
 @Component({
   selector: 'app-add-task',
@@ -14,9 +16,10 @@ import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.serv
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent {
+export class AddTaskComponent implements OnInit {
 
   toastMsgService = inject(ToastMsgService);
+  contactService = inject(ContactService);
   router = inject(Router);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
@@ -30,27 +33,23 @@ export class AddTaskComponent {
     'Technical Task',
     'User Story'
   ];
-  testContacts: string[] = [
-    'Sophie Müller',
-    'Hans Lustig',
-    'Max Mustermann',
-    'Erika Musterfrau',
-    'Gast',
-    'Tim Gross',
-    'Eva Klein',
-    'Klaus Bott',
-    'Hanna Seelig',
-    'Gustaf Konrad'
-  ];
-  selectedContacts: string[] = [];
-  filteredContacts: string[] = [...this.testContacts];
+  selectedContacts: Contact[] = [];
+  allContacts = this.contactService.allContacts;
+  filteredContacts = signal<Contact[]>([]);
   addedSubtasks: string[] = [];
 
 
   @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
+  onDocumentClick() {
     this.categoriesVisible = false;
     this.contactsVisible = false;
+  }
+
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.filteredContacts.set(this.allContacts());
+    }, 1000);
   }
 
 
@@ -70,9 +69,8 @@ export class AddTaskComponent {
   }
 
 
-  selectContact(contact: string) {
+  selectContact(contact: Contact) {
     const index = this.selectedContacts.indexOf(contact);
-    
     if (index == -1) {
       this.selectedContacts.push(contact);
     } else {
@@ -82,8 +80,8 @@ export class AddTaskComponent {
 
 
   filterContacts(searchTerm: string) {
-    const term = searchTerm.toLowerCase();
-    this.filteredContacts = this.testContacts.filter(contact => contact.toLowerCase().includes(term));
+    const term = searchTerm.trim().toLowerCase();
+    this.filteredContacts.set(this.allContacts().filter(contact => contact.name.toLowerCase().includes(term)));
   }
 
 
@@ -166,6 +164,7 @@ export class AddTaskComponent {
       console.log('addTaskForm: ', addTaskForm);
     }
   }
+
 
   // Hilfsfunktionen:
   getInitials(name: string) {

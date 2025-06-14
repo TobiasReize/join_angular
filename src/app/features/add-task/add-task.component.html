@@ -66,7 +66,7 @@
                             <div class="selected-contacts-container">
                                 @for (contact of selectedContacts; track $index) {
                                     @if ($index < 5) {
-                                        <div class="initials">{{ getInitials(contact) }}</div>
+                                        <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact.name) }}</div>
                                     }
                                 }
                                 @if (selectedContacts.length > 5) {
@@ -75,10 +75,10 @@
                             </div>
                         }
                         <div (click)="$event.stopPropagation()" class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
-                            @for (contact of filteredContacts; track contact) {
+                            @for (contact of filteredContacts(); track contact) {
                                 <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
-                                    <div class="initials">{{ getInitials(contact) }}</div>
-                                    <div class="contact-name">{{ contact }}</div>
+                                    <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact.name) }}</div>
+                                    <div class="contact-name">{{ contact.name }}</div>
                                     @if (selectedContacts.includes(contact)) {
                                         <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
                                             <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke-width="2" stroke-linecap="round"/>

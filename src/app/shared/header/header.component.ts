@@ -15,7 +15,7 @@ export class HeaderComponent {
 
 
   @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
+  onDocumentClick() {
     this.overlayVisible = false;
   }
 
