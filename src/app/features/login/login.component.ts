@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { HeaderComponent } from '../../shared/header/header.component';
@@ -15,6 +15,7 @@ import { IntroComponent } from './intro/intro.component';
 })
 export class LoginComponent {
 
+  private router = inject(Router);
   isPasswordVisible: boolean = false;
   passwordIconSrc: string = 'icon/visibility_off.svg';
   showIntro: boolean = true;
@@ -44,6 +45,7 @@ export class LoginComponent {
 
   guestLogin() {
     console.log('Gast Login');
+    this.router.navigateByUrl('summary');
     // tbd.
   }
 

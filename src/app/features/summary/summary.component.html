@@ -10,7 +10,7 @@
         <section class="content-container">
             <div class="key-metrics-container">
                 <div class="first-row">
-                    <div class="rectangle-style first-row-rectangle">
+                    <div routerLink="/board" class="rectangle-style first-row-rectangle">
                         <svg class="first-row-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -20,11 +20,11 @@
                             </g>
                         </svg>
                         <div class="dF-column-cc">
-                            <h2>1</h2>
+                            <h2>{{ tasksToDo() }}</h2>
                             <span class="font-size">To do</span>
                         </div>
                     </div>
-                    <div class="rectangle-style first-row-rectangle">
+                    <div routerLink="/board" class="rectangle-style first-row-rectangle">
                         <svg class="first-row-icon done-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                             <mask id="mask0_75592_9963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -34,36 +34,36 @@
                             </g>
                         </svg>
                         <div class="dF-column-cc">
-                            <h2>2</h2>
+                            <h2>{{ tasksDone() }}</h2>
                             <span class="font-size">Done</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="middle-row rectangle-style">
+                <div routerLink="/board" class="middle-row rectangle-style">
                     <img class="urgent-icon" src="icon/urgent_white.svg" alt="urgent">
                     <div class="dF-column-cc">
-                        <h2>2</h2>
+                        <h2>{{ tasksUrgent() }}</h2>
                         <span class="font-size">Urgent</span>
                     </div>
                     <div class="urgent-separator"></div>
                     <div class="deadline-container">
-                        <span class="font-style-6">October 16, 2022</span>
+                        <span class="font-style-6">{{ months[deadlineMonth()] }} {{ deadlineDay() }}, {{ deadlineYear() }}</span>
                         <span class="font-style-9">Upcoming Deadline</span>
                     </div>
                 </div>
 
                 <div class="last-row">
-                    <div class="rectangle-style last-row-rectangle">
-                        <h2>5</h2>
+                    <div routerLink="/board" class="rectangle-style last-row-rectangle">
+                        <h2>{{ allTasks() }}</h2>
                         <span class="font-size">Tasks on<br>Board</span>
                     </div>
-                    <div class="rectangle-style last-row-rectangle">
-                        <h2>2</h2>
+                    <div routerLink="/board" class="rectangle-style last-row-rectangle">
+                        <h2>{{ tasksInProgress() }}</h2>
                         <span class="font-size">Tasks In<br>Progress</span>
                     </div>
-                    <div class="rectangle-style last-row-rectangle">
-                        <h2>2</h2>
+                    <div routerLink="/board" class="rectangle-style last-row-rectangle">
+                        <h2>{{ tasksAwaitFeedback() }}</h2>
                         <span class="font-size">Awaiting<br>Feedback</span>
                     </div>
                 </div>

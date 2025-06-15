@@ -157,7 +157,7 @@ export class AddTaskComponent implements OnInit {
       this.toastMsgService.showToastMsg('Task added to board');
         setTimeout(() => {
           this.toastMsgService.resetToastMsg();
-          // this.router.navigateByUrl('');
+          this.router.navigateByUrl('board');
         }, 1500);
     } else {
       console.log('Form invalid!!!');

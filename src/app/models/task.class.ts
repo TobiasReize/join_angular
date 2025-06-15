@@ -24,8 +24,8 @@ export class Task {
         this.description = obj ? obj.description : '';
         this.date = obj ? obj.date : '';
         this.priority = obj ? obj.priority : 'medium';
-        this.subtasks = obj.subtasks ? obj.subtasks : [];
-        this.contacts = obj.contacts ? obj.contacts : [];
+        this.subtasks = obj?.subtasks ? obj.subtasks : [];
+        this.contacts = obj?.contacts ? obj.contacts : [];
     }
 
 
