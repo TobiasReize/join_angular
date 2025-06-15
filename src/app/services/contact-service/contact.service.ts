@@ -17,7 +17,7 @@ export class ContactService {
   subContactCol() {
     return onSnapshot(this.firebaseService.getCollectionRef('contacts'), contactsCollection => {
       this.allContactsSignal.set([]);
-      const contacts: Contact[] = [];
+      let contacts: Contact[] = [];
       contactsCollection.forEach(contact => {
         const data = new Contact(contact.data(), contact.id);
         contacts.push(data);

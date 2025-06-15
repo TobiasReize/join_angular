@@ -36,9 +36,9 @@ export class TaskService {
 
 
   subTaskCol() {
-    return onSnapshot(this.firebaseService.getCollectionRef('tasks'), async tasksCollection => {
+    return onSnapshot(this.firebaseService.getCollectionRef('tasks'), tasksCollection => {
       this.allTasksSignal.set([]);
-      const tasks: Task[] = [];
+      let tasks: Task[] = [];
       tasksCollection.forEach(task => {
         const data = new Task(task.data(), task.id);
         this.subSubtaskCol(data, task);
