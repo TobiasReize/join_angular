@@ -1,5 +1,6 @@
-import { Component, HostListener, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener, inject, Input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,8 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
+  userService = inject(UserService);
+  router = inject(Router);
   @Input() type: string = '';
   overlayVisible: boolean = false;
 
@@ -23,6 +26,24 @@ export class HeaderComponent {
   toggleOverlay(event: Event) {
     event.stopPropagation();
     this.overlayVisible = !this.overlayVisible;
+  }
+
+
+  async logout() {
+    await this.userService.signOutUser();
+    this.router.navigateByUrl('');
+  }
+
+
+  // Hilfsfunktionen:
+  getInitials(name: string | undefined) {
+    if (name) {
+      const words = name.split(' ');
+      const initials = words.map(word => word.charAt(0).toUpperCase()).join('');
+      return initials;
+    } else {
+      return '';
+    }
   }
 
 }
