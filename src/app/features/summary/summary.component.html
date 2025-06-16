@@ -70,14 +70,14 @@
             </div>
 
             <div class="greeting-container">
-                <h4>Good morning,</h4>
-                <h1>Sofia Müller</h1>
+                <h4>Good {{ daytime() }},</h4>
+                <h1>{{ userService.currentUser()?.name }}</h1>
             </div>
         </section>
         @if (greetingVisible) {
             <div class="mobile-greeting-overlay">
-                <h4>Good morning,</h4>
-                <h1>Sofia Müller</h1>
+                <h4>Good {{ daytime() }},</h4>
+                <h1>{{ userService.currentUser()?.name }}</h1>
             </div>
         }
     </main>

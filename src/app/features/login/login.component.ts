@@ -6,8 +6,8 @@ import { Auth, browserSessionPersistence } from '@angular/fire/auth';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { IntroComponent } from './intro/intro.component';
-import { FirebaseService } from '../../services/firebase-service/firebase.service';
 import { environment } from '../../../environments/environment';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ import { environment } from '../../../environments/environment';
 export class LoginComponent implements OnInit {
 
   private router = inject(Router);
-  private firebaseService = inject(FirebaseService);
+  private userService = inject(UserService);
   private auth = inject(Auth);
   isPasswordVisible: boolean = false;
   passwordIconSrc: string = 'icon/visibility_off.svg';
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.setAuthStatePersistence();
     if (this.auth.currentUser) {
-      await this.firebaseService.signOutUser();
+      await this.userService.signOutUser();
     }
   }
 
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   
 
   onSubmit(ngForm: NgForm) {
-    this.firebaseService.signInUser(ngForm.value.email, ngForm.value.password)
+    this.userService.signInUser(ngForm.value.email, ngForm.value.password)
       .then(user => {
         if (user) {
           sessionStorage.setItem('uid', user.uid);
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
 
   guestLogin() {
-    this.firebaseService.signInUser(environment.guest.EMAIL, environment.guest.PASSWORD)
+    this.userService.signInUser(environment.guest.EMAIL, environment.guest.PASSWORD)
       .then(user => {
         if (user) {
           sessionStorage.setItem('uid', user.uid);

@@ -4,6 +4,7 @@ import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { TaskService } from '../../services/task-service/task.service';
 import { Task } from '../../models/task.class';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-summary',
@@ -15,7 +16,9 @@ import { Task } from '../../models/task.class';
 export class SummaryComponent implements OnInit {
 
   taskService = inject(TaskService);
+  userService = inject(UserService);
   greetingVisible: boolean = true;
+  daytime = signal<string>('');
   tasksToDo: Signal<number> = signal<number>(0);
   tasksDone: Signal<number> = signal(0);
   tasksUrgent: Signal<number> = signal<number>(0);
@@ -30,11 +33,13 @@ export class SummaryComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userService.checkCredentials();
     setTimeout(() => {
       this.greetingVisible = false;
     }, 1600);
     this.setKeyMetrics();
     this.setUpcomingDeadline();
+    this.setDaytime();
   }
 
 
@@ -55,6 +60,20 @@ export class SummaryComponent implements OnInit {
     this.deadlineDay = computed(() => new Date(this.upcomingDeadline().date).getDate());
     this.deadlineMonth = computed(() => new Date(this.upcomingDeadline().date).getMonth());
     this.deadlineYear = computed(() => new Date(this.upcomingDeadline().date).getFullYear());
+  }
+
+
+  setDaytime() {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return this.daytime.set('morning');
+    } else if (hour >= 12 && hour < 18) {
+      return this.daytime.set('day');
+    } else if (hour >= 18) {
+      return this.daytime.set('evening');
+    } else {
+      return this.daytime.set('night');
+    }
   }
 
 }
