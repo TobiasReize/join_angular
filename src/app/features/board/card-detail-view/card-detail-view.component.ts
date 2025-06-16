@@ -1,26 +1,48 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { TaskService } from '../../../services/task-service/task.service';
 import { Contact } from '../../../models/contact.class';
 import { ContactService } from '../../../services/contact-service/contact.service';
 import { FirebaseService } from '../../../services/firebase-service/firebase.service';
+import { Task } from '../../../models/task.class';
 
 @Component({
   selector: 'app-card-detail-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './card-detail-view.component.html',
   styleUrl: './card-detail-view.component.scss'
 })
-export class CardDetailViewComponent {
+export class CardDetailViewComponent implements OnInit {
 
   taskService = inject(TaskService);
   contactService = inject(ContactService);
   firebaseService = inject(FirebaseService);
-  activeTask = this.taskService.activeTask;
-  selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
+  activeTask: Task = new Task();
   contactsVisible: boolean = false;
   taskClosed: boolean = false;
+  subtaskAddable: boolean = false;
+  filteredContacts = signal<Contact[]>([]);
+  selectedContacts: string[] = [];
+  addedSubtasks: any[] = [];
+  @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
+  editedSubtaskIndex: number | null = null;
+  editedSubtaskTitle: string = '';
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick() {
+    this.contactsVisible = false;
+  }
+
+
+  ngOnInit(): void {
+    this.filteredContacts.set(this.contactService.allContacts());
+    this.activeTask = this.taskService.activeTask() ?? new Task();
+    this.selectedContacts = [...this.taskService.activeTask()?.contacts ?? []];
+    this.addedSubtasks = [...this.taskService.activeTask()?.subtasks ?? []];
+  }
 
 
   closeTask() {
@@ -38,7 +60,7 @@ export class CardDetailViewComponent {
 
 
   toggleCheckbox(subtaskId: string) {
-    const currentTask = this.activeTask();
+    const currentTask = this.activeTask;
     if (currentTask) {
       const currentSubtask = currentTask.subtasks.find(subtask => subtask.id === subtaskId);
       if (currentSubtask) {
@@ -54,7 +76,9 @@ export class CardDetailViewComponent {
 
 
   choosePriority(priority: 'low' | 'medium' | 'urgent') {
-    this.selectedPriority = priority;
+    if (this.activeTask) {
+      this.activeTask.priority = priority;
+    }
   }
 
 
@@ -65,6 +89,73 @@ export class CardDetailViewComponent {
     } else {
       this.contactsVisible = !this.contactsVisible;
       event.stopPropagation();
+    }
+  }
+
+
+  selectContact(contact: Contact) {
+    const index = this.selectedContacts.indexOf(contact.id);
+    if (index == -1) {
+      this.selectedContacts.push(contact.id);
+    } else {
+      this.selectedContacts.splice(index, 1);
+    }
+  }
+
+
+  filterContacts(searchTerm: string) {
+    const term = searchTerm.trim().toLowerCase();
+    this.filteredContacts.set(this.contactService.allContacts().filter(contact => contact.name.toLowerCase().includes(term)));
+  }
+
+
+  checkSubtask(subtask: string) {
+    if (subtask.length > 2) {
+      this.subtaskAddable = true;
+    } else {
+      this.subtaskAddable = false;
+    }
+  }
+
+
+  addSubtask(subtaskInput: string) {
+    this.addedSubtasks.push({title: subtaskInput, status: 'open'});
+    this.clearSubtask();
+  }
+
+
+  clearSubtask() {
+    this.subtaskInputRef.nativeElement.value = '';
+    this.subtaskAddable = false;
+  }
+
+
+  deleteSubtask(index: number) {
+    this.addedSubtasks.splice(index, 1);
+    this.editedSubtaskIndex = null;
+  }
+
+
+  editSubtask(index: number) {
+    this.editedSubtaskIndex = index;
+    this.editedSubtaskTitle = this.addedSubtasks[index]['title'];
+  }
+
+
+  saveSubtask(index: number) {
+    this.addedSubtasks[index]['title'] = this.editedSubtaskTitle;
+    this.editedSubtaskIndex = null;
+  }
+
+
+  onSubmit(editTaskForm: NgForm) {
+    if (editTaskForm.submitted && editTaskForm.valid) {
+      console.log('Form :', editTaskForm);
+      console.log('Form value :', editTaskForm.value);
+      console.log('Contacts :', this.selectedContacts);
+      console.log('Subtasks :', this.addedSubtasks);
+    } else {
+      console.log('Fehler!');
     }
   }
 
@@ -85,6 +176,11 @@ export class CardDetailViewComponent {
     } else {
       return '';
     }
+  }
+
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
   }
 
 }
