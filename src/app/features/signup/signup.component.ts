@@ -6,6 +6,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
 import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,14 +17,15 @@ import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.serv
 })
 export class SignupComponent {
 
+    private location = inject(Location);
+    toastMsgService = inject(ToastMsgService);
+    private router = inject(Router);
+    private userService = inject(UserService);
     isPasswordVisible: boolean = false;
     isPasswordRepeatVisible: boolean = false;
     passwordIconSrc: string = 'icon/visibility_off.svg';
     passwordRepeatIconSrc: string = 'icon/visibility_off.svg';
     acceptedPrivacyPolicy: boolean = false;
-    location = inject(Location);
-    toastMsgService = inject(ToastMsgService);
-    private router = inject(Router);
 
 
     goBack() {
@@ -59,8 +61,7 @@ export class SignupComponent {
 
     onSubmit(ngForm: NgForm) {
       if (ngForm.submitted && ngForm.valid) {
-        console.log(ngForm);
-        console.log(ngForm.value);
+        this.userService.registerUser(ngForm.value.name, ngForm.value.email, ngForm.value.password);
         this.toastMsgService.showToastMsg('You signed up successfully');
         setTimeout(() => {
           this.toastMsgService.resetToastMsg();

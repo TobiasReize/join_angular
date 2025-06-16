@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { onSnapshot } from '@angular/fire/firestore';
-import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { User } from '../../models/user.class';
@@ -48,12 +48,25 @@ export class UserService {
 
   async signInUser(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
+      .then(userCredential => {
         return userCredential.user;
       })
       .catch((error) => {
         console.log('Login fehlgeschlagen, Error-Code:', error.code);
         console.log('Login fehlgeschlagen, Error-Message:', error.message);
+      });
+  }
+
+
+  registerUser(name: string, email: string, password: string) {
+    createUserWithEmailAndPassword(this.auth, email, password)
+      .then(async (userCredential) => {
+        const user = {name: name, email: email};
+        await this.firebaseService.addDoc('users', userCredential.user.uid, user);
+      })
+      .catch((error) => {
+        console.log('Sign up fehlgeschlagen, Error-Code:', error.code);
+        console.log('Sign up fehlgeschlagen, Error-Message:', error.message);
       });
   }
 
