@@ -8,6 +8,7 @@ import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
 import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 import { ContactService } from '../../services/contact-service/contact.service';
 import { Contact } from '../../models/contact.class';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-add-task',
@@ -20,6 +21,7 @@ export class AddTaskComponent implements OnInit {
 
   toastMsgService = inject(ToastMsgService);
   contactService = inject(ContactService);
+  userService = inject(UserService);
   router = inject(Router);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
@@ -47,6 +49,7 @@ export class AddTaskComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userService.checkCredentials();
     setTimeout(() => {
       this.filteredContacts.set(this.allContacts());
     }, 1000);
