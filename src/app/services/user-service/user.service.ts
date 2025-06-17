@@ -62,7 +62,7 @@ export class UserService {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then(async (userCredential) => {
         const user = {name: name, email: email};
-        await this.firebaseService.addDoc('users', userCredential.user.uid, user);
+        await this.firebaseService.setDoc('users', userCredential.user.uid, user);
       })
       .catch((error) => {
         console.log('Sign up fehlgeschlagen, Error-Code:', error.code);

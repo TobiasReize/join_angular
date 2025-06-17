@@ -105,7 +105,7 @@
                             }
                         </div>
                         <span [ngStyle]="{'visibility': addTaskForm.submitted && selectedCategory == '' ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
-                        <div class="category-overlay" [ngStyle]="{'max-height': categoriesVisible ? '96px' : '0px'}">
+                        <div class="category-overlay" [ngStyle]="{'max-height': categoriesVisible ? '144px' : '0px'}">
                             @for (category of categories; track $index) {
                                 <span (click)="selectCategory(category)" class="category-item">{{ category }}</span>
                             }
@@ -139,7 +139,7 @@
                                     </li>
                                 } @else {
                                     <li class="subtask-item">
-                                        <span class="subtask-content">{{ subtask }}</span>
+                                        <span class="subtask-content">{{ subtask['title'] }}</span>
                                         <div class="edit-icon-container">
                                             <img (click)="deleteSubtask($index)" class="input-icon-style" src="icon/delete.svg" alt="delete">
                                             <div class="small-separator"></div>

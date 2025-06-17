@@ -9,6 +9,7 @@ import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.serv
 import { ContactService } from '../../services/contact-service/contact.service';
 import { Contact } from '../../models/contact.class';
 import { UserService } from '../../services/user-service/user.service';
+import { FirebaseService } from '../../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-add-task',
@@ -22,6 +23,7 @@ export class AddTaskComponent implements OnInit {
   toastMsgService = inject(ToastMsgService);
   contactService = inject(ContactService);
   userService = inject(UserService);
+  firebaseService = inject(FirebaseService);
   router = inject(Router);
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
@@ -33,12 +35,13 @@ export class AddTaskComponent implements OnInit {
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   categories: string[] = [
     'Technical Task',
-    'User Story'
+    'User Story',
+    'Bug Fix'
   ];
   selectedContacts: Contact[] = [];
   allContacts = this.contactService.allContacts;
   filteredContacts = signal<Contact[]>([]);
-  addedSubtasks: string[] = [];
+  addedSubtasks: any[] = [];
 
 
   @HostListener('document:click', ['$event'])
@@ -109,7 +112,7 @@ export class AddTaskComponent implements OnInit {
 
 
   addSubtask(subtask: string) {
-    this.addedSubtasks.push(subtask);
+    this.addedSubtasks.push({title: subtask, status: 'open'});
     this.clearSubtask();
   }
 
@@ -128,12 +131,12 @@ export class AddTaskComponent implements OnInit {
 
   editSubtask(index: number) {
     this.editedSubtaskIndex = index;
-    this.editedSubtaskContent = this.addedSubtasks[index];
+    this.editedSubtaskContent = this.addedSubtasks[index]['title'];
   }
 
 
   saveSubtask(index: number) {
-    this.addedSubtasks[index] = this.editedSubtaskContent;
+    this.addedSubtasks[index]['title'] = this.editedSubtaskContent;
     this.editedSubtaskIndex = null;
   }
 
@@ -144,24 +147,28 @@ export class AddTaskComponent implements OnInit {
     this.selectedContacts = [];
     this.selectedCategory = '';
     this.addedSubtasks = [];
-    console.log('Form cleared!');    
   }
 
 
-  onSubmit(addTaskForm: NgForm) {
+  async onSubmit(addTaskForm: NgForm) {
     if (addTaskForm.submitted && addTaskForm.valid) {
-      console.log('addTaskForm: ', addTaskForm);
-      console.log('values: ', addTaskForm.form.value);
-      console.log('selectedPriority: ', this.selectedPriority);
-      console.log('selectedContacts: ', this.selectedContacts);
-      console.log('selectedCategory: ', this.selectedCategory);
-      console.log('addedSubtasks: ', this.addedSubtasks);
+      const contactIds = this.selectedContacts.map(contact => contact.id);
+      const taskData = {
+        column: 'To do',
+        category: this.selectedCategory,
+        title: addTaskForm.value.title,
+        description: addTaskForm.value.description,
+        date: addTaskForm.value.date,
+        priority: this.selectedPriority,
+        contacts: [...contactIds]
+      }
+      await this.firebaseService.addTask(taskData, this.addedSubtasks)
       this.clearForm(addTaskForm);
       this.toastMsgService.showToastMsg('Task added to board');
-        setTimeout(() => {
-          this.toastMsgService.resetToastMsg();
-          this.router.navigateByUrl('board');
-        }, 1500);
+      setTimeout(() => {
+        this.toastMsgService.resetToastMsg();
+        this.router.navigateByUrl('board');
+      }, 1500);
     } else {
       console.log('Form invalid!!!');
       console.log('addTaskForm: ', addTaskForm);
