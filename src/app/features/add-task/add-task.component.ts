@@ -32,6 +32,7 @@ export class AddTaskComponent implements OnInit {
   subtaskAddable: boolean = false;
   editedSubtaskIndex: number | null = null;
   editedSubtaskContent: string = '';
+  minDate: string = '';
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   categories: string[] = [
     'Technical Task',
@@ -53,9 +54,17 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.checkCredentials();
+    this.setMinDate();
     setTimeout(() => {
       this.filteredContacts.set(this.allContacts());
     }, 1000);
+  }
+
+
+  setMinDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.minDate = tomorrow.toISOString().split('T')[0];
   }
 
 
