@@ -27,6 +27,7 @@ export class CardDetailViewComponent implements OnInit {
   filteredContacts = signal<Contact[]>([]);
   selectedContacts: string[] = [];
   addedSubtasks: any[] = [];
+  deletedSubtasks: string[] = [];
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   editedSubtaskIndex: number | null = null;
   editedSubtaskTitle: string = '';
@@ -139,6 +140,9 @@ export class CardDetailViewComponent implements OnInit {
 
 
   deleteSubtask(index: number) {
+    if (this.addedSubtasks[index]['id']) {
+      this.deletedSubtasks.push(this.addedSubtasks[index]['id']);
+    }
     this.addedSubtasks.splice(index, 1);
     this.editedSubtaskIndex = null;
   }
@@ -165,7 +169,7 @@ export class CardDetailViewComponent implements OnInit {
         priority: this.selectedPriority,
         contacts: [...this.selectedContacts]
       }
-      this.firebaseService.updateTask(this.activeTask.id, taskData, this.addedSubtasks);
+      this.firebaseService.updateTask(this.activeTask.id, taskData, this.addedSubtasks, this.deletedSubtasks);
       this.closeTask();
     } else {
       console.log('Fehler!');

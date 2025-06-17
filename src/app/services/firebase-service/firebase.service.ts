@@ -59,7 +59,7 @@ export class FirebaseService {
   }
 
 
-  async updateTask(taskId: string, taskData: any, subtaskData: any[]) {
+  async updateTask(taskId: string, taskData: any, subtaskData: any[], deletedSubtasks: string[]) {
     const batch = writeBatch(this.firestore);
     const taskDocRef = this.getDocRef('tasks', taskId);
     batch.update(taskDocRef, taskData);
@@ -72,6 +72,10 @@ export class FirebaseService {
         const subtaskDocRef = doc(collection(this.firestore, `tasks/${taskDocRef.id}/subtasks`));
         batch.set(subtaskDocRef, subtask);
       }
+    });
+    deletedSubtasks.forEach(subtaskId => {
+      const delSubtaskDocRef = this.getDocRef(`tasks/${taskDocRef.id}/subtasks`, subtaskId);
+      batch.delete(delSubtaskDocRef);
     });
     await batch.commit();
   }
