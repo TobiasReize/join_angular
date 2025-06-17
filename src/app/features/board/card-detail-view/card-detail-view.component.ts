@@ -23,6 +23,7 @@ export class CardDetailViewComponent implements OnInit {
   contactsVisible: boolean = false;
   taskClosed: boolean = false;
   subtaskAddable: boolean = false;
+  selectedPriority: string = '';
   filteredContacts = signal<Contact[]>([]);
   selectedContacts: string[] = [];
   addedSubtasks: any[] = [];
@@ -43,6 +44,7 @@ export class CardDetailViewComponent implements OnInit {
     this.activeTask = this.taskService.activeTask() ?? new Task();
     this.selectedContacts = [...this.taskService.activeTask()?.contacts ?? []];
     this.addedSubtasks = [...this.taskService.activeTask()?.subtasks ?? []];
+    this.selectedPriority = structuredClone(this.taskService.activeTask()?.priority ?? '');
   }
 
 
@@ -84,9 +86,7 @@ export class CardDetailViewComponent implements OnInit {
 
 
   choosePriority(priority: 'low' | 'medium' | 'urgent') {
-    if (this.activeTask) {
-      this.activeTask.priority = priority;
-    }
+     this.selectedPriority = priority;
   }
 
 
@@ -158,10 +158,15 @@ export class CardDetailViewComponent implements OnInit {
 
   onSubmit(editTaskForm: NgForm) {
     if (editTaskForm.submitted && editTaskForm.valid) {
-      console.log('Form :', editTaskForm);
-      console.log('Form value :', editTaskForm.value);
-      console.log('Contacts :', this.selectedContacts);
-      console.log('Subtasks :', this.addedSubtasks);
+      const taskData = {
+        title: editTaskForm.value.title,
+        description: editTaskForm.value.description,
+        date: editTaskForm.value.date,
+        priority: this.selectedPriority,
+        contacts: [...this.selectedContacts]
+      }
+      this.firebaseService.updateTask(this.activeTask.id, taskData, this.addedSubtasks);
+      this.closeTask();
     } else {
       console.log('Fehler!');
     }

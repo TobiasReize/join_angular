@@ -58,4 +58,22 @@ export class FirebaseService {
     await batch.commit();
   }
 
+
+  async updateTask(taskId: string, taskData: any, subtaskData: any[]) {
+    const batch = writeBatch(this.firestore);
+    const taskDocRef = this.getDocRef('tasks', taskId);
+    batch.update(taskDocRef, taskData);
+    subtaskData.forEach(subtask => {
+      const subtaskData = {title: subtask.title, status: subtask.status};
+      if (subtask.id) {
+        const subtaskDocRef = this.getDocRef(`tasks/${taskDocRef.id}/subtasks`, subtask.id);
+        batch.update(subtaskDocRef, subtaskData);
+      } else {
+        const subtaskDocRef = doc(collection(this.firestore, `tasks/${taskDocRef.id}/subtasks`));
+        batch.set(subtaskDocRef, subtask);
+      }
+    });
+    await batch.commit();
+  }
+
 }
