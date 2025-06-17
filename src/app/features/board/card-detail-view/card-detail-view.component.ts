@@ -29,6 +29,7 @@ export class CardDetailViewComponent implements OnInit {
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   editedSubtaskIndex: number | null = null;
   editedSubtaskTitle: string = '';
+  minDate: string = '';
 
 
   @HostListener('document:click', ['$event'])
@@ -72,6 +73,13 @@ export class CardDetailViewComponent implements OnInit {
         this.firebaseService.updateDocData(`tasks/${currentTask.id}/subtasks`, currentSubtask.id, data);
       }
     }
+  }
+
+
+  setMinDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.minDate = tomorrow.toISOString().split('T')[0];
   }
 
 

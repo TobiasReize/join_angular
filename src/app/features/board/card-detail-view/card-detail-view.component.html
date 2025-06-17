@@ -72,8 +72,8 @@
         <div class="edit-task-overflow-wrapper">
             <div class="dF-column-ai-fs">
                 <label class="m-btm-8" for="title">Title<span class="red-color">*</span></label>
-                <input #title="ngModel" class="general-input-style" type="text" name="title" id="title" [ngModel]="activeTask.title" required>
-                <span class="error-msg m-top-4">This field is required</span>
+                <input #title="ngModel" class="general-input-style" type="text" name="title" id="title" [ngModel]="activeTask.title" minlength="3" maxlength="40" placeholder="Enter a title" required>
+                <span [ngStyle]="{'visibility': (editTaskForm.submitted && title.invalid) || (title.touched && title.invalid) ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
             </div>
             <div class="dF-column-ai-fs">
                 <label class="m-btm-8" for="description">Description</label>
@@ -81,8 +81,8 @@
             </div>
             <div class="dF-column-ai-fs">
                 <label class="m-btm-8" for="date">Due date<span class="red-color">*</span></label>
-                <input class="general-input-style" type="date" name="date" id="date" [ngModel]="activeTask.date" required>
-                <span class="error-msg m-top-4">This field is required</span>
+                <input #date="ngModel" class="general-input-style" type="date" name="date" id="date" [ngModel]="activeTask.date" [min]="minDate" required>
+                <span [ngStyle]="{'visibility': (editTaskForm.submitted && date.invalid) || (date.touched && date.invalid) ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
             </div>
 
             <div class="dF-column-ai-fs">
@@ -195,7 +195,7 @@
         </div>
         
         <div class="dF-jc-fe">
-            <button class="btn-2-prim" type="submit">
+            <button [disabled]="title.invalid || date.invalid" class="btn-2-prim" type="submit">
                 <span>Ok</span>
                 <img src="icon/ok_white.svg" alt="add">
             </button>
