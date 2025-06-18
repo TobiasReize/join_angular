@@ -120,6 +120,7 @@ app-header {
     gap: 16px;
     width: 100%;
     flex: 1;
+    border-radius: 24px;
 }
 
 .app-card {
@@ -130,4 +131,8 @@ app-header {
     &:active {
         transform: rotate(5deg);
     }
+}
+
+.highlight-column {
+    background-color: color.$icon-hover-gray;
 }

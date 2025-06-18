@@ -34,9 +34,9 @@
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <div class="cards-container">
+                <div class="cards-container" [ngClass]="{'highlight-column': dragOver() === 'To do'}" (dragover)="allowDrop($event, 'To do')" (dragleave)="removeHighlight()" (drop)="moveTo('To do')">
                     @for (task of getFilteredTasks('To do'); track $index) {
-                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" (dragstart)="startDragging(task.id)" [task]="task" draggable="true" class="app-card"></app-card>
                     } @empty {
                         <app-card column="To do"></app-card>
                     }
@@ -52,9 +52,9 @@
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <div class="cards-container">
+                <div class="cards-container" [ngClass]="{'highlight-column': dragOver() === 'In progress'}" (dragover)="allowDrop($event, 'In progress')" (dragleave)="removeHighlight()" (drop)="moveTo('In progress')">
                     @for (task of getFilteredTasks('In progress'); track $index) {
-                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" (dragstart)="startDragging(task.id)" [task]="task" draggable="true" class="app-card"></app-card>
                     } @empty {
                         <app-card column="In progress"></app-card>
                     }
@@ -69,9 +69,9 @@
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-                <div class="cards-container">
+                <div class="cards-container" [ngClass]="{'highlight-column': dragOver() === 'Await feedback'}" (dragover)="allowDrop($event, 'Await feedback')" (dragleave)="removeHighlight()" (drop)="moveTo('Await feedback')">
                     @for (task of getFilteredTasks('Await feedback'); track $index) {
-                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" (dragstart)="startDragging(task.id)" [task]="task" draggable="true" class="app-card"></app-card>
                     } @empty {
                         <app-card column="Await feedback"></app-card>
                     }
@@ -81,9 +81,9 @@
                 <div class="column-headline-container">
                     <span class="column-title">Done</span>
                 </div>
-                <div class="cards-container">
+                <div class="cards-container" [ngClass]="{'highlight-column': dragOver() === 'Done'}" (dragover)="allowDrop($event, 'Done')" (dragleave)="removeHighlight()" (drop)="moveTo('Done')">
                     @for (task of getFilteredTasks('Done'); track $index) {
-                        <app-card (click)="selectTask(task.id)" [task]="task" class="app-card"></app-card>
+                        <app-card (click)="selectTask(task.id)" (dragstart)="startDragging(task.id)" [task]="task" draggable="true" class="app-card"></app-card>
                     } @empty {
                         <app-card column="Done"></app-card>
                     }
