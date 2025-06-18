@@ -24,7 +24,7 @@ export class CardDetailViewComponent implements OnInit {
   taskClosed: boolean = false;
   subtaskAddable: boolean = false;
   selectedPriority: string = '';
-  filteredContacts = signal<Contact[]>([]);
+  filteredContacts = this.contactService.allContacts;
   selectedContacts: string[] = [];
   addedSubtasks: any[] = [];
   deletedSubtasks: string[] = [];
@@ -41,7 +41,6 @@ export class CardDetailViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.filteredContacts.set(this.contactService.allContacts());
     this.activeTask = this.taskService.activeTask() ?? new Task();
     this.selectedContacts = [...this.taskService.activeTask()?.contacts ?? []];
     this.addedSubtasks = [...this.taskService.activeTask()?.subtasks ?? []];
@@ -120,7 +119,7 @@ export class CardDetailViewComponent implements OnInit {
 
   filterContacts(searchTerm: string) {
     const term = searchTerm.trim().toLowerCase();
-    this.filteredContacts.set(this.contactService.allContacts().filter(contact => contact.name.toLowerCase().includes(term)));
+    this.filteredContacts = signal(this.contactService.allContacts().filter(contact => contact.name.trim().toLowerCase().includes(term)));
   }
 
 

@@ -40,8 +40,7 @@ export class AddTaskComponent implements OnInit {
     'Bug Fix'
   ];
   selectedContacts: Contact[] = [];
-  allContacts = this.contactService.allContacts;
-  filteredContacts = signal<Contact[]>([]);
+  filteredContacts = this.contactService.allContacts;
   addedSubtasks: any[] = [];
 
 
@@ -55,9 +54,6 @@ export class AddTaskComponent implements OnInit {
   ngOnInit(): void {
     this.userService.checkCredentials();
     this.setMinDate();
-    setTimeout(() => {
-      this.filteredContacts.set(this.allContacts());
-    }, 1000);
   }
 
 
@@ -96,7 +92,7 @@ export class AddTaskComponent implements OnInit {
 
   filterContacts(searchTerm: string) {
     const term = searchTerm.trim().toLowerCase();
-    this.filteredContacts.set(this.allContacts().filter(contact => contact.name.toLowerCase().includes(term)));
+    this.filteredContacts = signal(this.contactService.allContacts().filter(contact => contact.name.trim().toLowerCase().includes(term)));
   }
 
 

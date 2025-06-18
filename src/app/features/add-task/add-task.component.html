@@ -55,7 +55,7 @@
                     <div class="assigned-container">
                         <label class="m-btm-8" for="contacts">Assigned to</label>
                         <div (click)="toggleContactOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
-                            <input (input)="filterContacts(contactInput.value)" #contactInput class="pointer" type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                            <input (input)="filterContacts(contactInput.value)" #contactInput class="pointer" type="text" name="contacts" id="contacts" maxlength="10" placeholder="Select contacts to assign">
                             @if (contactsVisible) {
                                 <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
                             } @else {
