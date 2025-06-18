@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { onSnapshot } from '@angular/fire/firestore';
+import { onSnapshot, orderBy, query } from '@angular/fire/firestore';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { Contact } from '../../models/contact.class';
 
@@ -15,7 +15,8 @@ export class ContactService {
 
 
   subContactCol() {
-    return onSnapshot(this.firebaseService.getCollectionRef('contacts'), contactsCollection => {
+    const q = query(this.firebaseService.getCollectionRef('contacts'), orderBy('name'));
+    return onSnapshot(q, contactsCollection => {
       this.allContactsSignal.set([]);
       let contacts: Contact[] = [];
       contactsCollection.forEach(contact => {

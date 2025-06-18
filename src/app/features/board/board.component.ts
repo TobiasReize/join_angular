@@ -1,5 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { CardComponent } from './card/card.component';
@@ -13,7 +14,7 @@ import { UserService } from '../../services/user-service/user.service';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent],
+  imports: [CommonModule, FormsModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -23,10 +24,11 @@ export class BoardComponent implements OnInit {
   contactService = inject(ContactService);
   firebaseService = inject(FirebaseService);
   userService = inject(UserService);
+  filteredTasks = this.taskService.allTasks;
 
 
   ngOnInit(): void {
-    this.userService.checkCredentials();  
+    this.userService.checkCredentials();
   }
 
 
@@ -35,9 +37,19 @@ export class BoardComponent implements OnInit {
   }
 
 
+  filterTasks(searchTerm: string) {
+    if (searchTerm.length > 2) {
+      const term = searchTerm.trim().toLowerCase();
+      this.filteredTasks = signal(this.taskService.allTasks().filter(task => task.title.trim().toLocaleLowerCase().includes(searchTerm) || task.description.trim().toLocaleLowerCase().includes(searchTerm)));
+    } else {
+      this.filteredTasks = this.taskService.allTasks;
+    }
+  }
+
+
   // Hilfsfunktionen:
   getFilteredTasks(column: string): Task[] {
-    return this.taskService.allTasks().filter(task => task.column === column);
+    return this.filteredTasks().filter(task => task.column === column);
   }
 
 }
