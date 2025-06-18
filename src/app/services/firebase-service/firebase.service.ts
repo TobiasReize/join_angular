@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, getDocs, Query, setDoc, updateDoc, writeBatch } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDocs, setDoc, updateDoc, writeBatch } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +19,6 @@ export class FirebaseService {
   }
 
 
-  async getMultipleDocs(query: Query) {
-    return await getDocs(query);
-  }
-
-
   getSubcollectionRef(colName: string, docId: string, subcolName: string) {
     return collection(this.firestore, colName, docId, subcolName);
   }
@@ -39,12 +34,6 @@ export class FirebaseService {
     const docRef = this.getDocRef(colName, docId);
     await setDoc(docRef, data)
   }
-
-
-  // async addDoc(colName: string, data: any) {
-  //   const colRef = this.getCollectionRef(colName);
-  //   return await addDoc(colRef, data)
-  // }
 
 
   async addTask(taskData: any, subtaskData: any[]) {
@@ -77,6 +66,18 @@ export class FirebaseService {
       const delSubtaskDocRef = this.getDocRef(`tasks/${taskDocRef.id}/subtasks`, subtaskId);
       batch.delete(delSubtaskDocRef);
     });
+    await batch.commit();
+  }
+
+
+  async deleteTask(taskId: string) {
+    const batch = writeBatch(this.firestore);
+    const subtaskQuery = await getDocs(this.getCollectionRef(`tasks/${taskId}/subtasks`));
+    subtaskQuery.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    const taskRef = this.getDocRef('tasks', taskId);
+    batch.delete(taskRef);
     await batch.commit();
   }
 

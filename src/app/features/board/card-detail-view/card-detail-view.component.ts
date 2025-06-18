@@ -63,6 +63,12 @@ export class CardDetailViewComponent implements OnInit {
   }
 
 
+  async deleteTask() {
+    await this.firebaseService.deleteTask(this.activeTask.id);
+    this.closeTask();
+  }
+
+
   toggleCheckbox(subtaskId: string) {
     const currentTask = this.activeTask;
     if (currentTask) {
