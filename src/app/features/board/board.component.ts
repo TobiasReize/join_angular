@@ -8,11 +8,12 @@ import { TaskService } from '../../services/task-service/task.service';
 import { CardDetailViewComponent } from './card-detail-view/card-detail-view.component';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
 import { UserService } from '../../services/user-service/user.service';
+import { AddTaskFormComponent } from '../../shared/add-task-form/add-task-form.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent],
+  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent, AddTaskFormComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
