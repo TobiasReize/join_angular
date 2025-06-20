@@ -1,4 +1,4 @@
-<form  #addTaskForm="ngForm" class="addtask-form">
+<form (submit)="onSubmit(addTaskForm)"  #addTaskForm="ngForm" class="addtask-form">
     <section class="content-container">
         <div class="addtask-left">
             <div class="title-container">

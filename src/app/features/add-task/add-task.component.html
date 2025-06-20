@@ -3,7 +3,7 @@
     <app-header type="main"></app-header>
     <main class="main-content">
         <h3>Add Task</h3>
-        <app-add-task-form></app-add-task-form>
+        <app-add-task-form (submitForm)="onSubmit($event)"></app-add-task-form>
     </main>
 </div>
 

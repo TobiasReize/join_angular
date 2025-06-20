@@ -17,7 +17,7 @@
                         </g>
                     </svg>
                 </div>
-                <button (click)="showAddTaskOverlay(true)" class="btn-3" type="button">
+                <button (click)="showAddTaskOverlay('To do')" class="btn-3" type="button">
                     <span>Add task</span>
                     <img src="icon/add_white.svg" alt="add">
                 </button>
@@ -28,7 +28,7 @@
             <div class="column-style">
                 <div class="column-headline-container">
                     <span class="column-title">To do</span>
-                    <svg class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <svg (click)="showAddTaskOverlay('To do')" class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                         <rect x="1" y="1" width="22" height="22" rx="7" stroke-width="2"/>
                         <path d="M12 8V16" stroke-width="2" stroke-linecap="round"/>
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
@@ -46,7 +46,7 @@
             <div class="column-style">
                 <div class="column-headline-container">
                     <span class="column-title">In progress</span>
-                    <svg class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <svg (click)="showAddTaskOverlay('In progress')" class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                         <rect x="1" y="1" width="22" height="22" rx="7" stroke-width="2"/>
                         <path d="M12 8V16" stroke-width="2" stroke-linecap="round"/>
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
@@ -63,7 +63,7 @@
             <div class="column-style">
                 <div class="column-headline-container">
                     <span class="column-title">Await feedback</span>
-                    <svg class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <svg (click)="showAddTaskOverlay('Await feedback')" class="add-task-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                         <rect x="1" y="1" width="22" height="22" rx="7" stroke-width="2"/>
                         <path d="M12 8V16" stroke-width="2" stroke-linecap="round"/>
                         <path d="M16 12.0754L8 12.0754" stroke-width="2" stroke-linecap="round"/>
@@ -102,9 +102,13 @@
         <div class="add-task-content" [ngClass]="addTaskClosed ? 'fly-out-animation' : 'fly-in-animation'">
             <div class="add-task-headline-container">
                 <h3>Add Task</h3>
-                <img (click)="showAddTaskOverlay(false)" class="close-icon" src="icon/close.svg" alt="close">
+                <img (click)="closeAddTaskOverlay()" class="close-icon" src="icon/close.svg" alt="close">
             </div>
-            <app-add-task-form></app-add-task-form>
+            <app-add-task-form (submitForm)="onSubmit($event)"></app-add-task-form>
         </div>
     </div>
+}
+
+@if (toastMsgService.toastState() == 'active') {
+    <app-toast-msg></app-toast-msg>
 }

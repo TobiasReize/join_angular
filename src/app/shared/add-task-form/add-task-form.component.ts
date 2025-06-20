@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Contact } from '../../models/contact.class';
 import { ContactService } from '../../services/contact-service/contact.service';
+import { Contact } from '../../models/contact.class';
 
 @Component({
   selector: 'app-add-task-form',
@@ -31,6 +31,7 @@ export class AddTaskFormComponent implements OnInit {
   editedSubtaskContent: string = '';
   @ViewChild('subtaskInput') subtaskInputRef!: ElementRef;
   addedSubtasks: any[] = [];
+  @Output() submitForm = new EventEmitter<any>();
 
 
   @HostListener('document:click', ['$event'])
@@ -140,6 +141,27 @@ export class AddTaskFormComponent implements OnInit {
     this.selectedContacts = [];
     this.selectedCategory = '';
     this.addedSubtasks = [];
+  }
+
+
+  onSubmit(addTaskForm: NgForm) {
+    if (addTaskForm.submitted && addTaskForm.valid) {
+      const contactIds = this.selectedContacts.map(contact => contact.id);
+      const data = {
+        title: addTaskForm.value.title,
+        description: addTaskForm.value.description,
+        date: addTaskForm.value.date,
+        priority: this.selectedPriority,
+        contacts: [...contactIds],
+        category: this.selectedCategory,
+        subtasks: this.addedSubtasks
+      }
+      this.submitForm.emit(data);
+      this.clearForm(addTaskForm);
+    } else {
+      console.log('Form invalid!!!');
+      console.log('addTaskForm: ', addTaskForm);
+    }
   }
 
 

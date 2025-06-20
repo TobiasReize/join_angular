@@ -9,11 +9,13 @@ import { CardDetailViewComponent } from './card-detail-view/card-detail-view.com
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
 import { UserService } from '../../services/user-service/user.service';
 import { AddTaskFormComponent } from '../../shared/add-task-form/add-task-form.component';
+import { ToastMsgComponent } from '../../shared/toast-msg/toast-msg.component';
+import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.service';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent, AddTaskFormComponent],
+  imports: [CommonModule, SidenavComponent, HeaderComponent, CardComponent, CardDetailViewComponent, AddTaskFormComponent, ToastMsgComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -22,11 +24,13 @@ export class BoardComponent implements OnInit {
   taskService = inject(TaskService);
   private firebaseService = inject(FirebaseService);
   private userService = inject(UserService);
+  toastMsgService = inject(ToastMsgService);
   filteredTasks = this.taskService.allTasks;
   private currentDraggedTaskID = signal<string>('');
   dragOver = signal<string>('');
   addTaskVisible: boolean = false;
   addTaskClosed: boolean = false;
+  selectedColumn: string = 'To do';
 
 
   ngOnInit(): void {
@@ -72,16 +76,31 @@ export class BoardComponent implements OnInit {
   }
 
 
-  showAddTaskOverlay(state: boolean) {
-    if (state) {
-      this.addTaskVisible = true;
-      this.addTaskClosed = false;
-    } else {
-      this.addTaskClosed = true;
-      setTimeout(() => {
-        this.addTaskVisible = false;
-      }, 200);
-    }
+  showAddTaskOverlay(column: string) {
+    this.selectedColumn = column;
+    this.addTaskVisible = true;
+    this.addTaskClosed = false;
+  }
+
+
+  closeAddTaskOverlay() {
+    this.addTaskClosed = true;
+    setTimeout(() => {
+      this.addTaskVisible = false;
+    }, 200);
+  }
+
+
+  async onSubmit(addTaskData: any) {
+    const subtasks = addTaskData['subtasks'];
+    addTaskData['column'] = this.selectedColumn;
+    delete addTaskData['subtasks'];
+    await this.firebaseService.addTask(addTaskData, subtasks);
+    this.toastMsgService.showToastMsg('Task added to board');
+    setTimeout(() => {
+      this.toastMsgService.resetToastMsg();
+    }, 2000);
+    this.closeAddTaskOverlay();
   }
 
 
