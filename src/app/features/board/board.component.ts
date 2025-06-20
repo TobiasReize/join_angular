@@ -25,6 +25,8 @@ export class BoardComponent implements OnInit {
   filteredTasks = this.taskService.allTasks;
   private currentDraggedTaskID = signal<string>('');
   dragOver = signal<string>('');
+  addTaskVisible: boolean = false;
+  addTaskClosed: boolean = false;
 
 
   ngOnInit(): void {
@@ -67,6 +69,19 @@ export class BoardComponent implements OnInit {
     const data = {column: column};
     this.dragOver.set('');
     this.firebaseService.updateDocData('tasks', this.currentDraggedTaskID(), data);
+  }
+
+
+  showAddTaskOverlay(state: boolean) {
+    if (state) {
+      this.addTaskVisible = true;
+      this.addTaskClosed = false;
+    } else {
+      this.addTaskClosed = true;
+      setTimeout(() => {
+        this.addTaskVisible = false;
+      }, 200);
+    }
   }
 
 

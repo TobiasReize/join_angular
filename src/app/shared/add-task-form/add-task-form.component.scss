@@ -5,40 +5,11 @@
 
 :host {
     @extend .dF-column-cc;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(246, 247, 248, 0.5);
-    z-index: 5;
 }
 
 .addtask-form {
     @extend .dF-column-fs;
-    padding: 64px 74px;
-    height: 870px;
-    border-radius: 30px;
-    background-color: white;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
-}
-
-.headline-container {
-    @extend .dF-jc-sb;
-    width: 100%;
-    margin-bottom: 56px;
-}
-
-.close-icon {
-    width: 32px;
-    height: 32px;
-    padding: 2px;
-    border-radius: 50%;
-
-    &:hover {
-        cursor: pointer;
-        background-color: color.$icon-hover-gray;
-    }
+    height: 640px;
 }
 
 .content-container {

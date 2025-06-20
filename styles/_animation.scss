@@ -1,5 +1,14 @@
 @use '../styles/variable';
 
+.fly-in-animation {
+    transform: translateX(100vw);
+    animation: flyIn variable.$flyin-animation-config;
+}
+
+.fly-out-animation {
+    animation: flyOut variable.$flyout-animation-config;
+}
+
 @keyframes coverUp {
     from {
         opacity: 0;

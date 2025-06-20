@@ -17,7 +17,7 @@
                         </g>
                     </svg>
                 </div>
-                <button class="btn-3" type="button">
+                <button (click)="showAddTaskOverlay(true)" class="btn-3" type="button">
                     <span>Add task</span>
                     <img src="icon/add_white.svg" alt="add">
                 </button>
@@ -97,4 +97,14 @@
     <app-card-detail-view></app-card-detail-view>
 }
 
-<app-add-task-form></app-add-task-form>
+@if (addTaskVisible) {
+    <div class="add-task-overlay">
+        <div class="add-task-content" [ngClass]="addTaskClosed ? 'fly-out-animation' : 'fly-in-animation'">
+            <div class="add-task-headline-container">
+                <h3>Add Task</h3>
+                <img (click)="showAddTaskOverlay(false)" class="close-icon" src="icon/close.svg" alt="close">
+            </div>
+            <app-add-task-form></app-add-task-form>
+        </div>
+    </div>
+}

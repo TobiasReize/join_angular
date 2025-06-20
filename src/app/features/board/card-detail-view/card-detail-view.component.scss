@@ -32,15 +32,6 @@
     }
 }
 
-.fly-in-animation {
-    transform: translateX(100vw);
-    animation: flyIn variable.$flyin-animation-config;
-}
-
-.fly-out-animation {
-    animation: flyOut variable.$flyout-animation-config;
-}
-
 .active-task-category {
     @extend .font-style-5;
     color: white;
