@@ -13,6 +13,7 @@
     left: 0;
     height: 100%;
     width: 100%;
+    padding: 16px;
     background-color: rgba(246, 247, 248, 0.5);
     z-index: 5;
 }
@@ -417,4 +418,34 @@
     @extend .font-style-9;
     background-color: white;
     flex: 1;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 557px) {
+    .active-task-content {
+        width: 100%;
+        padding: 32px 24px;
+    }
+}
+
+@media(max-width: 450px) {
+    .active-task-content {
+        padding: 24px 8px;
+    }
+
+    .priority-buttons {
+        gap: 4px;
+    }
+
+    .priority-btn {
+        gap: 4px;
+
+        > span {
+            font-size: 16px;
+        }
+    }
+
+    .selected-contacts-container {
+        gap: 2px;
+    }
 }
