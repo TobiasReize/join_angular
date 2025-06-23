@@ -116,6 +116,7 @@ button[type="submit"]:disabled {
 @media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
     .main-content {
         padding: 48px 16px 16px 48px;
+        gap: 40px;
     }
 }
 
@@ -140,8 +141,7 @@ button[type="submit"]:disabled {
 
     .main-content {
         align-items: center;
-        padding: 48px 16px 16px 16px;
-        gap: 40px;
+        padding-left: 16px;
     }
 }
 
