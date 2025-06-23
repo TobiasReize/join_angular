@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { CardComponent } from './card/card.component';
@@ -25,12 +26,12 @@ export class BoardComponent implements OnInit {
   private firebaseService = inject(FirebaseService);
   private userService = inject(UserService);
   toastMsgService = inject(ToastMsgService);
+  private router = inject(Router);
   filteredTasks = this.taskService.allTasks;
   private currentDraggedTaskID = signal<string>('');
   dragOver = signal<string>('');
   addTaskVisible: boolean = false;
   addTaskClosed: boolean = false;
-  selectedColumn: string = 'To do';
 
 
   ngOnInit(): void {
@@ -77,9 +78,13 @@ export class BoardComponent implements OnInit {
 
 
   showAddTaskOverlay(column: string) {
-    this.selectedColumn = column;
-    this.addTaskVisible = true;
-    this.addTaskClosed = false;
+    this.taskService.setAddTaskColumn(column);
+    if (window.innerWidth <= 750) {
+      this.router.navigateByUrl('addtask');
+    } else {
+      this.addTaskVisible = true;
+      this.addTaskClosed = false;
+    }
   }
 
 
@@ -93,7 +98,7 @@ export class BoardComponent implements OnInit {
 
   async onSubmit(addTaskData: any) {
     const subtasks = addTaskData['subtasks'];
-    addTaskData['column'] = this.selectedColumn;
+    addTaskData['column'] = this.taskService.addTaskColumn();
     delete addTaskData['subtasks'];
     await this.firebaseService.addTask(addTaskData, subtasks);
     this.toastMsgService.showToastMsg('Task added to board');

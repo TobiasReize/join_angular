@@ -3,7 +3,14 @@
     <app-header type="main"></app-header>
     <main class="main-content">
         <section class="headline-container">
-            <h3>Board</h3>
+            <div class="title-container">
+                <h3>Board</h3>
+                <svg (click)="showAddTaskOverlay('To do')" class="add-task-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="10"/>
+                    <path d="M20 10V30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M30 20L10.0005 20.138" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
             <div class="search-container">
                 <div class="search-input-style">
                     <input (input)="filterTasks(search.value)" #search type="text" name="search" id="search" minlength="3" maxlength="30" placeholder="Find task">

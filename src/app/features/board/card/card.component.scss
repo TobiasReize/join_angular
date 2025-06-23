@@ -108,3 +108,14 @@
 .card-prio-icon {
     width: 20px;
 }
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1250px) {
+    :host {
+        width: unset;
+    }
+    
+    .card, .empty-card {
+        width: 252px;
+    }
+}

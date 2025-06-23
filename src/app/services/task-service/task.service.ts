@@ -19,6 +19,9 @@ export class TaskService {
   private allTasksSignal = signal<Task[]>([]);
   readonly allTasks = this.allTasksSignal.asReadonly();
 
+  private addTaskColumnSignal = signal<string>('To do');
+  readonly addTaskColumn = this.addTaskColumnSignal.asReadonly();
+
 
   setActiveTask(id: string) {
     this.activeTaskSignal.set(this.getTaskFromId(id));
@@ -32,6 +35,11 @@ export class TaskService {
 
   setEditTask(state: boolean) {
     this.editTaskSignal.set(state);
+  }
+
+
+  setAddTaskColumn(column: string) {
+    this.addTaskColumnSignal.set(column);
   }
 
 

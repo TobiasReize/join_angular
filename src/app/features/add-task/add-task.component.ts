@@ -7,6 +7,7 @@ import { ToastMsgService } from '../../services/toast-msg-service/toast-msg.serv
 import { UserService } from '../../services/user-service/user.service';
 import { FirebaseService } from '../../services/firebase-service/firebase.service';
 import { AddTaskFormComponent } from '../../shared/add-task-form/add-task-form.component';
+import { TaskService } from '../../services/task-service/task.service';
 
 @Component({
   selector: 'app-add-task',
@@ -18,9 +19,10 @@ import { AddTaskFormComponent } from '../../shared/add-task-form/add-task-form.c
 export class AddTaskComponent implements OnInit {
 
   toastMsgService = inject(ToastMsgService);
-  userService = inject(UserService);
-  firebaseService = inject(FirebaseService);
-  router = inject(Router);
+  private userService = inject(UserService);
+  private firebaseService = inject(FirebaseService);
+  private router = inject(Router);
+  private taskService = inject(TaskService);
 
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class AddTaskComponent implements OnInit {
 
   async onSubmit(addTaskData: any) {
     const subtasks = addTaskData['subtasks'];
-    addTaskData['column'] = 'To do';
+    addTaskData['column'] = this.taskService.addTaskColumn();
     delete addTaskData['subtasks'];
     await this.firebaseService.addTask(addTaskData, subtasks);
     this.toastMsgService.showToastMsg('Task added to board');
