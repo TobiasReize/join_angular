@@ -4,37 +4,39 @@
             <span class="active-task-category" [ngClass]="{'cat-user-story': activeTask.category === 'User Story', 'cat-technical-task': activeTask.category === 'Technical Task', 'cat-bug-fix': activeTask.category === 'Bug Fix'}">{{ activeTask.category }}</span>
             <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
-        <h3>{{ activeTask.title }}</h3>
-        <span class="black-color">{{ activeTask.description }}</span>
-        <div class="dF-jc-fs">
-            <span>Due date:</span>
-            <span class="black-color m-left-25">{{ activeTask.date }}</span>
-        </div>
-        <div class="dF-jc-fs">
-            <span>Priority:</span>
-            <span class="black-color m-left-43">{{ firstLetterUppercase(activeTask.priority) }}</span>
-            <img class="prio-icon m-left-10" src="icon/{{ activeTask.priority }}.svg" alt="priority">
-        </div>
-        <div class="dF-column-ai-fs">
-            <span class="m-btm-8">Assigned to:</span>
-            <div class="contact-overflow-wrapper">
-                @for (contactId of activeTask.contacts; track $index) {
-                    <div class="active-task-contact">
-                        <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
-                        <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
-                    </div>
-                }
+        <div class="active-task-overflow-wrapper">
+            <h3>{{ activeTask.title }}</h3>
+            <span class="black-color">{{ activeTask.description }}</span>
+            <div class="dF-jc-fs">
+                <span>Due date:</span>
+                <span class="black-color m-left-25">{{ activeTask.date }}</span>
             </div>
-        </div>
-        <div class="dF-column-ai-fs">
-            <span class="m-btm-8">Subtasks:</span>
-            <div class="subtask-overflow-wrapper">
-                @for (subtask of activeTask.subtasks; track $index) {
-                    <div class="active-task-subtask">
-                        <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
-                        <span class="black-color font-style-9">{{ subtask.title }}</span>
-                    </div>
-                }
+            <div class="dF-jc-fs">
+                <span>Priority:</span>
+                <span class="black-color m-left-43">{{ firstLetterUppercase(activeTask.priority) }}</span>
+                <img class="prio-icon m-left-10" src="icon/{{ activeTask.priority }}.svg" alt="priority">
+            </div>
+            <div class="dF-column-ai-fs">
+                <span class="m-btm-8">Assigned to:</span>
+                <div class="contact-overflow-wrapper">
+                    @for (contactId of activeTask.contacts; track $index) {
+                        <div class="active-task-contact">
+                            <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
+                            <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="dF-column-ai-fs">
+                <span class="m-btm-8">Subtasks:</span>
+                <div class="subtask-overflow-wrapper">
+                    @for (subtask of activeTask.subtasks; track $index) {
+                        <div class="active-task-subtask">
+                            <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
+                            <span class="black-color font-style-9">{{ subtask.title }}</span>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
         <div class="active-task-button-container">
@@ -69,7 +71,7 @@
         <div class="dF-jc-fe">
             <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
-        <div class="edit-task-overflow-wrapper">
+        <div class="active-task-overflow-wrapper">
             <div class="dF-column-ai-fs">
                 <label class="m-btm-8" for="title">Title<span class="red-color">*</span></label>
                 <input #title="ngModel" class="general-input-style" type="text" name="title" id="title" [ngModel]="activeTask.title" minlength="3" maxlength="40" placeholder="Enter a title" required>
