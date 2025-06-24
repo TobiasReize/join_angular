@@ -40,12 +40,8 @@ app-header {
         fill: color.$main-color;
     }
 
-    &:hover rect {
-        fill: color.$hover-light-blue;
-    }
-
     &:active rect {
-        fill: color.$click-blue;
+        fill: color.$hover-light-blue;
     }
 }
 
@@ -247,6 +243,10 @@ app-header {
 @media(max-width: 1024px) {
     .column-style {
         width: 100%;
+    }
+
+    .app-card:active {
+        transform: unset;
     }
 
     .add-task-overlay {
