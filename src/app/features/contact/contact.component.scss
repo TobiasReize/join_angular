@@ -1,0 +1,181 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+@use '../../../../styles/animation';
+
+:host {
+    @extend .host;
+    position: relative;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+    z-index: 5;
+}
+
+.main-content {
+    padding: 0;
+    gap: 0;
+    flex-direction: row;
+}
+
+.contact-list-section {
+    @extend .dF-column-jc-fs;
+    gap: 22.5px;
+    width: 456px;
+    height: 100%;
+    padding: 22.5px 52px 8px 52px;
+    background-color: white;
+    filter: drop-shadow(4px 0 6px rgba(0, 0, 0, 0.08));
+}
+
+.btn-3 {
+    padding: 12px 64px;
+}
+
+.contact-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.letter-container {
+    @extend .dF-column-fs;
+    width: 100%;
+
+    > span {
+        padding: 17px 36px;
+    }
+}
+
+.contact-separator {
+    width: 100%;
+    height: 1px;
+    margin: 8px;
+    background-color: color.$form-gray;
+}
+
+.contact-container {
+    @extend .dF-jc-fs;
+    gap: 35px;
+    padding: 15px 24px;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-image: linear-gradient(#F9F9F9, #F0F0F0);
+    }
+
+    &:active {
+        background-image: linear-gradient(color.$main-color);
+
+        .black-color {
+            color: white;
+        }
+    }
+}
+
+.selected-contact {
+    background-image: linear-gradient(color.$main-color) !important;
+
+    .black-color {
+        color: white !important;
+    }
+}
+
+.initials {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: white;
+}
+
+.name-email-container {
+    @extend .dF-column-ai-fs;
+    gap: 5px;
+}
+
+.contact-email {
+    @extend .font-style-9;
+    color: color.$email-blue;
+}
+
+.single-contact-section {
+    @extend .dF-column-fs;
+    gap: 32px;
+    flex: 1;
+    height: 100%;
+    padding: 110px 0 0 55px;
+}
+
+.headline-container {
+    @extend .dF-row-cc;
+    gap: 30px;
+}
+
+.headline-separator {
+    width: 3px;
+    height: 59px;
+    border-radius: 3px;
+    background-color: color.$hover-light-blue;
+}
+
+.selected-contact-container {
+    @extend .dF-column-fs;
+    gap: 21px;
+}
+
+.selected-contact-header {
+    @extend .dF-row-cc;
+    gap: 54px;
+}
+
+.big-initials {
+    @extend .dF-row-cc;
+    @extend .font-style-3;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    color: white;
+}
+
+.active-contact-icon-container {
+    @extend .dF-row-cc;
+    gap: 8px;
+
+    > svg {
+        width: 24px;
+        height: 24px;
+
+        path {
+            fill: color.$main-color;
+        }
+    }
+
+    > span {
+        @extend .font-style-9;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        > svg path {
+            fill: color.$hover-light-blue;
+        }
+
+        > span {
+            color: color.$hover-light-blue;
+            font-weight: 700;
+        }
+    }
+}

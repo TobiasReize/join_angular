@@ -265,18 +265,8 @@
     height: 42px;
 }
 
-.initial-style {
-    @extend .dF-row-cc;
-    @extend .font-style-10;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 2px solid white;
-    color: white; 
-}
-
 .remaining-contacts {
-    @extend .initial-style;
+    @extend .initials;
     background-color: color.$icon-gray;
 }
 
