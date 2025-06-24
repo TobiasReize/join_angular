@@ -34,7 +34,7 @@
                 <h5>Better with a team</h5>
             </div>
 
-            @if (selectedContact) {
+            @if (contactSelected) {
                 <div class="selected-contact-container fly-in-animation">
                     <div class="selected-contact-header">
                         <div class="big-initials" [ngStyle]="{'background-color': selectedContact.color}">{{ getInitials(selectedContact) }}</div>

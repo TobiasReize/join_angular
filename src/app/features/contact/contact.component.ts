@@ -17,7 +17,8 @@ export class ContactComponent implements OnInit {
 
   private userService = inject(UserService);
   contactService = inject(ContactService);
-  selectedContact: Contact | null = null;
+  contactSelected: boolean = false;
+  selectedContact: Contact = new Contact();
   initialLetters = computed(() => {
     const result: string[] = [];
     this.contactService.allContacts().map(contact => contact.name.charAt(0).toUpperCase()).forEach(letter => {
@@ -31,15 +32,15 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.checkCredentials();
-    console.log('Letters: ', this.initialLetters());
   }
 
 
   selectContact(contact: Contact) {
-    this.selectedContact = null;
+    this.contactSelected = false;
+    this.selectedContact = contact;
     setTimeout(() => {
-      this.selectedContact = contact;
-    }, 1);
+      this.contactSelected = true;
+    }, 0);
   }
 
 
