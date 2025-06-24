@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
 
 
   filterTasks(searchTerm: string) {
-    if (searchTerm.length > 2) {
+    if (searchTerm.length > 1) {
       const term = searchTerm.trim().toLowerCase();
       this.filteredTasks = signal(this.taskService.allTasks().filter(task => task.title.trim().toLowerCase().includes(searchTerm) || task.description.trim().toLowerCase().includes(searchTerm)));
     } else {
