@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ContactService } from '../../../services/contact-service/contact.service';
+import { Contact } from '../../../models/contact.class';
 
 @Component({
   selector: 'app-contact-form',
@@ -11,11 +13,16 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class ContactFormComponent {
 
+  contactService = inject(ContactService);
   formClosed: boolean = false;
 
 
   closeForm() {
+    this.contactService.resetEditContact();
     this.formClosed = true;
+    setTimeout(() => {
+      this.contactService.setContactForm(false);
+    }, 200);
   }
 
 
@@ -24,9 +31,27 @@ export class ContactFormComponent {
   }
 
 
+  deleteContact() {
+    const id = this.contactService.editContact()?.id;
+    if (id) {
+      console.log('Contact deleted!!!', this.contactService.getContactFromId(id));
+    }
+  }
+
+
   onSubmit(contactForm: NgForm) {
     if (contactForm.submitted && contactForm.valid) {
       console.log('contactForm: ', contactForm.value);
+    }
+  }
+
+
+  // Hilfsfunktionen:
+  getInitials(contact: Contact | undefined): string {
+    if (contact) {
+      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
+    } else {
+      return '';
     }
   }
 

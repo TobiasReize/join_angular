@@ -3,7 +3,7 @@
     <app-header type="main"></app-header>
     <main class="main-content">
         <section class="contact-list-section">
-            <button class="btn-3" type="button">
+            <button (click)="addContact()" class="btn-3" type="button">
                 <span>Add new contact</span>
                 <img src="icon/contact_add.svg" alt="add-contact">
             </button>
@@ -41,7 +41,7 @@
                         <div class="dF-column-fs gap-8">
                             <h4 class="black-color">{{ selectedContact.name }}</h4>
                             <div class="dF-row-cc gap-16">
-                                <div class="active-contact-icon-container">
+                                <div (click)="editContact(selectedContact.id)" class="active-contact-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                                         <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                             <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -52,7 +52,7 @@
                                     </svg>
                                     <span class="font-style-9">Edit</span>
                                 </div>
-                                <div class="active-contact-icon-container">
+                                <div (click)="deleteContact(selectedContact.id)" class="active-contact-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                                         <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                             <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -81,4 +81,6 @@
     </main>
 </div>
 
-<app-contact-form></app-contact-form>
+@if (contactService.contactFormActive()) {
+    <app-contact-form></app-contact-form>
+}

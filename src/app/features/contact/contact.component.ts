@@ -45,6 +45,22 @@ export class ContactComponent implements OnInit {
   }
 
 
+  addContact() {
+    this.contactService.setContactForm(true);
+  }
+
+
+  editContact(id: string) {
+    this.contactService.setEditContact(id);
+    this.contactService.setContactForm(true);
+  }
+
+
+  deleteContact(id: string) {
+    console.log('Contact deleted!!!', this.contactService.getContactFromId(id));
+  }
+
+
   // Hilfsfunktionen:
   getInitials(contact: Contact): string {
     return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');

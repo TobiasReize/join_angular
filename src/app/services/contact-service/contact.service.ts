@@ -13,6 +13,27 @@ export class ContactService {
   private allContactsSignal = signal<Contact[]>([]);
   readonly allContacts = this.allContactsSignal.asReadonly();
 
+  private contactFormActiveSignal = signal<boolean>(false);
+  readonly contactFormActive = this.contactFormActiveSignal.asReadonly();
+
+  private editContactSignal = signal<Contact | undefined>(undefined);
+  readonly editContact = this.editContactSignal.asReadonly();
+
+
+  setContactForm(state: boolean) {
+    this.contactFormActiveSignal.set(state);
+  }
+  
+  
+  setEditContact(id: string) {
+    this.editContactSignal.set(this.getContactFromId(id));
+  }
+
+
+  resetEditContact() {
+    this.editContactSignal.set(undefined);
+  }
+
 
   subContactCol() {
     const q = query(this.firebaseService.getCollectionRef('contacts'), orderBy('name'));
