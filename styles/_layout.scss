@@ -49,6 +49,10 @@
     @include dFlex($fd: column, $jc: flex-start, $ai: flex-start);
 }
 
+.dF-column-jc-fs-ai-fe {
+    @include dFlex($fd: column, $jc: flex-start, $ai: flex-end);
+}
+
 .dF-column-jc-sb {
     @include dFlex($fd: column, $jc: space-between);
 }

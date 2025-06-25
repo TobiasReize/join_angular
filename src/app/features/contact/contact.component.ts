@@ -5,11 +5,12 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { UserService } from '../../services/user-service/user.service';
 import { ContactService } from '../../services/contact-service/contact.service';
 import { Contact } from '../../models/contact.class';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, HeaderComponent],
+  imports: [CommonModule, SidenavComponent, HeaderComponent, ContactFormComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
@@ -53,6 +54,5 @@ export class ContactComponent implements OnInit {
   getFilteredContacts(letter: string) {
     return this.contactService.allContacts().filter(contact => contact.name.startsWith(letter));
   }
-
 
 }

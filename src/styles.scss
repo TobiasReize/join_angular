@@ -101,6 +101,10 @@ h5 {
     color: black;
 }
 
+.white-color {
+    color: white;
+}
+
 button[type="submit"]:disabled {
     background-color: color.$form-icon-gray;
     box-shadow: unset;
