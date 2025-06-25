@@ -16,22 +16,22 @@ export class ContactService {
   private contactFormActiveSignal = signal<boolean>(false);
   readonly contactFormActive = this.contactFormActiveSignal.asReadonly();
 
-  private editContactSignal = signal<Contact | undefined>(undefined);
-  readonly editContact = this.editContactSignal.asReadonly();
+  private activeContactSignal = signal<Contact | undefined>(undefined);
+  readonly activeContact = this.activeContactSignal.asReadonly();
 
 
   setContactForm(state: boolean) {
     this.contactFormActiveSignal.set(state);
   }
-  
-  
-  setEditContact(id: string) {
-    this.editContactSignal.set(this.getContactFromId(id));
+
+
+  setActiveContact(contact: Contact) {
+    this.activeContactSignal.set(contact);
   }
 
 
-  resetEditContact() {
-    this.editContactSignal.set(undefined);
+  resetActiveContact() {
+    this.activeContactSignal.set(undefined);
   }
 
 

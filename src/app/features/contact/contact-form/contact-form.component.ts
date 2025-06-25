@@ -3,6 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactService } from '../../../services/contact-service/contact.service';
 import { Contact } from '../../../models/contact.class';
+import { FirebaseService } from '../../../services/firebase-service/firebase.service';
+import { ToastMsgService } from '../../../services/toast-msg-service/toast-msg.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,11 +16,13 @@ import { Contact } from '../../../models/contact.class';
 export class ContactFormComponent {
 
   contactService = inject(ContactService);
+  private firebaseService = inject(FirebaseService);
+  private toastMsgService = inject(ToastMsgService);
   formClosed: boolean = false;
 
 
   closeForm() {
-    this.contactService.resetEditContact();
+    this.contactService.resetActiveContact();
     this.formClosed = true;
     setTimeout(() => {
       this.contactService.setContactForm(false);
@@ -32,16 +36,34 @@ export class ContactFormComponent {
 
 
   deleteContact() {
-    const id = this.contactService.editContact()?.id;
+    const id = this.contactService.activeContact()?.id;
     if (id) {
-      console.log('Contact deleted!!!', this.contactService.getContactFromId(id));
+      this.firebaseService.deleteDoc('contacts', id);
+      this.closeForm();
+      this.toastMsgService.showToastMsg('Contact deleted');
+      setTimeout(() => {
+        this.toastMsgService.resetToastMsg();
+      }, 2000);
     }
   }
 
 
   onSubmit(contactForm: NgForm) {
+    const currentContact = this.contactService.activeContact();
     if (contactForm.submitted && contactForm.valid) {
-      console.log('contactForm: ', contactForm.value);
+      let data = contactForm.value;
+      if (currentContact) {
+        this.firebaseService.updateDocData('contacts', currentContact.id, data);
+      } else {
+        data['color'] = this.getRandomColor();
+        this.firebaseService.addDoc('contacts', data);
+        this.toastMsgService.showToastMsg('Contact succesfully created');
+        setTimeout(() => {
+          this.toastMsgService.resetToastMsg();
+        }, 2000);
+      }
+      contactForm.resetForm();
+      this.closeForm();
     }
   }
 
@@ -53,6 +75,16 @@ export class ContactFormComponent {
     } else {
       return '';
     }
+  }
+
+
+  getRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
 }

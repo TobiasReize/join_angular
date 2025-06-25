@@ -15,7 +15,7 @@
                     </div>
 
                     @for (contact of getFilteredContacts(letter); track $index) {
-                        <div (click)="selectContact(contact)" class="contact-container" [ngClass]="{'selected-contact': selectedContact === contact}">
+                        <div (click)="selectContact(contact)" class="contact-container" [ngClass]="{'selected-contact': contactService.activeContact() === contact}">
                             <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact) }}</div>
                             <div class="name-email-container">
                                 <span class="black-color">{{ contact.name }}</span>
@@ -34,14 +34,14 @@
                 <h5>Better with a team</h5>
             </div>
 
-            @if (contactSelected) {
+            @if (contactSelected && contactService.activeContact()) {
                 <div class="selected-contact-container fly-in-animation">
                     <div class="selected-contact-header">
-                        <div class="big-initials" [ngStyle]="{'background-color': selectedContact.color}">{{ getInitials(selectedContact) }}</div>
+                        <div class="big-initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ getInitials(contactService.activeContact()) }}</div>
                         <div class="dF-column-fs gap-8">
-                            <h4 class="black-color">{{ selectedContact.name }}</h4>
+                            <h4 class="black-color">{{ contactService.activeContact()?.name }}</h4>
                             <div class="dF-row-cc gap-16">
-                                <div (click)="editContact(selectedContact.id)" class="active-contact-icon-container">
+                                <div (click)="editContact(contactService.activeContact())" class="active-contact-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                                         <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                             <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -52,7 +52,7 @@
                                     </svg>
                                     <span class="font-style-9">Edit</span>
                                 </div>
-                                <div (click)="deleteContact(selectedContact.id)" class="active-contact-icon-container">
+                                <div (click)="deleteContact(contactService.activeContact()?.id)" class="active-contact-icon-container">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                                         <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                             <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -69,11 +69,11 @@
                     <span class="black-color m-top-24 m-btm-24">Contact Information:</span>
                     <div class="dF-column-fs gap-8">
                         <span class="font-style-8 black-color">Email</span>
-                        <span class="contact-email">{{ selectedContact.email }}</span>
+                        <span class="contact-email">{{ contactService.activeContact()?.email }}</span>
                     </div>
                     <div class="dF-column-fs gap-8">
                         <span class="font-style-8 black-color">Phone</span>
-                        <span class="font-style-9 black-color">{{ selectedContact.phone }}</span>
+                        <span class="font-style-9 black-color">{{ contactService.activeContact()?.phone }}</span>
                     </div>
                 </div>
             }
@@ -83,4 +83,8 @@
 
 @if (contactService.contactFormActive()) {
     <app-contact-form></app-contact-form>
+}
+
+@if (toastMsgService.toastState() === 'active') {
+    <app-toast-msg></app-toast-msg>
 }

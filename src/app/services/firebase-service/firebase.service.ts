@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, doc, Firestore, getDocs, setDoc, updateDoc, writeBatch } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, setDoc, updateDoc, writeBatch } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,18 @@ export class FirebaseService {
   async setDoc(colName: string, docId: string, data: any) {
     const docRef = this.getDocRef(colName, docId);
     await setDoc(docRef, data)
+  }
+
+
+  async addDoc(colName: string, data: any) {
+    const colRef = this.getCollectionRef(colName);
+    await addDoc(colRef, data);
+  }
+
+
+  async deleteDoc(colName: string, docId: string) {
+    const docRef = this.getDocRef(colName, docId);
+    await deleteDoc(docRef);
   }
 
 

@@ -2,15 +2,15 @@
     <div class="left-side">
         <div class="left-side-content">
             <img class="logo" src="icon/logo_white.svg" alt="logo">
-            <h3 class="white-color">{{ contactService.editContact() ? 'Edit contact' : 'Add contact'}}</h3>
-            @if (!contactService.editContact()) {
+            <h3 class="white-color">{{ contactService.activeContact() ? 'Edit contact' : 'Add contact'}}</h3>
+            @if (!contactService.activeContact()) {
                 <h5 class="white-color">Tasks are better with a team!</h5>
             }
         </div>
     </div>
     <div class="right-side">
-        @if (contactService.editContact()) {
-            <div class="initials" [ngStyle]="{'background-color': contactService.editContact()?.color}">{{ getInitials(contactService.editContact()) }}</div>
+        @if (contactService.activeContact()) {
+            <div class="initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ getInitials(contactService.activeContact()) }}</div>
         } @else {
             <div class="person-icon">
                 <img src="icon/person_white.svg" alt="person">
@@ -21,20 +21,20 @@
             <form (submit)="onSubmit(contactForm)" #contactForm="ngForm" class="contact-form">
                 <div class="input-wrapper">
                     <div class="icon-input-style">
-                        <input #name="ngModel" [ngModel]="contactService.editContact()?.name" type="text" name="name" id="name" minlength="3" maxlength="30" placeholder="Name" ngModel required>
+                        <input #name="ngModel" [ngModel]="contactService.activeContact()?.name" type="text" name="name" id="name" minlength="3" maxlength="30" placeholder="Name" ngModel required>
                         <img src="icon/person.svg" alt="person">
                     </div>
                     <div class="icon-input-style">
-                        <input #email="ngModel" [ngModel]="contactService.editContact()?.email" type="email" name="email" id="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Email" ngModel required>
+                        <input #email="ngModel" [ngModel]="contactService.activeContact()?.email" type="email" name="email" id="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Email" ngModel required>
                         <img src="icon/email.svg" alt="email">
                     </div>
                     <div class="icon-input-style">
-                        <input #phone="ngModel" [ngModel]="contactService.editContact()?.phone" type="tel" inputmode="numeric" name="phone" id="phone" minlength="4" maxlength="20" placeholder="Phone" ngModel required>
+                        <input #phone="ngModel" [ngModel]="contactService.activeContact()?.phone" type="tel" inputmode="numeric" name="phone" id="phone" minlength="4" maxlength="20" placeholder="Phone" ngModel required>
                         <img src="icon/phone.svg" alt="phone">
                     </div>
                 </div>
                 <div class="btn-container">
-                    @if (contactService.editContact()) {
+                    @if (contactService.activeContact()) {
                         <button (click)="deleteContact()" class="btn-2-sec" type="button">
                             <span>Delete</span>
                         </button>
