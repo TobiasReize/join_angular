@@ -64,9 +64,9 @@ export class ContactComponent implements OnInit {
   }
 
 
-  deleteContact(id: string | undefined) {
+  async deleteContact(id: string | undefined) {
     if (id) {
-      this.firebaseService.deleteDoc('contacts', id);
+      await this.firebaseService.deleteContact(id);
       this.contactService.resetActiveContact();
       this.toastMsgService.showToastMsg('Contact deleted');
       setTimeout(() => {

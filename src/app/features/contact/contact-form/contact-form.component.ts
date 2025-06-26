@@ -40,10 +40,10 @@ export class ContactFormComponent {
   }
 
 
-  deleteContact() {
+  async deleteContact() {
     const id = this.contactService.activeContact()?.id;
     if (id) {
-      this.firebaseService.deleteDoc('contacts', id);
+      await this.firebaseService.deleteContact(id);
       this.closeForm();
       this.toastMsgService.showToastMsg('Contact deleted');
       setTimeout(() => {

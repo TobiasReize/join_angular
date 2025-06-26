@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, setDoc, updateDoc, writeBatch } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, query, setDoc, updateDoc, where, writeBatch } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +91,22 @@ export class FirebaseService {
     const taskRef = this.getDocRef('tasks', taskId);
     batch.delete(taskRef);
     await batch.commit();
+  }
+
+
+  async deleteContact(contactId: string) {
+    const tasksCol = this.getCollectionRef('tasks');
+    const q = query(tasksCol, where('contacts', 'array-contains', contactId));
+    const batch = writeBatch(this.firestore);
+    const taskQuery = await getDocs(q);
+
+    taskQuery.forEach(doc => {
+      const taskRef = this.getDocRef('tasks', doc.id);
+      const updatedContactIds = doc.data()['contacts'].filter((id: string) => id !== contactId);
+      batch.update(taskRef, {contacts: updatedContactIds});
+    });
+    await batch.commit();
+    await this.deleteDoc('contacts', contactId);
   }
 
 }
