@@ -118,6 +118,23 @@ app-header {
     gap: 30px;
 }
 
+.headline-title-container {
+    @extend .dF-jc-sb;
+
+    > img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+
+        &:active {
+            scale: 1.1;
+            background-color: color.$icon-hover-gray;
+        }
+    }
+}
+
 .headline-separator {
     width: 3px;
     height: 59px;
@@ -261,6 +278,10 @@ app-header {
     }
 }
 
+.d-Flex {
+    display: flex !important;
+}
+
 // -------------------------- Responsive Design --------------------------- \\
 @media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
     .contact-list-section {
@@ -366,11 +387,20 @@ app-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+        width: 100%;
         background-image: linear-gradient(color.$hover-light-blue);
         background-position: bottom left;
         background-size: 90px 3px;
         background-repeat: no-repeat;
         padding-bottom: 16px;
+    }
+
+    .headline-title-container {
+        width: 100%;
+
+        > img {
+            display: block;
+        }
     }
 
     h5 {
@@ -379,6 +409,11 @@ app-header {
 
     .headline-separator {
         display: none;
+    }
+
+    .fly-in-animation {
+        transform: unset;
+        animation: unset;
     }
 
     .selected-contact-header {

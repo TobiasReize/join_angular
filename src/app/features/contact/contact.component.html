@@ -30,9 +30,12 @@
             </div>
         </section>
 
-        <section class="single-contact-section">
+        <section #singleContactSection class="single-contact-section">
             <div class="headline-container">
-                <h3>Contacts</h3>
+                <div class="headline-title-container">
+                    <h3>Contacts</h3>
+                    <img (click)="goBack()" class="arrow_back" src="icon/arrow_back.svg" alt="arrow_back">
+                </div>
                 <div class="headline-separator"></div>
                 <h5>Better with a team</h5>
             </div>

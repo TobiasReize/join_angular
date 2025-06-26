@@ -1,4 +1,4 @@
-import { Component, computed, HostListener, inject, OnInit } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
@@ -26,6 +26,8 @@ export class ContactComponent implements OnInit {
   contactSelected: boolean = false;
   moreOverlayVisible: boolean = false;
   moreOptionsClosed: boolean = false;
+  @ViewChild('singleContactSection') singleContactSection!: ElementRef;
+
   initialLetters = computed(() => {
     const result: string[] = [];
     this.contactService.allContacts().map(contact => contact.name.charAt(0).toUpperCase()).sort().forEach(letter => {
@@ -50,11 +52,17 @@ export class ContactComponent implements OnInit {
 
 
   selectContact(contact: Contact) {
-    this.contactSelected = false;
-    this.contactService.setActiveContact(contact);
-    setTimeout(() => {
+    if (window.innerWidth <= 750) {
       this.contactSelected = true;
-    }, 0);
+      this.contactService.setActiveContact(contact);
+      this.singleContactSection.nativeElement.classList.add('d-Flex');
+    } else {
+      this.contactSelected = false;
+      this.contactService.setActiveContact(contact);
+      setTimeout(() => {
+        this.contactSelected = true;
+      }, 0);
+    }
   }
 
 
@@ -81,6 +89,12 @@ export class ContactComponent implements OnInit {
         this.toastMsgService.resetToastMsg();
       }, 2000);
     }
+  }
+
+
+  goBack() {
+    this.contactService.resetActiveContact();
+    this.singleContactSection.nativeElement.classList.remove('d-Flex');
   }
 
 
