@@ -1,7 +1,6 @@
 import { Component, HostListener, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../../models/task.class';
-import { Contact } from '../../../models/contact.class';
 import { ContactService } from '../../../services/contact-service/contact.service';
 import { FirebaseService } from '../../../services/firebase-service/firebase.service';
 
@@ -15,7 +14,7 @@ import { FirebaseService } from '../../../services/firebase-service/firebase.ser
 export class CardComponent {
 
   contactService = inject(ContactService);
-  firebaseService = inject(FirebaseService);
+  private firebaseService = inject(FirebaseService);
   @Input() task!: Task;
   @Input() column!: 'To do' | 'In progress' | 'Await feedback' | 'Done';
   columns = ['To do', 'In progress', 'Await feedback', 'Done'];
@@ -64,15 +63,6 @@ export class CardComponent {
   // Hilfsfunktionen:
   getSubtasksDone(task: Task): number {
     return task.subtasks.filter(subtask => subtask.status === 'done').length;
-  }
-
-
-  getInitials(contact: Contact | undefined): string {
-    if (contact) {
-      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
-    } else {
-      return '';
-    }
   }
 
 }

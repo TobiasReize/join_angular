@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactService } from '../../../services/contact-service/contact.service';
-import { Contact } from '../../../models/contact.class';
 import { FirebaseService } from '../../../services/firebase-service/firebase.service';
 import { ToastMsgService } from '../../../services/toast-msg-service/toast-msg.service';
 
@@ -69,15 +68,6 @@ export class ContactFormComponent {
 
 
   // Hilfsfunktionen:
-  getInitials(contact: Contact | undefined): string {
-    if (contact) {
-      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
-    } else {
-      return '';
-    }
-  }
-
-
   getRandomColor(): string {
     const letters = '0123456789ABCDEF';
     let color = '#';

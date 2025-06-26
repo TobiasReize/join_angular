@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user-service/user.service';
+import { ContactService } from '../../services/contact-service/contact.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ import { UserService } from '../../services/user-service/user.service';
 export class HeaderComponent {
 
   userService = inject(UserService);
-  router = inject(Router);
+  private router = inject(Router);
+  contactService = inject(ContactService);
   @Input() type: string = '';
   overlayVisible: boolean = false;
 
@@ -32,18 +34,6 @@ export class HeaderComponent {
   async logout() {
     await this.userService.signOutUser();
     this.router.navigateByUrl('');
-  }
-
-
-  // Hilfsfunktionen:
-  getInitials(name: string | undefined) {
-    if (name) {
-      const words = name.split(' ');
-      const initials = words.map(word => word.charAt(0).toUpperCase()).join('');
-      return initials;
-    } else {
-      return '';
-    }
   }
 
 }

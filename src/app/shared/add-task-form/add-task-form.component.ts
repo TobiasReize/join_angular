@@ -13,7 +13,7 @@ import { Contact } from '../../models/contact.class';
 })
 export class AddTaskFormComponent implements OnInit {
 
-  private contactService = inject(ContactService);
+  contactService = inject(ContactService);
   minDate: string = '';
   selectedPriority: 'low' | 'medium' | 'urgent' = 'medium';
   selectedCategory: string = '';
@@ -162,14 +162,6 @@ export class AddTaskFormComponent implements OnInit {
       console.log('Form invalid!!!');
       console.log('addTaskForm: ', addTaskForm);
     }
-  }
-
-
-  // Hilfsfunktionen:
-  getInitials(name: string) {
-    const words = name.split(' ');
-    const initials = words.map(word => word.charAt(0).toUpperCase()).join('');
-    return initials;
   }
 
 }

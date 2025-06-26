@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
@@ -77,15 +77,6 @@ export class ContactComponent implements OnInit {
 
 
   // Hilfsfunktionen:
-  getInitials(contact: Contact | undefined): string {
-    if (contact) {
-      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).slice(0, 2).join('');
-    } else {
-      return '';
-    }
-  }
-
-
   getFilteredContacts(letter: string) {
     return this.contactService.allContacts().filter(contact => contact.name.toUpperCase().startsWith(letter));
   }

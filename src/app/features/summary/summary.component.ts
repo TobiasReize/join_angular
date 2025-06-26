@@ -15,7 +15,7 @@ import { UserService } from '../../services/user-service/user.service';
 })
 export class SummaryComponent implements OnInit {
 
-  taskService = inject(TaskService);
+  private taskService = inject(TaskService);
   userService = inject(UserService);
   greetingVisible: boolean = true;
   daytime = signal<string>('');

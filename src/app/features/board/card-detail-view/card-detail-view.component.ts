@@ -18,7 +18,7 @@ export class CardDetailViewComponent implements OnInit {
 
   taskService = inject(TaskService);
   contactService = inject(ContactService);
-  firebaseService = inject(FirebaseService);
+  private firebaseService = inject(FirebaseService);
   activeTask: Task = new Task();
   contactsVisible: boolean = false;
   taskClosed: boolean = false;
@@ -183,15 +183,6 @@ export class CardDetailViewComponent implements OnInit {
 
 
   // Hilfsfunktionen:
-  getInitials(contact: Contact | undefined): string {
-    if (contact) {
-      return contact.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
-    } else {
-      return '';
-    }
-  }
-
-
   firstLetterUppercase(word: string | undefined): string {
     if (word) {
       return word.charAt(0).toUpperCase() + word.slice(1);

@@ -16,7 +16,7 @@
         <span class="header-title">Kanban Project Management Tool</span>
         <div class="help-container">
             <img class="icon-help" src="icon/help.svg" alt="help">
-            <div (click)="toggleOverlay($event)" class="initials">{{ getInitials(userService.currentUser()?.name) }}</div>
+            <div (click)="toggleOverlay($event)" class="initials">{{ contactService.getInitials(userService.currentUser()?.name) }}</div>
 
             @if (overlayVisible) {
                 <div class="overlay">

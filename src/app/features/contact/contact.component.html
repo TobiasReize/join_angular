@@ -16,7 +16,7 @@
 
                     @for (contact of getFilteredContacts(letter); track $index) {
                         <div (click)="selectContact(contact)" class="contact-container" [ngClass]="{'selected-contact': contactService.activeContact() === contact}">
-                            <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact) }}</div>
+                            <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ contactService.getInitials(contact.name) }}</div>
                             <div class="name-email-container">
                                 <span class="black-color">{{ contact.name }}</span>
                                 <span class="contact-email">{{ contact.email}}</span>
@@ -37,7 +37,7 @@
             @if (contactSelected && contactService.activeContact()) {
                 <div class="selected-contact-container fly-in-animation">
                     <div class="selected-contact-header">
-                        <div class="big-initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ getInitials(contactService.activeContact()) }}</div>
+                        <div class="big-initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ contactService.getInitials(contactService.activeContact()?.name) }}</div>
                         <div class="dF-column-fs gap-8">
                             <h4 class="black-color">{{ contactService.activeContact()?.name }}</h4>
                             <div class="dF-row-cc gap-16">

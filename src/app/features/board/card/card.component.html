@@ -39,7 +39,7 @@
             <div class="contacts-container">
                 @for (contactId of task.contacts; track $index) {
                     @if ($index < 4) {
-                        <div class="card-contact" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
+                        <div class="card-contact" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ contactService.getInitials(contactService.getContactFromId(contactId)?.name) }}</div>
                     }
                 }
                 @if (task.contacts.length > 4) {

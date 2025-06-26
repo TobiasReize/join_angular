@@ -61,7 +61,7 @@
                     <div class="selected-contacts-container">
                         @for (contact of selectedContacts; track $index) {
                             @if ($index < 5) {
-                                <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact.name) }}</div>
+                                <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ contactService.getInitials(contact.name) }}</div>
                             }
                         }
                         @if (selectedContacts.length > 5) {
@@ -72,7 +72,7 @@
                 <div (click)="$event.stopPropagation()" class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                     @for (contact of filteredContacts(); track contact) {
                         <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact)}">
-                            <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact.name) }}</div>
+                            <div class="initial-style" [ngStyle]="{'background-color': contact.color}">{{ contactService.getInitials(contact.name) }}</div>
                             <div class="contact-name">{{ contact.name }}</div>
                             @if (selectedContacts.includes(contact)) {
                                 <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">

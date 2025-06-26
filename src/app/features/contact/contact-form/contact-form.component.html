@@ -10,7 +10,7 @@
     </div>
     <div class="right-side">
         @if (contactService.activeContact()) {
-            <div class="initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ getInitials(contactService.activeContact()) }}</div>
+            <div class="initials" [ngStyle]="{'background-color': contactService.activeContact()?.color}">{{ contactService.getInitials(contactService.activeContact()?.name) }}</div>
         } @else {
             <div class="person-icon">
                 <img src="icon/person_white.svg" alt="person">

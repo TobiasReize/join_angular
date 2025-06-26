@@ -15,9 +15,9 @@ import { UserService } from './services/user-service/user.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'join_angular';
 
-  taskService = inject(TaskService);
-  contactService = inject(ContactService);
-  userService = inject(UserService);
+  private taskService = inject(TaskService);
+  private contactService = inject(ContactService);
+  private userService = inject(UserService);
   unsubTaskCol!: Unsubscribe;
   unsubContactCol!: Unsubscribe;
   unsubUserCol!: Unsubscribe;

@@ -21,7 +21,7 @@
                 <div class="contact-overflow-wrapper">
                     @for (contactId of activeTask.contacts; track $index) {
                         <div class="active-task-contact">
-                            <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ getInitials(contactService.getContactFromId(contactId)) }}</div>
+                            <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ contactService.getInitials(contactService.getContactFromId(contactId)?.name) }}</div>
                             <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
                         </div>
                     }
@@ -128,7 +128,7 @@
                     <div class="selected-contacts-container">
                         @for (contactID of selectedContacts; track $index) {
                             @if ($index < 5) {
-                                <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactID)?.color}">{{ getInitials(contactService.getContactFromId(contactID)) }}</div>
+                                <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactID)?.color}">{{ contactService.getInitials(contactService.getContactFromId(contactID)?.name) }}</div>
                             }
                         }
                         @if (selectedContacts.length > 5) {
@@ -139,7 +139,7 @@
                 <div (click)="$event.stopPropagation()" class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
                     @for (contact of filteredContacts(); track contact) {
                         <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact.id)}">
-                            <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ getInitials(contact) }}</div>
+                            <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ contactService.getInitials(contact.name) }}</div>
                             <div class="contact-name">{{ contact.name }}</div>
                             @if (selectedContacts.includes(contact.id)) {
                                 <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">

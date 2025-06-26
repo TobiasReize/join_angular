@@ -50,8 +50,18 @@ export class ContactService {
   }
 
 
+  // Hilfsfunktionen:
   getContactFromId(id: string) {
     return this.allContacts().find(contact => contact.id === id);
+  }
+
+
+  getInitials(name: string | undefined): string {
+    if (name) {
+      return name.split(' ').map(word => word.charAt(0).toUpperCase()).slice(0, 2).join('');
+    } else {
+      return '';
+    }
   }
 
 }
