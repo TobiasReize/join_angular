@@ -21,6 +21,7 @@ app-header {
     padding: 0;
     gap: 0;
     flex-direction: row;
+    position: relative;
 }
 
 .contact-list-section {
@@ -31,10 +32,6 @@ app-header {
     padding: 22.5px 52px 8px 52px;
     background-color: white;
     filter: drop-shadow(4px 0 6px rgba(0, 0, 0, 0.08));
-}
-
-.btn-3 {
-    padding: 12px 64px;
 }
 
 .contact-list {
@@ -149,7 +146,12 @@ app-header {
     color: white;
 }
 
-.active-contact-icon-container {
+.header-icon-container {
+    @extend .dF-row-cc;
+    gap: 16px;
+}
+
+.selected-contact-icon-container {
     @extend .dF-row-cc;
     gap: 8px;
 
@@ -177,5 +179,261 @@ app-header {
             color: color.$hover-light-blue;
             font-weight: 700;
         }
+    }
+}
+
+.contact-information {
+    color: black;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.fab-mobile {
+    @extend .dF-row-cc;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: color.$main-color;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    cursor: pointer;
+    transition: all 100ms ease-in;
+    display: none;
+
+    &:active {
+        background-color: color.$hover-light-blue;
+    }
+
+    > img {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.more-overlay{
+    @extend .dF-column-fs;
+    padding: 10px;
+    width: 116px;
+    border-radius: 20px 20px 0 20px;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    z-index: 5;
+}
+
+.more-icon-container {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 100ms ease-in;
+    cursor: pointer;
+
+    > svg {
+        width: 24px;
+        height: 24px;
+
+        path {
+            fill: color.$main-color;
+        }
+    }
+
+    > span {
+        @extend .font-style-9;
+    }
+
+    &:active {
+        background-color: color.$icon-hover-gray;
+
+        > svg path {
+            fill: color.$hover-light-blue;
+        }
+
+        > span {
+            color: color.$hover-light-blue;
+            font-weight: 700;
+        }
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .contact-list-section {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    
+    .single-contact-section {
+        padding: 48px 16px 16px 48px;
+    }
+}
+
+@media(max-width: 1300px) {
+    .contact-list-section {
+        padding-left: 24px;
+        padding-right: 24px;
+        width: 350px;
+    }
+    
+    .single-contact-section {
+        padding-left: 24px;
+    }
+}
+
+@media(max-width: 1100px) {
+    .headline-container {
+        gap: 16px;
+    }
+
+    h3 {
+        font-size: 47px;
+    }
+
+    .selected-contact-header {
+        gap: 24px;
+    }
+
+    h4 {
+        font-size: 32px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .contact-list-section {
+        padding: 16px 16px 8px 16px;
+    }
+    
+    .single-contact-section {
+        padding: 16px;
+    }
+}
+
+@media(max-width: 850px) {
+    .contact-list-section {
+        width: 300px;
+    }
+
+    .contact-container {
+        gap: 16px;
+    }
+
+    .headline-container {
+        gap: 12px;
+    }
+
+    h5 {
+        font-size: 22px;
+    }
+}
+
+@media(max-width: 750px) {
+    .contact-list-section {
+        width: 100%;
+        padding: 24px 24px 8px 24px;
+        position: relative;
+    }
+
+    .btn-3 {
+        display: none;
+    }
+
+    .contact-list {
+        padding-right: 16px;
+    }
+
+    .contact-container {
+        gap: 35px;
+    }
+    
+    .single-contact-section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: color.$bg-gray;
+        padding: 24px;
+        gap: 48px;
+        display: none;
+    }
+
+    .headline-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        background-image: linear-gradient(color.$hover-light-blue);
+        background-position: bottom left;
+        background-size: 90px 3px;
+        background-repeat: no-repeat;
+        padding-bottom: 16px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    .headline-separator {
+        display: none;
+    }
+
+    .selected-contact-header {
+        gap: 20px;
+    }
+
+    .big-initials {
+        width: 80px;
+        height: 80px;
+        font-size: 27px;
+    }
+
+    h4 {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .header-icon-container {
+        display: none;
+    }
+
+    .contact-information {
+        margin: 0;
+    }
+
+    .fab-mobile {
+        display: flex;
+    }
+}
+
+@media(max-width: 450px) {
+    .contact-list-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .contact-list {
+        padding-right: 8px;
+    }
+
+    .contact-container {
+        gap: 16px;
+    }
+
+    .single-contact-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .big-initials {
+        width: 70px;
+        height: 70px;
+    }
+
+    h4 {
+        font-size: 32px;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from '../../shared/sidenav/sidenav.component';
 import { HeaderComponent } from '../../shared/header/header.component';
@@ -24,6 +24,8 @@ export class ContactComponent implements OnInit {
   toastMsgService = inject(ToastMsgService);
   contactService = inject(ContactService);
   contactSelected: boolean = false;
+  moreOverlayVisible: boolean = false;
+  moreOptionsClosed: boolean = false;
   initialLetters = computed(() => {
     const result: string[] = [];
     this.contactService.allContacts().map(contact => contact.name.charAt(0).toUpperCase()).sort().forEach(letter => {
@@ -33,6 +35,12 @@ export class ContactComponent implements OnInit {
     });
     return result;
   });
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick() {
+    this.closeMoreOptions();
+  }
 
 
   ngOnInit(): void {
@@ -73,6 +81,21 @@ export class ContactComponent implements OnInit {
         this.toastMsgService.resetToastMsg();
       }, 2000);
     }
+  }
+
+
+  showMoreOptions(event: Event) {
+    this.moreOptionsClosed = false;
+    event.stopPropagation();
+    this.moreOverlayVisible = true;
+  }
+
+
+  closeMoreOptions() {
+    this.moreOptionsClosed = true;
+    setTimeout(() => {
+      this.moreOverlayVisible = false;
+    }, 200);
   }
 
 
