@@ -8,7 +8,7 @@ import { Contact } from '../../models/contact.class';
 })
 export class ContactService {
 
-  firebaseService = inject(FirebaseService);
+  private firebaseService = inject(FirebaseService);
   
   private allContactsSignal = signal<Contact[]>([]);
   readonly allContacts = this.allContactsSignal.asReadonly();

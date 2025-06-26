@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactService } from '../../../services/contact-service/contact.service';
 import { FirebaseService } from '../../../services/firebase-service/firebase.service';
@@ -18,6 +18,12 @@ export class ContactFormComponent {
   private firebaseService = inject(FirebaseService);
   private toastMsgService = inject(ToastMsgService);
   formClosed: boolean = false;
+
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick() {
+    this.closeForm();
+  }
 
 
   closeForm() {

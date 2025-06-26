@@ -1,4 +1,4 @@
-<main class="content" [ngClass]="formClosed ? 'fly-out-animation' : 'fly-in-animation'">
+<main (click)="$event.stopPropagation()" class="content" [ngClass]="formClosed ? 'fly-out-animation' : 'fly-in-animation'">
     <div class="left-side">
         <div class="left-side-content">
             <img class="logo" src="icon/logo_white.svg" alt="logo">
@@ -29,7 +29,7 @@
                         <img src="icon/email.svg" alt="email">
                     </div>
                     <div class="icon-input-style">
-                        <input #phone="ngModel" [ngModel]="contactService.activeContact()?.phone" type="tel" inputmode="numeric" name="phone" id="phone" minlength="4" maxlength="20" placeholder="Phone" ngModel required>
+                        <input #phone="ngModel" [ngModel]="contactService.activeContact()?.phone" type="tel" inputmode="numeric" name="phone" id="phone" minlength="3" maxlength="20" pattern="^\+?[0-9]+$" placeholder="Phone" ngModel required>
                         <img src="icon/phone.svg" alt="phone">
                     </div>
                 </div>

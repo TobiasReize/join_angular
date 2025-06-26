@@ -8,7 +8,7 @@ import { Task } from '../../models/task.class';
 })
 export class TaskService {
 
-  firebaseService = inject(FirebaseService);
+  private firebaseService = inject(FirebaseService);
 
   private activeTaskSignal = signal<Task | undefined>(undefined);
   readonly activeTask = this.activeTaskSignal.asReadonly();
