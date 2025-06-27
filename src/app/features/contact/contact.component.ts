@@ -87,6 +87,9 @@ export class ContactComponent implements OnInit {
       this.toastMsgService.showToastMsg('Contact deleted');
       setTimeout(() => {
         this.toastMsgService.resetToastMsg();
+        if (window.innerWidth <= 750) {
+          this.singleContactSection.nativeElement.classList.remove('d-Flex');
+        }
       }, 2000);
     }
   }
@@ -110,6 +113,13 @@ export class ContactComponent implements OnInit {
     setTimeout(() => {
       this.moreOverlayVisible = false;
     }, 200);
+  }
+
+
+  hideSingleContactSection(isTrue: boolean) {
+    if (isTrue) {
+      this.singleContactSection.nativeElement.classList.remove('d-Flex');
+    }
   }
 
 

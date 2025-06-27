@@ -119,7 +119,7 @@
 </div>
 
 @if (contactService.contactFormActive()) {
-    <app-contact-form></app-contact-form>
+    <app-contact-form (hideSingleContactSection)="hideSingleContactSection($event)"></app-contact-form>
 }
 
 @if (toastMsgService.toastState() === 'active') {

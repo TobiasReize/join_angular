@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactService } from '../../../services/contact-service/contact.service';
 import { FirebaseService } from '../../../services/firebase-service/firebase.service';
@@ -18,6 +18,7 @@ export class ContactFormComponent {
   private firebaseService = inject(FirebaseService);
   private toastMsgService = inject(ToastMsgService);
   formClosed: boolean = false;
+  @Output() hideSingleContactSection = new EventEmitter<boolean>();
 
 
   @HostListener('document:click', ['$event'])
@@ -43,11 +44,15 @@ export class ContactFormComponent {
     const id = this.contactService.activeContact()?.id;
     if (id) {
       await this.firebaseService.deleteContact(id);
+      this.contactService.resetActiveContact();
       this.closeForm();
       this.toastMsgService.showToastMsg('Contact deleted');
       setTimeout(() => {
         this.toastMsgService.resetToastMsg();
       }, 2000);
+      if (window.innerWidth <= 750) {
+        this.hideSingleContactSection.emit(true);
+      }
     }
   }
 
@@ -58,6 +63,10 @@ export class ContactFormComponent {
       let data = contactForm.value;
       if (currentContact) {
         this.firebaseService.updateDocData('contacts', currentContact.id, data);
+        this.contactService.resetActiveContact();
+        if (window.innerWidth <= 750) {
+          this.hideSingleContactSection.emit(true);
+        }
       } else {
         data['color'] = this.getRandomColor();
         this.firebaseService.addDoc('contacts', data);
