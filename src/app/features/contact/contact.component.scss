@@ -7,6 +7,7 @@
 :host {
     @extend .host;
     position: relative;
+    overflow: hidden;
 }
 
 app-header {
@@ -411,7 +412,7 @@ app-header {
         display: none;
     }
 
-    .fly-in-animation {
+    .selected-contact-container {
         transform: unset;
         animation: unset;
     }

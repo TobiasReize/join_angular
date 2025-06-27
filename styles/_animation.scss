@@ -59,6 +59,16 @@
     }
 }
 
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(+100vh);
+    }
+}
+
 @media(min-width: 1952px) {    // Intro: für Bildschirmbreite > 1952px
     @keyframes moveTopLeft {
         from {

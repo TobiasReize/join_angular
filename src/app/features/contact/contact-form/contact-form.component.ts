@@ -27,7 +27,6 @@ export class ContactFormComponent {
 
 
   closeForm() {
-    this.contactService.resetActiveContact();
     this.formClosed = true;
     setTimeout(() => {
       this.contactService.setContactForm(false);

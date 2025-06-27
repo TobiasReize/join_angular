@@ -25,7 +25,7 @@
                     }
                 }
             </div>
-            <div class="fab-mobile">
+            <div (click)="addContact()" class="fab-mobile">
                 <img src="icon/contact_add.svg" alt="contact_add">
             </div>
         </section>
@@ -90,7 +90,7 @@
 
             @if (moreOverlayVisible) {
                 <div class="more-overlay" [ngClass]="moreOptionsClosed ? 'fly-out-animation' : 'fly-in-animation'">
-                    <div class="more-icon-container">
+                    <div (click)="editContact(contactService.activeContact())" class="more-icon-container">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                             <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
@@ -101,7 +101,7 @@
                         </svg>
                         <span>Edit</span>
                     </div>
-                    <div class="more-icon-container">
+                    <div (click)="deleteContact(contactService.activeContact()?.id)" class="more-icon-container">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
                             <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
                                 <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
