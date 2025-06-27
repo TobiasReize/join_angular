@@ -98,6 +98,10 @@ h5 {
         cursor: pointer;
         background-color: color.$icon-hover-gray;
     }
+
+    path {
+        fill: color.$main-color;
+    }
 }
 
 .contact-form {
@@ -115,4 +119,152 @@ h5 {
 .btn-container {
     @extend .dF-jc-fs;
     gap: 24px;
+
+    > * {
+        height: 100%;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1250px) {
+    .content {
+        height: 550px;
+    }
+
+    .left-side {
+        width: 400px;
+    }
+
+    .right-side {
+        padding-left: 16px;
+        padding-right: 16px;
+        width: 540px;
+        gap: 30px;
+    }
+
+    .close-icon {
+        margin-bottom: 88px;
+    }
+
+    .contact-form {
+        gap: 32px;
+    }
+}
+
+@media(max-width: 960px) {
+    .left-side {
+        width: 310px;
+        padding: 0 16px;
+    }
+
+    h3 {
+        font-size: 47px;
+    }
+
+    h5 {
+        font-size: 22px;
+    }
+
+    .right-side {
+        gap: 16px;
+        width: 430px;
+    }
+
+    .btn-cancel {
+        display: none;
+    }
+}
+
+@media(max-width: 750px) {
+    :host {
+        padding: 24px;
+    }
+
+    .content {
+        flex-direction: column;
+        width: 100%;
+        height: unset;
+        position: relative;
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.10));
+    }
+
+    .left-side {
+        width: 100%;
+        height: 352px;
+        border-radius: 30px 30px 0 0;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .right-side {
+        width: 100%;
+        height: 408px;
+        padding: 0 16px;
+        border-radius: 0 0 30px 30px;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 32px;
+    }
+
+    .person-icon, .initials {
+        margin-top: -60px;
+    }
+
+    .form-container {
+        width: 80%;
+        height: unset;
+        flex: unset;
+        align-items: center;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+        margin: 0;
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: color.$hover-light-blue;
+        }
+
+        path {
+            fill: white;
+        }
+    }
+
+    .contact-form {
+        align-items: center;
+    }
+
+    .input-wrapper {
+        gap: 15px;
+        align-items: center;
+    }
+
+    .btn-container {
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media(max-width: 450px) {
+    :host {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .left-side, .right-side {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .form-container {
+        width: 100%;
+    }
 }
