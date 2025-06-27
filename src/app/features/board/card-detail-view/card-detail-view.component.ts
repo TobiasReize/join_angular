@@ -37,6 +37,7 @@ export class CardDetailViewComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick() {
     this.contactsVisible = false;
+    this.closeTask();
   }
 
 
@@ -192,8 +193,9 @@ export class CardDetailViewComponent implements OnInit {
   }
 
 
-  stopPropagation(event: Event) {
+  closeContactsOverlay(event: Event) {
     event.stopPropagation();
+    this.contactsVisible = false;
   }
 
 }

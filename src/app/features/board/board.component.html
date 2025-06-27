@@ -105,8 +105,8 @@
 }
 
 @if (addTaskVisible) {
-    <div class="add-task-overlay">
-        <div class="add-task-content" [ngClass]="addTaskClosed ? 'fly-out-animation' : 'fly-in-animation'">
+    <div (click)="closeAddTaskOverlay()" class="add-task-overlay">
+        <div (click)="$event.stopPropagation()" class="add-task-content" [ngClass]="addTaskClosed ? 'fly-out-animation' : 'fly-in-animation'">
             <div class="add-task-headline-container">
                 <h3>Add Task</h3>
                 <img (click)="closeAddTaskOverlay()" class="close-icon" src="icon/close.svg" alt="close">

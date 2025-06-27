@@ -164,4 +164,10 @@ export class AddTaskFormComponent implements OnInit {
     }
   }
 
+
+  closeOverlays() {
+    this.categoriesVisible = false;
+    this.contactsVisible = false;
+  }
+
 }

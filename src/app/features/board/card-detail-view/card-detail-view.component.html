@@ -1,5 +1,5 @@
 @if (!taskService.editTask()) {
-    <section class="active-task-content" [ngClass]="taskClosed ? 'fly-out-animation' : 'fly-in-animation'">
+    <section (click)="$event.stopPropagation()" class="active-task-content" [ngClass]="taskClosed ? 'fly-out-animation' : 'fly-in-animation'">
         <div class="dF-jc-sb">
             <span class="active-task-category" [ngClass]="{'cat-user-story': activeTask.category === 'User Story', 'cat-technical-task': activeTask.category === 'Technical Task', 'cat-bug-fix': activeTask.category === 'Bug Fix'}">{{ activeTask.category }}</span>
             <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
@@ -67,7 +67,7 @@
     </section>
 
 } @else if (taskService.editTask()) {
-    <form (submit)="onSubmit(editTaskForm)" #editTaskForm="ngForm" class="active-task-content" [ngClass]="{'fly-out-animation': taskClosed}">
+    <form (submit)="onSubmit(editTaskForm)" (click)="closeContactsOverlay($event)" #editTaskForm="ngForm" class="active-task-content" [ngClass]="{'fly-out-animation': taskClosed}">
         <div class="dF-jc-fe">
             <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
         </div>
