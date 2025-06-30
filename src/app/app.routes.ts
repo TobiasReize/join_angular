@@ -5,6 +5,7 @@ import { SummaryComponent } from './features/summary/summary.component';
 import { AddTaskComponent } from './features/add-task/add-task.component';
 import { BoardComponent } from './features/board/board.component';
 import { ContactComponent } from './features/contact/contact.component';
+import { HelpComponent } from './features/help/help.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -13,4 +14,5 @@ export const routes: Routes = [
     { path: 'addtask', component: AddTaskComponent },
     { path: 'board', component: BoardComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'help', component: HelpComponent },
 ];

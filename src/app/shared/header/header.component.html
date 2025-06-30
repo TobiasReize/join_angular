@@ -15,12 +15,12 @@
         <img class="mobile-logo" src="icon/logo_dark.svg" alt="logo">
         <span class="header-title">Kanban Project Management Tool</span>
         <div class="help-container">
-            <img class="icon-help" src="icon/help.svg" alt="help">
+            <img routerLink="/help" class="icon-help" src="icon/help.svg" alt="help">
             <div (click)="toggleOverlay($event)" class="initials">{{ contactService.getInitials(userService.currentUser()?.name) }}</div>
 
             @if (overlayVisible) {
                 <div class="overlay">
-                    <span routerLink="">Help</span>
+                    <span routerLink="/help">Help</span>
                     <span routerLink="">Privacy policy</span>
                     <span routerLink="">Imprint</span>
                     <span (click)="logout()">Log out</span>
