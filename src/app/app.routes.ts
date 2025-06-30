@@ -7,6 +7,7 @@ import { BoardComponent } from './features/board/board.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { HelpComponent } from './features/help/help.component';
 import { ImprintComponent } from './features/imprint/imprint.component';
+import { PrivacyPolicyComponent } from './features/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -17,4 +18,5 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'help', component: HelpComponent },
     { path: 'imprint', component: ImprintComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];
