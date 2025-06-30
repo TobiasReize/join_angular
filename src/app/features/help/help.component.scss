@@ -5,7 +5,6 @@
 
 :host {
     @extend .host;
-    position: relative;
 }
 
 app-header {
@@ -27,7 +26,7 @@ app-header {
         border-radius: 50%;
         cursor: pointer;
 
-        &:hover {
+        &:hover, &:active {
             scale: 1.1;
             background-color: color.$icon-hover-gray;
         }
@@ -70,4 +69,21 @@ li {
 .enjoy-text {
     font-size: 30px;
     font-weight: 700;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media (max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .title-container, .text-section {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    li::marker {
+        font-size: 20px;
+    }
+
+    .enjoy-text {
+        font-size: 24px;
+    }
 }
