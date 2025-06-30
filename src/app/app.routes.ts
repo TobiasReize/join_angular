@@ -6,6 +6,7 @@ import { AddTaskComponent } from './features/add-task/add-task.component';
 import { BoardComponent } from './features/board/board.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { HelpComponent } from './features/help/help.component';
+import { ImprintComponent } from './features/imprint/imprint.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'help', component: HelpComponent },
+    { path: 'imprint', component: ImprintComponent },
 ];
