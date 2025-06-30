@@ -1,0 +1,73 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+    position: relative;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.title-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+    max-width: 1592px;
+    padding-right: 40px;
+
+    > img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            scale: 1.1;
+            background-color: color.$icon-hover-gray;
+        }
+    }
+}
+
+.text-section {
+    @extend .dF-column-fs;
+    width: 100%;
+    max-width: 1592px;
+    padding-right: 40px;
+}
+
+.blue-color {
+    color: color.$hover-light-blue;
+}
+
+h5, h6 {
+    font-weight: 700;
+}
+
+h5 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+h6 {
+    display: inline-block;
+}
+
+li {
+    margin-bottom: 16px;
+
+    &::marker {
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+.enjoy-text {
+    font-size: 30px;
+    font-weight: 700;
+}
