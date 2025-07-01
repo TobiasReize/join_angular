@@ -18,7 +18,12 @@ export class HelpComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userService.checkCredentials();
+    // this.userService.checkCredentials();
+    this.userService.currentUser();
+    const uid = sessionStorage.getItem('uid');
+    if (uid) {
+      this.loggedIn = true;
+    }
   }
 
 
