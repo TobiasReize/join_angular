@@ -1,6 +1,6 @@
-<app-sidenav route="privacyPolicy"></app-sidenav>
+<app-sidenav route="privacyPolicy" [loggedIn]="loggedIn"></app-sidenav>
 <div class="content-wrapper">
-    <app-header type="main"></app-header>
+    <app-header type="main" [loggedIn]="loggedIn"></app-header>
     <main class="main-content">
         <h3>Privacy Policy</h3>
 

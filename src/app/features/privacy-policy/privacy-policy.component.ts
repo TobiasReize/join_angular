@@ -13,10 +13,15 @@ import { UserService } from '../../services/user-service/user.service';
 export class PrivacyPolicyComponent implements OnInit {
 
   private userService = inject(UserService);
+  loggedIn: boolean = false;
 
 
   ngOnInit(): void {
-    this.userService.checkCredentials();
+    this.userService.currentUser();
+    const uid = sessionStorage.getItem('uid');
+    if (uid) {
+      this.loggedIn = true;
+    }
   }
 
 }

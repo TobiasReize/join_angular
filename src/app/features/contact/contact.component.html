@@ -1,6 +1,6 @@
-<app-sidenav route="contact"></app-sidenav>
+<app-sidenav route="contact" [loggedIn]="true"></app-sidenav>
 <div class="content-wrapper">
-    <app-header type="main"></app-header>
+    <app-header type="main" [loggedIn]="true"></app-header>
     <main class="main-content">
         <section class="contact-list-section">
             <button (click)="addContact()" class="btn-3 width-100" type="button">

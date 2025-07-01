@@ -1,6 +1,6 @@
-<app-sidenav route="addTask"></app-sidenav>
+<app-sidenav route="addTask" [loggedIn]="true"></app-sidenav>
 <div class="content-wrapper">
-    <app-header type="main"></app-header>
+    <app-header type="main" [loggedIn]="true"></app-header>
     <main class="main-content">
         <h3>Add Task</h3>
         <app-add-task-form (submitForm)="onSubmit($event)"></app-add-task-form>

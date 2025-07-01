@@ -16,6 +16,7 @@ export class HeaderComponent {
   private router = inject(Router);
   contactService = inject(ContactService);
   @Input() type: string = '';
+  @Input() loggedIn: boolean = false;
   overlayVisible: boolean = false;
 
 

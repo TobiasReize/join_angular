@@ -12,5 +12,6 @@ import { RouterLink } from '@angular/router';
 export class SidenavComponent {
 
   @Input() route: string = '';
+  @Input() loggedIn: boolean = false;
 
 }

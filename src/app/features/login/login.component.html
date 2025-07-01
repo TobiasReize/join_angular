@@ -25,8 +25,8 @@
         <p [ngStyle]="{'visibility': password.touched && password.invalid ? 'visible' : 'hidden'}" class="error-msg">Check your password. Please try again.</p>
     </div>
     <div class="btn-container">
-        <button [disabled]="email.invalid || password.invalid" class="btn-1-prim" type="submit">Log In</button>
-        <button (click)="guestLogin()" class="btn-1-sec" type="button">Guest Log In</button>
+        <button [disabled]="email.invalid || password.invalid" class="btn-1-prim" type="submit">Log in</button>
+        <button (click)="guestLogin()" class="btn-1-sec" type="button">Guest Log in</button>
     </div>
 </form>
 
