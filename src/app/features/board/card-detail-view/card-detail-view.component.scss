@@ -365,7 +365,7 @@
         line-height: 1;
     }
 
-    &:hover {
+    &:hover, &:active {
         background-color: color.$icon-hover-gray;
 
         > .edit-icon-container {

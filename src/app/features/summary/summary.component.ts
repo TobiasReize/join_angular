@@ -56,7 +56,7 @@ export class SummaryComponent implements OnInit {
   setUpcomingDeadline() {
     this.upcomingDeadline = computed(() => this.taskService.allTasks().reduce((min, task) => {
       return new Date(task.date) < new Date(min.date) ? task : min;
-    }));
+    }, new Task({date: '2100-01-01'})));
     this.deadlineDay = computed(() => new Date(this.upcomingDeadline().date).getDate());
     this.deadlineMonth = computed(() => new Date(this.upcomingDeadline().date).getMonth());
     this.deadlineYear = computed(() => new Date(this.upcomingDeadline().date).getFullYear());
