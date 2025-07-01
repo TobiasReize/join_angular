@@ -71,6 +71,11 @@ export class UserService {
   }
 
 
+  setCurrentUserUID(uid: string) {
+    this.currentUserUIDSignal.set(uid);
+  }
+
+
   checkCredentials() {
     const uid = sessionStorage.getItem('uid');
     if (uid) {

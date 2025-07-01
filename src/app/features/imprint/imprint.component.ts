@@ -17,9 +17,9 @@ export class ImprintComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userService.currentUser();
     const uid = sessionStorage.getItem('uid');
     if (uid) {
+      this.userService.setCurrentUserUID(uid);
       this.loggedIn = true;
     }
   }
