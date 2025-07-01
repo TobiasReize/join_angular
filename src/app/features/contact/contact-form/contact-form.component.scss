@@ -153,6 +153,10 @@ h5 {
 }
 
 @media(max-width: 960px) {
+    .content {
+        height: 500px;
+    }
+    
     .left-side {
         width: 310px;
         padding: 0 16px;
@@ -169,6 +173,10 @@ h5 {
     .right-side {
         gap: 16px;
         width: 430px;
+    }
+
+    .close-icon {
+        margin-bottom: auto;
     }
 
     .btn-cancel {
