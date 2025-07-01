@@ -32,14 +32,13 @@ export class UserService {
         users.push(data);
       });
       this.allUsersSignal.set([...users]);
-      console.log('allUsers: ', this.allUsers());
+      // console.log('allUsers: ', this.allUsers());
     });
   }
 
 
   async signOutUser() {
     sessionStorage.removeItem('uid');
-    sessionStorage.removeItem('email');
     await signOut(this.auth).catch((error) => {
         console.log('Error:', error);
     });

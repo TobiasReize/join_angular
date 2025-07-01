@@ -45,7 +45,7 @@ export class ContactService {
         contacts.push(data);
       });
       this.allContactsSignal.set([...contacts]);
-      console.log('allContacts: ', this.allContacts());
+      // console.log('allContacts: ', this.allContacts());
     });
   }
 

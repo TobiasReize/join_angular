@@ -18,7 +18,7 @@ export class SummaryComponent implements OnInit {
   private taskService = inject(TaskService);
   userService = inject(UserService);
   greetingVisible: boolean = true;
-  daytime = signal<string>('');
+  greeting = signal<string>('');
   tasksToDo: Signal<number> = signal<number>(0);
   tasksDone: Signal<number> = signal(0);
   tasksUrgent: Signal<number> = signal<number>(0);
@@ -54,7 +54,7 @@ export class SummaryComponent implements OnInit {
 
 
   setUpcomingDeadline() {
-    this.upcomingDeadline = computed(() => this.taskService.allTasks().reduce((min, task) => {
+    this.upcomingDeadline = computed(() => this.taskService.allTasks().filter(task => task.column !== 'Done').reduce((min, task) => {
       return new Date(task.date) < new Date(min.date) ? task : min;
     }, new Task({date: '2100-01-01'})));
     this.deadlineDay = computed(() => new Date(this.upcomingDeadline().date).getDate());
@@ -66,13 +66,13 @@ export class SummaryComponent implements OnInit {
   setDaytime() {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
-      return this.daytime.set('morning');
+      return this.greeting.set('Good morning');
     } else if (hour >= 12 && hour < 18) {
-      return this.daytime.set('day');
+      return this.greeting.set('Hello');
     } else if (hour >= 18) {
-      return this.daytime.set('evening');
+      return this.greeting.set('Good evening');
     } else {
-      return this.daytime.set('night');
+      return this.greeting.set('Good night');
     }
   }
 

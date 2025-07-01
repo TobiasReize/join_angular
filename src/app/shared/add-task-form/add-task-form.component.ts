@@ -160,7 +160,6 @@ export class AddTaskFormComponent implements OnInit {
       this.clearForm(addTaskForm);
     } else {
       console.log('Form invalid!!!');
-      console.log('addTaskForm: ', addTaskForm);
     }
   }
 

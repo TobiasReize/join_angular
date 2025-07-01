@@ -53,7 +53,7 @@ export class TaskService {
         tasks.push(data);
       });
       this.allTasksSignal.set([...tasks])
-      console.log('allTasks: ', this.allTasks());
+      // console.log('allTasks: ', this.allTasks());
     });
   }
 

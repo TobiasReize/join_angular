@@ -27,17 +27,19 @@
                     }
                 </div>
             </div>
-            <div class="dF-column-ai-fs">
-                <span class="m-btm-8">Subtasks:</span>
-                <div class="subtask-overflow-wrapper">
-                    @for (subtask of activeTask.subtasks; track $index) {
-                        <div class="active-task-subtask">
-                            <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
-                            <span class="black-color font-style-9">{{ subtask.title }}</span>
-                        </div>
-                    }
+            @if (activeTask.subtasks.length > 0) {
+                <div class="dF-column-ai-fs">
+                    <span class="m-btm-8">Subtasks:</span>
+                    <div class="subtask-overflow-wrapper">
+                        @for (subtask of activeTask.subtasks; track $index) {
+                            <div class="active-task-subtask">
+                                <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
+                                <span class="black-color font-style-9">{{ subtask.title }}</span>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
         <div class="active-task-button-container">
             <div (click)="deleteTask()" class="active-task-icon-container">

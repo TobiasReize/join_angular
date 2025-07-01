@@ -29,12 +29,14 @@
         </div>
         <span class="card-title m-btm-8">{{ task.title }}</span>
         <p class="card-description m-btm-24">{{ task.description }}</p>
-        <div class="card-subtasks-container m-btm-24">
-            <div class="progress-bar">
-                <div class="bar-of-progress" [ngStyle]="{'width': (getSubtasksDone(task) / task.subtasks.length * 100) + '%'}"></div>
+        @if (task.subtasks.length > 0) {
+            <div class="card-subtasks-container m-btm-24">
+                <div class="progress-bar">
+                    <div class="bar-of-progress" [ngStyle]="{'width': (getSubtasksDone(task) / task.subtasks.length * 100) + '%'}"></div>
+                </div>
+                <div class="subtask">{{ getSubtasksDone(task) }}/{{ task.subtasks.length }} Subtasks</div>
             </div>
-            <div class="subtask">{{ getSubtasksDone(task) }}/{{ task.subtasks.length }} Subtasks</div>
-        </div>
+        }
         <div class="card-contacts-prio-container">
             <div class="contacts-container">
                 @for (contactId of task.contacts; track $index) {

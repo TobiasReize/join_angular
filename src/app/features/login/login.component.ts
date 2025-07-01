@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
       .then(user => {
         if (user) {
           sessionStorage.setItem('uid', user.uid);
-          sessionStorage.setItem('email', user.email ?? '');
           this.router.navigateByUrl('summary');
         }
       });
@@ -76,7 +75,6 @@ export class LoginComponent implements OnInit {
       .then(user => {
         if (user) {
           sessionStorage.setItem('uid', user.uid);
-          sessionStorage.setItem('email', user.email ?? '');
           this.router.navigateByUrl('summary');
         }
       });
