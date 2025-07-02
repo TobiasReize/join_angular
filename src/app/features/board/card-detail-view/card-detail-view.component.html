@@ -1,0 +1,208 @@
+@if (!taskService.editTask()) {
+    <section (click)="$event.stopPropagation()" class="active-task-content" [ngClass]="taskClosed ? 'fly-out-animation' : 'fly-in-animation'">
+        <div class="dF-jc-sb">
+            <span class="active-task-category" [ngClass]="{'cat-user-story': activeTask.category === 'User Story', 'cat-technical-task': activeTask.category === 'Technical Task', 'cat-bug-fix': activeTask.category === 'Bug Fix'}">{{ activeTask.category }}</span>
+            <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
+        </div>
+        <div class="active-task-overflow-wrapper">
+            <h3>{{ activeTask.title }}</h3>
+            <span class="black-color">{{ activeTask.description }}</span>
+            <div class="dF-jc-fs">
+                <span>Due date:</span>
+                <span class="black-color m-left-25">{{ activeTask.date }}</span>
+            </div>
+            <div class="dF-jc-fs">
+                <span>Priority:</span>
+                <span class="black-color m-left-43">{{ firstLetterUppercase(activeTask.priority) }}</span>
+                <img class="prio-icon m-left-10" src="icon/{{ activeTask.priority }}.svg" alt="priority">
+            </div>
+            <div class="dF-column-ai-fs">
+                <span class="m-btm-8">Assigned to:</span>
+                <div class="contact-overflow-wrapper">
+                    @for (contactId of activeTask.contacts; track $index) {
+                        <div class="active-task-contact">
+                            <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactId)?.color}">{{ contactService.getInitials(contactService.getContactFromId(contactId)?.name) }}</div>
+                            <span class="black-color">{{ contactService.getContactFromId(contactId)?.name }}</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (activeTask.subtasks.length > 0) {
+                <div class="dF-column-ai-fs">
+                    <span class="m-btm-8">Subtasks:</span>
+                    <div class="subtask-overflow-wrapper">
+                        @for (subtask of activeTask.subtasks; track $index) {
+                            <div class="active-task-subtask">
+                                <img (click)="toggleCheckbox(subtask.id)" class="checkbox" [src]="subtask.status === 'open' ? 'icon/checkbox.svg' : 'icon/checkbox_checked.svg'" alt="checkbox">
+                                <span class="black-color font-style-9">{{ subtask.title }}</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="active-task-button-container">
+            <div (click)="deleteTask()" class="active-task-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
+                    <mask id="mask0_75592_9951" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                        <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_75592_9951)">
+                        <path d="M7.14453 21C6.59453 21 6.1237 20.8042 5.73203 20.4125C5.34036 20.0208 5.14453 19.55 5.14453 19V6C4.8612 6 4.6237 5.90417 4.43203 5.7125C4.24036 5.52083 4.14453 5.28333 4.14453 5C4.14453 4.71667 4.24036 4.47917 4.43203 4.2875C4.6237 4.09583 4.8612 4 5.14453 4H9.14453C9.14453 3.71667 9.24036 3.47917 9.43203 3.2875C9.6237 3.09583 9.8612 3 10.1445 3H14.1445C14.4279 3 14.6654 3.09583 14.857 3.2875C15.0487 3.47917 15.1445 3.71667 15.1445 4H19.1445C19.4279 4 19.6654 4.09583 19.857 4.2875C20.0487 4.47917 20.1445 4.71667 20.1445 5C20.1445 5.28333 20.0487 5.52083 19.857 5.7125C19.6654 5.90417 19.4279 6 19.1445 6V19C19.1445 19.55 18.9487 20.0208 18.557 20.4125C18.1654 20.8042 17.6945 21 17.1445 21H7.14453ZM7.14453 6V19H17.1445V6H7.14453ZM9.14453 16C9.14453 16.2833 9.24036 16.5208 9.43203 16.7125C9.6237 16.9042 9.8612 17 10.1445 17C10.4279 17 10.6654 16.9042 10.857 16.7125C11.0487 16.5208 11.1445 16.2833 11.1445 16V9C11.1445 8.71667 11.0487 8.47917 10.857 8.2875C10.6654 8.09583 10.4279 8 10.1445 8C9.8612 8 9.6237 8.09583 9.43203 8.2875C9.24036 8.47917 9.14453 8.71667 9.14453 9V16ZM13.1445 16C13.1445 16.2833 13.2404 16.5208 13.432 16.7125C13.6237 16.9042 13.8612 17 14.1445 17C14.4279 17 14.6654 16.9042 14.857 16.7125C15.0487 16.5208 15.1445 16.2833 15.1445 16V9C15.1445 8.71667 15.0487 8.47917 14.857 8.2875C14.6654 8.09583 14.4279 8 14.1445 8C13.8612 8 13.6237 8.09583 13.432 8.2875C13.2404 8.47917 13.1445 8.71667 13.1445 9V16Z"/>
+                    </g>
+                </svg>
+                <span>Delete</span>
+            </div>
+            <div class="button-separator"></div>
+            <div (click)="editTask()" class="active-task-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 24" fill="none">
+                    <mask id="mask0_75592_9969" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+                        <rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_75592_9969)">
+                        <path d="M5.14453 19H6.54453L15.1695 10.375L13.7695 8.975L5.14453 17.6V19ZM19.4445 8.925L15.1945 4.725L16.5945 3.325C16.9779 2.94167 17.4487 2.75 18.007 2.75C18.5654 2.75 19.0362 2.94167 19.4195 3.325L20.8195 4.725C21.2029 5.10833 21.4029 5.57083 21.4195 6.1125C21.4362 6.65417 21.2529 7.11667 20.8695 7.5L19.4445 8.925ZM17.9945 10.4L7.39453 21H3.14453V16.75L13.7445 6.15L17.9945 10.4Z"/>
+                    </g>
+                </svg>
+                <span>Edit</span>
+            </div>
+        </div>
+    </section>
+
+} @else if (taskService.editTask()) {
+    <form (submit)="onSubmit(editTaskForm)" (click)="closeContactsOverlay($event)" #editTaskForm="ngForm" class="active-task-content" [ngClass]="{'fly-out-animation': taskClosed}">
+        <div class="dF-jc-fe">
+            <img (click)="closeTask()" class="close-icon" src="icon/close.svg" alt="close">
+        </div>
+        <div class="active-task-overflow-wrapper">
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="title">Title<span class="red-color">*</span></label>
+                <input #title="ngModel" class="general-input-style" type="text" name="title" id="title" [ngModel]="activeTask.title" minlength="3" maxlength="40" placeholder="Enter a title" required>
+                <span [ngStyle]="{'visibility': (editTaskForm.submitted && title.invalid) || (title.touched && title.invalid) ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
+            </div>
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="description">Description</label>
+                <textarea class="general-input-style" name="description" id="description" maxlength="60" rows="3" [ngModel]="activeTask.description">{{ activeTask.description }}</textarea>
+            </div>
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="date">Due date<span class="red-color">*</span></label>
+                <input #date="ngModel" class="general-input-style" type="date" name="date" id="date" [ngModel]="activeTask.date" [min]="minDate" required>
+                <span [ngStyle]="{'visibility': (editTaskForm.submitted && date.invalid) || (date.touched && date.invalid) ? 'visible' : 'hidden'}" class="error-msg m-top-4">This field is required</span>
+            </div>
+
+            <div class="dF-column-ai-fs">
+                <span class="m-btm-8">Priority</span>
+                <div class="priority-buttons">
+                    <div (click)="choosePriority('urgent')" class="priority-btn" [ngClass]="{'btn-urgent-selected': selectedPriority === 'urgent'}">
+                        <span>Urgent</span>
+                        <svg class="priority-icon icon-urgent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 26" fill="none">
+                            <path d="M33.0159 25.9714C32.6149 25.9721 32.2242 25.8425 31.9014 25.6018L17.7961 15.0719L3.69086 25.6018C3.49283 25.7499 3.26792 25.8571 3.02896 25.9172C2.78999 25.9774 2.54166 25.9893 2.29814 25.9524C2.05462 25.9154 1.82068 25.8302 1.60967 25.7018C1.39867 25.5733 1.21473 25.4041 1.06837 25.2037C0.922001 25.0033 0.816072 24.7757 0.756628 24.5339C0.697184 24.2921 0.68539 24.0408 0.721918 23.7944C0.79569 23.2967 1.06181 22.849 1.46174 22.5499L16.6816 11.1765C17.0041 10.9349 17.3948 10.8044 17.7961 10.8044C18.1974 10.8044 18.5881 10.9349 18.9107 11.1765L34.1305 22.5499C34.4483 22.7869 34.684 23.1194 34.8039 23.5001C34.9238 23.8807 34.9218 24.2899 34.7982 24.6693C34.6746 25.0487 34.4357 25.3789 34.1157 25.6127C33.7956 25.8466 33.4107 25.9721 33.0159 25.9714Z"/>
+                            <path d="M33.0159 16.0195C32.6149 16.0202 32.2242 15.8906 31.9014 15.6499L17.7961 5.11998L3.69087 15.6499C3.29094 15.949 2.78996 16.0751 2.29815 16.0004C1.80634 15.9258 1.36397 15.6565 1.06837 15.2518C0.772775 14.8471 0.648154 14.3401 0.721925 13.8425C0.795697 13.3448 1.06182 12.8971 1.46175 12.598L16.6816 1.22459C17.0041 0.98296 17.3948 0.852539 17.7961 0.852539C18.1974 0.852539 18.5881 0.98296 18.9107 1.22459L34.1305 12.598C34.4483 12.835 34.684 13.1675 34.8039 13.5482C34.9238 13.9288 34.9218 14.338 34.7982 14.7174C34.6746 15.0968 34.4357 15.427 34.1157 15.6608C33.7956 15.8947 33.4107 16.0202 33.0159 16.0195Z"/>
+                        </svg>
+                    </div>
+                    <div (click)="choosePriority('medium')" class="priority-btn" [ngClass]="{'btn-medium-selected': selectedPriority === 'medium'}">
+                        <span>Medium</span>
+                        <svg class="priority-icon icon-medium" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 8" fill="none">
+                            <path d="M19.7596 7.91693H1.95136C1.66071 7.91693 1.38197 7.80063 1.17645 7.59362C0.970928 7.3866 0.855469 7.10584 0.855469 6.81308C0.855469 6.52032 0.970928 6.23955 1.17645 6.03254C1.38197 5.82553 1.66071 5.70923 1.95136 5.70923H19.7596C20.0502 5.70923 20.329 5.82553 20.5345 6.03254C20.74 6.23955 20.8555 6.52032 20.8555 6.81308C20.8555 7.10584 20.74 7.3866 20.5345 7.59362C20.329 7.80063 20.0502 7.91693 19.7596 7.91693Z"/>
+                            <path d="M19.7596 2.67376H1.95136C1.66071 2.67376 1.38197 2.55746 1.17645 2.35045C0.970928 2.14344 0.855469 1.86267 0.855469 1.56991C0.855469 1.27715 0.970928 0.996386 1.17645 0.789374C1.38197 0.582363 1.66071 0.466064 1.95136 0.466064L19.7596 0.466064C20.0502 0.466064 20.329 0.582363 20.5345 0.789374C20.74 0.996386 20.8555 1.27715 20.8555 1.56991C20.8555 1.86267 20.74 2.14344 20.5345 2.35045C20.329 2.55746 20.0502 2.67376 19.7596 2.67376Z"/>
+                        </svg>
+                    </div>
+                    <div (click)="choosePriority('low')" class="priority-btn" [ngClass]="{'btn-low-selected': selectedPriority === 'low'}">
+                        <span>Low</span>
+                        <svg class="priority-icon icon-low" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 16" fill="none">
+                            <path d="M10.8555 9.69779C10.6209 9.69819 10.3923 9.62335 10.2035 9.48427L1.30038 2.91453C1.18454 2.82898 1.0867 2.72146 1.01245 2.59812C0.938193 2.47478 0.888977 2.33803 0.867609 2.19569C0.824455 1.90821 0.897354 1.61537 1.07027 1.3816C1.24319 1.14782 1.50196 0.992265 1.78965 0.949143C2.07734 0.906021 2.3704 0.978866 2.60434 1.15165L10.8555 7.23414L19.1066 1.15165C19.2224 1.0661 19.354 1.00418 19.4938 0.969432C19.6336 0.934685 19.7788 0.927791 19.9213 0.949143C20.0637 0.970495 20.2006 1.01967 20.324 1.09388C20.4474 1.16808 20.555 1.26584 20.6407 1.3816C20.7263 1.49735 20.7883 1.62882 20.823 1.7685C20.8578 1.90818 20.8647 2.05334 20.8433 2.19569C20.822 2.33803 20.7727 2.47478 20.6985 2.59812C20.6242 2.72146 20.5264 2.82898 20.4106 2.91453L11.5075 9.48427C11.3186 9.62335 11.0901 9.69819 10.8555 9.69779Z"/>
+                            <path d="M10.8555 15.4463C10.6209 15.4467 10.3923 15.3719 10.2035 15.2328L1.30038 8.66307C1.06644 8.49028 0.910763 8.2317 0.867609 7.94422C0.824455 7.65674 0.897354 7.3639 1.07027 7.13013C1.24319 6.89636 1.50196 6.7408 1.78965 6.69768C2.07734 6.65456 2.3704 6.7274 2.60434 6.90019L10.8555 12.9827L19.1066 6.90019C19.3405 6.7274 19.6336 6.65456 19.9213 6.69768C20.209 6.7408 20.4678 6.89636 20.6407 7.13013C20.8136 7.3639 20.8865 7.65674 20.8433 7.94422C20.8002 8.2317 20.6445 8.49028 20.4106 8.66307L11.5075 15.2328C11.3186 15.3719 11.0901 15.4467 10.8555 15.4463Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assigned-container">
+                <label class="m-btm-8" for="contacts">Assigned to</label>
+                <div (click)="toggleContactOverlay($event, 'visible')" class="icon-input-style icon-input-hover m-btm-8">
+                    <input (input)="filterContacts(contactInput.value)" #contactInput class="pointer" type="text" name="contacts" id="contacts" placeholder="Select contacts to assign">
+                    @if (contactsVisible) {
+                        <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_up.svg" alt="arrow_up">
+                    } @else {
+                        <img (click)="toggleContactOverlay($event)" class="input-icon-style" src="icon/arrow_down.svg" alt="arrow_down">
+                    }
+                </div>
+                @if (selectedContacts.length > 0) {
+                    <div class="selected-contacts-container">
+                        @for (contactID of selectedContacts; track $index) {
+                            @if ($index < 5) {
+                                <div class="initials" [ngStyle]="{'background-color': contactService.getContactFromId(contactID)?.color}">{{ contactService.getInitials(contactService.getContactFromId(contactID)?.name) }}</div>
+                            }
+                        }
+                        @if (selectedContacts.length > 5) {
+                            <div class="remaining-contacts">+{{ selectedContacts.length - 5 }}</div>
+                        }
+                    </div>
+                }
+                <div (click)="$event.stopPropagation()" class="contact-overlay" [ngStyle]="{'max-height': contactsVisible ? '168px' : '0px'}">
+                    @for (contact of filteredContacts(); track contact) {
+                        <div (click)="selectContact(contact)" class="contact-card" [ngClass]="{'contact-selected': selectedContacts.includes(contact.id)}">
+                            <div class="initials" [ngStyle]="{'background-color': contact.color}">{{ contactService.getInitials(contact.name) }}</div>
+                            <div class="contact-name">{{ contact.name }}</div>
+                            @if (selectedContacts.includes(contact.id)) {
+                                <svg class="checkbox-checked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                                    <path d="M20 11.9658V17.9658C20 19.6227 18.6569 20.9658 17 20.9658H7C5.34315 20.9658 4 19.6227 4 17.9658V7.96582C4 6.30897 5.34315 4.96582 7 4.96582H15" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 12.9658L12 16.9658L20 5.46582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            } @else {
+                                <svg class="checkbox-unchecked" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="none">
+                                    <rect x="4" y="4.96582" width="16" height="16" rx="3" stroke-width="2"/>
+                                </svg>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="dF-column-ai-fs">
+                <label class="m-btm-8" for="subtask">Subtasks</label>
+                <div class="icon-input-style m-btm-8">
+                    <input (input)="checkSubtask(subtaskInput.value)" #subtaskInput class="pointer" type="text" name="subtask" id="subtask" placeholder="Add new subtask">
+                    @if (subtaskAddable) {
+                        <div class="dF-row-cc gap-4">
+                            <img (click)="clearSubtask()" class="input-icon-style" src="icon/close.svg" alt="cancel">
+                            <div class="small-separator"></div>
+                            <img (click)="addSubtask(subtaskInput.value)" class="input-icon-style" src="icon/ok.svg" alt="add">
+                        </div>
+                    } @else {
+                        <img (click)="subtaskInput.focus()" class="input-icon-style" src="icon/add.svg" alt="add">
+                    }
+                </div>
+                <ul class="added-subtasks-container">
+                    @for (subtask of addedSubtasks; track $index) {
+                        @if (editedSubtaskIndex === $index) {
+                            <li class="subtask-edit-item">
+                                <input [(ngModel)]="editedSubtaskTitle" class="edit-subtask-input" type="text" name="editSubtask">
+                                <div class="subtask-icon-container-style">
+                                    <img (click)="deleteSubtask($index)" class="input-icon-style" src="icon/delete.svg" alt="delete">
+                                    <div class="small-separator"></div>
+                                    <img (click)="saveSubtask($index)" class="input-icon-style" src="icon/ok.svg" alt="add">
+                                </div>
+                            </li>
+                        } @else {
+                            <li class="subtask-item">
+                                <span class="subtask-content">{{ subtask['title'] }}</span>
+                                <div class="edit-icon-container">
+                                    <img (click)="deleteSubtask($index)" class="input-icon-style" src="icon/delete.svg" alt="delete">
+                                    <div class="small-separator"></div>
+                                    <img (click)="editSubtask($index)" class="input-icon-style" src="icon/edit.svg" alt="edit">
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        
+        <div class="dF-jc-fe">
+            <button [disabled]="title.invalid || date.invalid" class="btn-2-prim" type="submit">
+                <span>Ok</span>
+                <img src="icon/ok_white.svg" alt="add">
+            </button>
+        </div>
+    </form>
+}

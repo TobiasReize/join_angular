@@ -2,6 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.19.
 
+## Install this repository
+
+1. Clone this repository:
+```
+    git clone <GitHub repository link>
+```
+
+2. Install the dependencies (in the project folder):
+```
+    npm i
+```
+
+3. Create environments:
+```
+    ng generate environments
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

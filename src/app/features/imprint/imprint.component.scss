@@ -1,0 +1,51 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+
+:host {
+    @extend .host;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+h3 {
+    width: 100%;
+}
+
+.content {
+    @extend .dF-column-fs;
+    width: 100%;
+    max-width: 1592px;
+    padding-right: 40px;
+}
+
+h6 {
+    font-weight: 700;
+    margin-top: 24px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.blue-color {
+    color: color.$hover-light-blue;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media (max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .content {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    h3 {
+        font-size: 42px;
+    }
+}

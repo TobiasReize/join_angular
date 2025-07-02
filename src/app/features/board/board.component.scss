@@ -1,0 +1,291 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/variable';
+@use '../../../../styles/distance';
+@use '../../../../styles/typography';
+@use '../../../../styles/animation';
+
+:host {
+    @extend .host;
+    position: relative;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.headline-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+    max-width: calc(1920px - 96px - variable.$sidenav-width);
+    padding-right: 40px;
+}
+
+.title-container {
+    @extend .dF-jc-sb;
+}
+
+.add-task-mobile {
+    width: 40px;
+    height: 40px;
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
+    display: none;
+
+    > rect {
+        fill: color.$main-color;
+    }
+
+    &:active rect {
+        fill: color.$hover-light-blue;
+    }
+}
+
+.search-container {
+    @extend .dF-row-cc;
+    gap: 32px;
+}
+
+.search-input-style {
+    @extend .general-input-style;
+    @extend .dF-row-cc;
+    gap: 10px;
+    border: 1px solid color.$form-icon-gray;
+    padding: 8px 16px;
+    width: 312px;
+
+    > input {
+        width: 0;
+        flex: 1;
+
+        &::placeholder {
+            color: color.$form-gray;
+        }
+    }
+}
+
+.search-separator {
+    width: 1px;
+    height: 31px;
+    background-color: color.$form-gray;
+}
+
+.search-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+
+    path {
+        fill: color.$main-color;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+
+    &:active {
+        background-color: unset;
+        path {
+                fill: color.$hover-light-blue;
+        }
+    }
+}
+
+.content-container {
+    @extend .dF-ai-fs;
+    gap: 26px;
+    flex: 1
+}
+
+.column-style {
+    @extend .dF-column-jc-fs;
+    gap: 16px;
+    width: 252px;
+    height: 100%;
+}
+
+.column-headline-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.column-title {
+    font-weight: 700;
+}
+
+.add-task-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    rect, path {
+        stroke: color.$main-color;
+    }
+
+    &:hover rect, &:hover path {
+        stroke: color.$hover-light-blue;
+    }
+
+    &:active rect, &:active path {
+        stroke: color.$click-blue;
+    }
+}
+
+.cards-container {
+    @extend .dF-column-jc-fs;
+    gap: 16px;
+    width: 100%;
+    flex: 1;
+    border-radius: 24px;
+}
+
+.app-card {
+    cursor: pointer;
+    transform-origin: bottom left;
+    transition: all 200ms ease-out;
+
+    &:active {
+        transform: rotate(5deg);
+    }
+}
+
+.highlight-column {
+    background-color: color.$icon-hover-gray;
+}
+
+.add-task-overlay {
+    @extend .dF-column-cc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(246, 247, 248, 0.5);
+    z-index: 5;
+}
+
+.add-task-content {
+    @extend .dF-column-fs;
+    gap: 32px;
+    padding: 64px 74px;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.add-task-headline-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.close-icon {
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px) {
+    .headline-container {
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .content-container {
+        gap: 8px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media(max-width: 1300px) {
+    .add-task-content {
+        padding: 48px;
+    }
+}
+
+@media(max-width: 1250px) {
+    .content-container {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .column-style {
+        width: 820px;
+        height: unset;
+    }
+
+    .add-task-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .cards-container {
+        flex-direction: row;
+        border-radius: 10px;
+        padding: 8px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+@media(max-width: 1024px) {
+    .column-style {
+        width: 100%;
+    }
+
+    .app-card:active {
+        transform: unset;
+    }
+
+    .add-task-overlay {
+        padding: 12px;
+    }
+
+    .add-task-content {
+        padding: 24px;
+        width: 100%;
+    }
+
+    app-add-task-form {
+        width: 100%;
+    }
+}
+
+@media(max-width: 750px) {
+    .headline-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+    
+    .title-container, .search-container, .search-input-style {
+        width: 100%;
+    }
+    
+    .add-task-mobile {
+        display: block;
+    }
+
+    .search-container {
+        justify-content: flex-start;
+    }
+
+    .search-input-style {
+        max-width: 400px;
+    }
+
+    .btn-3 {
+        display: none;
+    }
+}

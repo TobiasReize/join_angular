@@ -1,0 +1,189 @@
+@use '../../../../../styles/layout';
+@use '../../../../../styles/color';
+@use '../../../../../styles/distance';
+@use '../../../../../styles/typography';
+@use '../../../../../styles/helper';
+
+:host {
+    @extend .dF-row-cc;
+    width: 100%;
+}
+
+.empty-card {
+    @extend .dF-row-cc;
+    @extend .font-style-9;
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px dashed color.$form-icon-gray;
+    background-color: color.$task-gray;
+    color: color.$form-icon-gray;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+}
+
+.card {
+    @extend .dF-column-ai-fs;
+    width: 100%;
+    padding: 16px;
+    border-radius: 24px;
+    background-color: white;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-category {
+    @extend .font-style-9;
+    padding: 4px 16px;
+    border-radius: 8px;
+    color: white;
+}
+
+.swap-mobile-container {
+    @extend .dF-row-cc;
+    position: relative;
+}
+
+.swap-mobile-icon {
+    display: none;
+    width: 24px;
+    height: 26px;
+
+    > rect {
+        stroke: color.$main-color;
+    }
+
+    path {
+        fill: color.$main-color;
+    }
+
+    &:active {
+        > rect {
+            stroke: color.$hover-light-blue;
+        }
+
+        path {
+            fill: color.$hover-light-blue;
+        }
+    }
+}
+
+.swap-mobile-overlay {
+    @extend .dF-column-fs;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    padding: 16px 8px;
+    gap: 8px;
+    background-color: color.$main-color;
+    border-radius: 0 20px 20px 20px;
+
+    span {
+        color: white;
+        white-space: nowrap;
+    }
+}
+
+.swap-option {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    width: 100%;
+
+    > img {
+        width: 20px;
+        height: 20px;
+    }
+
+    &:active {
+        background-color: color.$click-blue;
+    }
+}
+
+.card-title {
+    @extend .font-style-8;
+    color: color.$main-color;
+}
+
+.card-description {
+    @extend .font-style-9;
+    color: color.$form-icon-gray;
+}
+
+.card-subtasks-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.progress-bar {
+    @extend .dF-jc-fs;
+    width: 128px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: color.$subtask-gray;
+}
+
+.bar-of-progress {
+    height: 100%;
+    border-radius: 4px;
+    background-color: color.$subtask-blue;
+}
+
+.subtask {
+    @extend .font-style-10;
+    color: black;
+}
+
+.card-contacts-prio-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+}
+
+.contacts-container {
+    @extend .dF-row-cc;
+}
+
+.card-contact-style {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+}
+
+.card-contact {
+    @extend .card-contact-style;
+
+    &:not(:first-child) {
+        margin-left: -6px;
+    }
+}
+
+.remaining-contacts {
+    @extend .card-contact-style;
+    background-color: color.$icon-gray;
+    margin-left: -6px;
+}
+
+.card-prio-icon {
+    width: 20px;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1250px) {
+    :host {
+        width: unset;
+    }
+    
+    .card, .empty-card {
+        width: 252px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .swap-mobile-icon {
+        display: block;
+    }
+}

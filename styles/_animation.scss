@@ -1,0 +1,165 @@
+@use '../styles/variable';
+
+.fly-in-animation {
+    transform: translateX(100vw);
+    animation: flyIn variable.$flyin-animation-config;
+}
+
+.fly-out-animation {
+    animation: flyOut variable.$flyout-animation-config;
+}
+
+@keyframes coverUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes flyIn {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes flyOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(+100vh);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(+100vh);
+    }
+}
+
+@media(min-width: 1952px) {    // Intro: für Bildschirmbreite > 1952px
+    @keyframes moveTopLeft {
+        from {
+            transform: translateY(0) translateX(0);
+        }
+
+        to {
+            transform: translateY(calc(-50vh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + ((100vw - 1920px) / 2) + variable.$logo-end-width / 2));
+            transform: translateY(calc(-50svh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + ((100vw - 1920px) / 2) + variable.$logo-end-width / 2));
+        }
+    }
+}
+
+@media(max-width: 1952px) {    // Intro: für Bildschirmbreite <= 1952px
+    @keyframes moveTopLeft {
+        from {
+            transform: translateY(0) translateX(0);
+        }
+
+        to {
+            transform: translateY(calc(-50vh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + 16px + variable.$logo-end-width / 2));
+            transform: translateY(calc(-50svh + variable.$position-header + variable.$logo-end-height / 2)) translateX(calc(-50vw + 16px + variable.$logo-end-width / 2));
+        }
+    }
+}
+
+@media(min-width: 1024px) {     // Intro: für Bildschirmbreite > 1024px
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-start-height;
+            width: variable.$logo-start-width;
+        }
+
+        to {
+            height: variable.$logo-end-height;
+            width: variable.$logo-end-width;
+        }
+    }
+
+    @keyframes vanish {
+        from {
+            background-color: #F6F7F8;
+        }
+
+        to {
+            background-color: transparent;
+        }
+    }
+}
+
+@media(max-width: 1024px) {     // Intro: für Bildschirmbreite <= 1024px
+    @keyframes moveTopLeft {
+        from {
+            transform: translateY(0) translateX(0);
+        }
+
+        to {
+            transform: translateY(calc(-50vh + variable.$mobile-padding-top + variable.$logo-mobile-end-height / 2)) translateX(calc(-50vw + variable.$mobile-padding-left + variable.$logo-mobile-end-width / 2));
+            transform: translateY(calc(-50svh + variable.$mobile-padding-top + variable.$logo-mobile-end-height / 2)) translateX(calc(-50vw + variable.$mobile-padding-left + variable.$logo-mobile-end-width / 2));
+        }
+    }
+    
+    @keyframes shrinkLogo {
+        from {
+            height: variable.$logo-mobile-start-height;
+            width: variable.$logo-mobile-start-width;
+        }
+
+        to {
+            height: variable.$logo-mobile-end-height;
+            width: variable.$logo-mobile-end-width;
+        }
+    }
+
+    @keyframes vanish {
+        from {
+            background-color: #2A3647;
+        }
+
+        to {
+            background-color: transparent;
+        }
+    }
+
+    @keyframes colorLogo {
+        from {
+            fill: white;
+        }
+
+        to {
+            fill: #2A3647;
+        }
+    }
+}

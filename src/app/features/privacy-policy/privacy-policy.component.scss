@@ -1,0 +1,83 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+h3 {
+    width: 100%;
+}
+
+.content {
+    @extend .dF-column-fs;
+    width: 100%;
+    max-width: 1592px;
+    padding-right: 40px;
+}
+
+h5 {
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+h6 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 8px;;
+}
+
+.h7 {
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.blue-color {
+    color: color.$hover-light-blue;
+}
+
+ul {
+    padding-left: 24px;
+    list-style-position: unset;
+}
+
+.source {
+    margin-top: 32px;
+    font-size: 16px;
+
+    > a {
+        font-size: 16px;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media (max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .content {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    h3 {
+        font-size: 42px;
+    }
+    
+    h6 {
+        font-size: 19px;
+    }
+}

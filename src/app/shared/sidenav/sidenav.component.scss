@@ -1,0 +1,246 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/variable';
+@use '../../../../styles/typography';
+
+:host {
+    @extend .dF-row-cc;
+    height: 100%;
+    width: variable.$sidenav-width;
+    background-color: color.$main-color;
+}
+
+.content {
+    @extend .dF-column-cc;
+    padding: 64px 0;
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    width: 100px;
+}
+
+.navigation {
+    @extend .dF-column-cc;
+    gap: 15px;
+    width: 100%;
+    margin-top: 114px;
+}
+
+.option {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0 8px 56px;
+
+    &:hover, &:active {
+        cursor: pointer;
+        background-color: color.$hover-dark-blue;
+    }
+
+    > svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    path {
+        fill: color.$icon-gray;
+    }
+
+    > span {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+    }
+}
+
+.login-container {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 0 8px 56px;
+    margin-top: 114px;
+
+    &:hover, &:active {
+        cursor: pointer;
+        background-color: color.$hover-dark-blue;
+    }
+
+    > img {
+        width: 30px;
+        height: 30px;
+    }
+
+    > span {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+        white-space: nowrap;
+    }
+}
+
+.requirements-container, .requirements-container-anon {
+    @extend .dF-column-ai-fs;
+    gap: 4px;
+    width: 100%;
+    margin-top: auto;
+
+    > a {
+        @extend .font-style-9;
+        color: color.$form-icon-gray;
+        padding: 8px 0 8px 56px;
+        white-space: nowrap;
+        width: 100%;
+
+        &:hover, &:active {
+            font-weight: 700;
+            color: color.$hover-light-blue;
+        }
+    }
+}
+
+.selected {
+    background-color: color.$click-blue;
+}
+
+.white {
+    path {
+        fill: white;
+    }
+
+    span {
+        color: white;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1300px) {
+    :host {
+        width: 160px;
+    }
+
+    .option {
+        padding: 8px 24px;
+    }
+
+    .login-container {
+        padding: 8px 24px;
+    }
+
+    .requirements-container, .requirements-container-anon {
+        > a {
+            padding: 8px 24px;
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    :host {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+        z-index: 5;
+    }
+
+    .content {
+        padding: 0 16px;
+        flex-direction: row;
+    }
+
+    .logo, .requirements-container {
+        display: none;
+    }
+
+    .navigation {
+        gap: unset;
+        margin: 0;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .option {
+        width: 80px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        padding: 15.5px 0;
+        border-radius: 16px;
+
+        > svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        > span {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+
+    .login-container {
+        margin-top: 0;
+        width: unset;
+        height: 100%;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .requirements-container-anon {
+        margin-top: 0;
+        margin-left: auto;
+        width: unset;
+        height: 100%;
+        flex-direction: row;
+        gap: 8px;
+
+        > a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .content {
+        padding: 2px 16px;
+    }
+
+    .navigation {
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .option {
+        width: 70px;
+        height: 100%;
+        padding: 0;
+
+        > span {
+            white-space: nowrap;
+        }
+    }
+
+    .login-container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 16px;
+    }
+
+    .requirements-container-anon {
+        gap: 4px;
+
+        > a {
+            padding: 8px 14px;
+
+            &:hover, &:active {
+                font-weight: 400;
+            }
+        }
+    }
+}

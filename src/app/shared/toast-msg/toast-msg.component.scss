@@ -1,0 +1,27 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/animation';
+@use '../../../../styles/variable';
+
+:host {
+    @extend .host;
+    height: 100%;
+    background-color: rgba(180, 180, 180, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: 0;
+    animation: coverUp variable.$toastmsg-opacity-animation-config;
+}
+
+.content {
+    padding: 25px;
+    border-radius: 20px;
+    background-color: color.$main-color;
+    color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+    transform: translateY(+100vh);
+    animation: slideUp variable.$toastmsg-slideup-animation-config;
+}

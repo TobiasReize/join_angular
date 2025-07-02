@@ -1,0 +1,112 @@
+import { inject, Injectable } from '@angular/core';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, query, setDoc, updateDoc, where, writeBatch } from '@angular/fire/firestore';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FirebaseService {
+
+  private firestore = inject(Firestore);
+
+
+  getCollectionRef(colName: string) {
+    return collection(this.firestore, colName);
+  }
+
+
+  getDocRef(colName: string, docId: string) {
+    return doc(this.getCollectionRef(colName), docId);
+  }
+
+
+  getSubcollectionRef(colName: string, docId: string, subcolName: string) {
+    return collection(this.firestore, colName, docId, subcolName);
+  }
+
+
+  async updateDocData(colName: string, docId: string, data: any) {
+    const docRef = this.getDocRef(colName, docId);
+    await updateDoc(docRef, data);
+  }
+
+
+  async setDoc(colName: string, docId: string, data: any) {
+    const docRef = this.getDocRef(colName, docId);
+    await setDoc(docRef, data)
+  }
+
+
+  async addDoc(colName: string, data: any) {
+    const colRef = this.getCollectionRef(colName);
+    await addDoc(colRef, data);
+  }
+
+
+  async deleteDoc(colName: string, docId: string) {
+    const docRef = this.getDocRef(colName, docId);
+    await deleteDoc(docRef);
+  }
+
+
+  async addTask(taskData: any, subtaskData: any[]) {
+    const batch = writeBatch(this.firestore);
+    const taskDocRef = doc(collection(this.firestore, 'tasks'));
+    batch.set(taskDocRef, taskData);
+    subtaskData.forEach(subtask => {
+      const subtaskDocRef = doc(collection(this.firestore, `tasks/${taskDocRef.id}/subtasks`));
+      batch.set(subtaskDocRef, subtask);
+    });
+    await batch.commit();
+  }
+
+
+  async updateTask(taskId: string, taskData: any, subtaskData: any[], deletedSubtasks: string[]) {
+    const batch = writeBatch(this.firestore);
+    const taskDocRef = this.getDocRef('tasks', taskId);
+    batch.update(taskDocRef, taskData);
+    subtaskData.forEach(subtask => {
+      const subtaskData = {title: subtask.title, status: subtask.status};
+      if (subtask.id) {
+        const subtaskDocRef = this.getDocRef(`tasks/${taskDocRef.id}/subtasks`, subtask.id);
+        batch.update(subtaskDocRef, subtaskData);
+      } else {
+        const subtaskDocRef = doc(collection(this.firestore, `tasks/${taskDocRef.id}/subtasks`));
+        batch.set(subtaskDocRef, subtask);
+      }
+    });
+    deletedSubtasks.forEach(subtaskId => {
+      const delSubtaskDocRef = this.getDocRef(`tasks/${taskDocRef.id}/subtasks`, subtaskId);
+      batch.delete(delSubtaskDocRef);
+    });
+    await batch.commit();
+  }
+
+
+  async deleteTask(taskId: string) {
+    const batch = writeBatch(this.firestore);
+    const subtaskQuery = await getDocs(this.getCollectionRef(`tasks/${taskId}/subtasks`));
+    subtaskQuery.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    const taskRef = this.getDocRef('tasks', taskId);
+    batch.delete(taskRef);
+    await batch.commit();
+  }
+
+
+  async deleteContact(contactId: string) {
+    const tasksCol = this.getCollectionRef('tasks');
+    const q = query(tasksCol, where('contacts', 'array-contains', contactId));
+    const batch = writeBatch(this.firestore);
+    const taskQuery = await getDocs(q);
+
+    taskQuery.forEach(doc => {
+      const taskRef = this.getDocRef('tasks', doc.id);
+      const updatedContactIds = doc.data()['contacts'].filter((id: string) => id !== contactId);
+      batch.update(taskRef, {contacts: updatedContactIds});
+    });
+    await batch.commit();
+    await this.deleteDoc('contacts', contactId);
+  }
+
+}

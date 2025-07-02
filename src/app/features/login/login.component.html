@@ -1,0 +1,42 @@
+<app-header type="login"></app-header>
+
+<form (ngSubmit)="onSubmit(loginForm)" class="form" #loginForm="ngForm">
+    <h3>Log in</h3>
+    <div class="input-container">
+        <div [ngClass]="{'error-input': email.touched && email.invalid}" class="icon-input-style m-btm-8">
+            <input #email="ngModel" type="email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" ngModel required>
+            <img src="icon/email.svg" alt="email">
+        </div>
+        <p [ngStyle]="{'visibility': email.touched && email.invalid ? 'visible' : 'hidden'}" class="error-msg m-btm-10">Please enter a valid Email.</p>
+        <div [ngClass]="{'error-input': password.touched && password.invalid}" class="icon-input-style m-btm-8">
+            <input #password="ngModel" [type]="isPasswordVisible ? 'text' : 'password'" name="password" placeholder="Password" minlength="6" ngModel required>
+            <img 
+                (mousedown)="showPassword(true, password)" 
+                (mouseup)="showPassword(false, password)" 
+                (mouseleave)="showPassword(false, password)" 
+                (touchstart)="showPassword(true, password)" 
+                (touchend)="showPassword(false, password)" 
+                (touchcancel)="showPassword(false, password)" 
+                [src]="password.value && password.value.length > 0 ? passwordIconSrc : 'icon/password.svg'" 
+                [ngClass]="{'pointer': password.value && password.value.length > 0}"
+                alt="password"
+            >
+        </div>
+        <p [ngStyle]="{'visibility': password.touched && password.invalid ? 'visible' : 'hidden'}" class="error-msg">Check your password. Please try again.</p>
+    </div>
+    <div class="btn-container">
+        <button [disabled]="email.invalid || password.invalid" class="btn-1-prim" type="submit">Log in</button>
+        <button (click)="guestLogin()" class="btn-1-sec" type="button">Guest Log in</button>
+    </div>
+</form>
+
+<div class="signup-container">
+    <span>Not a Join User?</span>
+    <button routerLink="signup" class="btn-1-prim">Sign up</button>
+</div>
+
+<app-footer></app-footer>
+
+@if (showIntro) {
+    <app-intro (introFinished)="setIntroVariable($event)"></app-intro>
+}

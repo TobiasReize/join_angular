@@ -1,0 +1,84 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+    position: relative;
+    overflow: hidden;
+}
+
+app-header {
+    @extend .dF-row-cc;
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100%;
+}
+
+h3 {
+    background-image: linear-gradient(color.$hover-light-blue);
+    background-position: bottom center;
+    background-size: 150px 3px;
+    background-repeat: no-repeat;
+    padding-bottom: 16px
+}
+
+.input-container {
+    @extend .dF-column-cc;
+    width: 100%;
+}
+
+.btn-container {
+    @extend .dF-row-cc;
+    gap: 35px;
+    width: 100%;
+}
+
+.signup-container {
+    @extend .dF-row-cc;
+    gap: 32px;
+    display: none;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1952px) {
+    app-header {
+        padding: 0 16px;
+    }
+}
+
+@media(max-width: 1024px) {
+    :host {
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px 16px;
+        gap: 16px;
+    }
+
+    app-header {
+        position: unset;
+        padding: 0;
+    }
+
+    .signup-container {
+        display: flex;
+    }
+}
+
+@media(max-width: 684px) {
+    .btn-container {
+        flex-direction: column;
+        width: unset;
+        gap: 20px;
+
+        > button {
+            width: 100%;
+        }
+    }
+
+    .signup-container {
+        gap: 24px;
+    }
+}

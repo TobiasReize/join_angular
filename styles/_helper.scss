@@ -1,0 +1,275 @@
+@use '../styles/layout';
+@use '../styles/color';
+@use '../styles/typography';
+
+.host {
+    @extend .dF-row-cc;
+    height: 100vh;
+    height: 100svh;
+    width: 100%;
+    background-color: color.$bg-gray;
+}
+
+.form {
+    @extend .dF-column-cc;
+    gap: 32px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 48px 115px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    width: 652px;
+}
+
+.general-input-style {
+    border: 1px solid color.$form-gray;
+    border-radius: 10px;
+    padding: 12px 21px;
+    width: 100%;
+    background-color: white;
+    color: black;
+
+    &:focus-within {
+        border: 1px solid color.$hover-light-blue !important;
+    }
+}
+
+.icon-input-style {
+    @extend .general-input-style;
+    @extend .dF-row-cc;
+    gap: 16px;
+
+    > input {
+        width: 0;
+        flex: 1;
+
+        &::placeholder {
+            color: color.$form-gray;
+        }
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.error-msg {
+    @extend .font-style-10;
+    color: color.$error-red;
+    text-align: start;
+    width: 100%;
+}
+
+.error-input {
+    border: 1px solid color.$form-red;
+}
+
+.btn-1 {
+    @extend .font-style-6;
+    border-radius: 8px;
+    padding: 15px 24px;
+    transition: all 100ms ease-in-out;
+}
+
+.btn-1-prim {
+    @extend .btn-1;
+    border: unset;
+    background-color: color.$main-color;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$hover-light-blue;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+        background-color: color.$click-blue;
+    }
+}
+
+.btn-1-sec {
+    @extend .btn-1;
+    border: 1px solid color.$main-color;
+    background-color: unset;
+    color: color.$main-color;
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid color.$hover-light-blue;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+        color: color.$hover-light-blue;
+    }
+
+    &:active {
+        border: 1px solid color.$click-blue;
+        color: color.$click-blue;
+    }
+}
+
+.btn-2 {
+    @extend .dF-row-cc;
+    gap: 4px;
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 100ms ease-in-out;
+}
+
+.btn-2-prim {
+    @extend .btn-2;
+    border: unset;
+    background-color: color.$main-color;
+
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    > img {
+        width: 24px;
+        height: 24px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$hover-light-blue;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+        background-color: color.$click-blue;
+    }
+}
+
+.btn-2-sec {
+    @extend .btn-2;
+    border: 1px solid color.$main-color;
+    background-color: unset;
+    color: color.$main-color;
+
+    > svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    path {
+        fill: color.$main-color;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid color.$hover-light-blue;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+        color: color.$hover-light-blue;
+
+        > span {
+            color: color.$hover-light-blue;
+        }
+
+        path {
+            fill: color.$hover-light-blue;
+        }
+    }
+
+    &:active {
+        border: 1px solid color.$click-blue;
+        color: color.$click-blue;
+
+        > span {
+            color: color.$click-blue;
+        }
+
+        path {
+            fill: color.$click-blue;
+        }
+    }
+}
+
+.btn-3 {
+    @extend .dF-row-cc;
+    @extend .font-style-6;
+    gap: 16px;
+    border-radius: 10px;
+    border: unset;
+    padding: 12px 16px;
+    background-color: color.$main-color;
+    transition: all 100ms ease-in-out;
+
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    > img {
+        width: 32px;
+        height: 32px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$hover-light-blue;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+        background-color: color.$click-blue;
+    }
+}
+
+.cat-user-story {
+    background-color: color.$cat-blue;
+}
+
+.cat-technical-task {
+    background-color: color.$cat-mint;
+}
+
+.cat-bug-fix {
+    background-color: color.$cat-red;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    .host {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+}
+
+@media(max-width: 684px) {
+    .form {
+        width: 100%;
+        padding: 48px 80px;
+
+        input {
+            width: 100%;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .form {
+        padding: 32px 16px;
+        gap: 24px;
+    }
+
+    .icon-input-style {
+        gap: 8px;
+    }
+
+    .btn-1 {
+        font-size: 16px;
+    }
+
+    .btn-2 {
+        > span {
+            font-size: 16px;
+        }
+    }
+}
+
+@media(max-width: 450px) {
+    .general-input-style {
+        padding: 12px;
+    }
+}

@@ -1,0 +1,475 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+@use '../../../../styles/animation';
+
+:host {
+    @extend .host;
+    position: relative;
+    overflow: hidden;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+    z-index: 5;
+}
+
+.main-content {
+    padding: 0;
+    gap: 0;
+    flex-direction: row;
+    position: relative;
+}
+
+.contact-list-section {
+    @extend .dF-column-jc-fs;
+    gap: 22.5px;
+    width: 456px;
+    height: 100%;
+    padding: 22.5px 52px 8px 52px;
+    background-color: white;
+    filter: drop-shadow(4px 0 6px rgba(0, 0, 0, 0.08));
+}
+
+.contact-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.letter-container {
+    @extend .dF-column-fs;
+    width: 100%;
+
+    > span {
+        padding: 17px 36px;
+    }
+}
+
+.contact-separator {
+    width: 100%;
+    height: 1px;
+    margin: 8px;
+    background-color: color.$form-gray;
+}
+
+.contact-container {
+    @extend .dF-jc-fs;
+    gap: 35px;
+    padding: 15px 24px;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-image: linear-gradient(#F9F9F9, #F0F0F0);
+    }
+
+    &:active {
+        background-image: linear-gradient(color.$main-color);
+
+        .black-color {
+            color: white;
+        }
+    }
+}
+
+.selected-contact {
+    background-image: linear-gradient(color.$main-color) !important;
+
+    .black-color {
+        color: white !important;
+    }
+}
+
+.initials {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: white;
+}
+
+.name-email-container {
+    @extend .dF-column-ai-fs;
+    gap: 5px;
+}
+
+.contact-email {
+    @extend .font-style-9;
+    color: color.$email-blue;
+}
+
+.single-contact-section {
+    @extend .dF-column-fs;
+    gap: 32px;
+    flex: 1;
+    height: 100%;
+    padding: 110px 0 0 55px;
+}
+
+.headline-container {
+    @extend .dF-row-cc;
+    gap: 30px;
+}
+
+.headline-title-container {
+    @extend .dF-jc-sb;
+
+    > img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+
+        &:active {
+            scale: 1.1;
+            background-color: color.$icon-hover-gray;
+        }
+    }
+}
+
+.headline-separator {
+    width: 3px;
+    height: 59px;
+    border-radius: 3px;
+    background-color: color.$hover-light-blue;
+}
+
+.selected-contact-container {
+    @extend .dF-column-fs;
+    gap: 21px;
+}
+
+.selected-contact-header {
+    @extend .dF-row-cc;
+    gap: 54px;
+}
+
+.big-initials {
+    @extend .dF-row-cc;
+    @extend .font-style-3;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    color: white;
+}
+
+.header-icon-container {
+    @extend .dF-row-cc;
+    gap: 16px;
+}
+
+.selected-contact-icon-container {
+    @extend .dF-row-cc;
+    gap: 8px;
+
+    > svg {
+        width: 24px;
+        height: 24px;
+
+        path {
+            fill: color.$main-color;
+        }
+    }
+
+    > span {
+        @extend .font-style-9;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        > svg path {
+            fill: color.$hover-light-blue;
+        }
+
+        > span {
+            color: color.$hover-light-blue;
+            font-weight: 700;
+        }
+    }
+}
+
+.contact-information {
+    color: black;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.fab-mobile {
+    @extend .dF-row-cc;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: color.$main-color;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    cursor: pointer;
+    transition: all 100ms ease-in;
+    display: none;
+
+    &:active {
+        background-color: color.$hover-light-blue;
+    }
+
+    > img {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.more-overlay{
+    @extend .dF-column-fs;
+    padding: 10px;
+    width: 116px;
+    border-radius: 20px 20px 0 20px;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    bottom: 32px;
+    right: 16px;
+    z-index: 5;
+}
+
+.more-icon-container {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 100ms ease-in;
+    cursor: pointer;
+
+    > svg {
+        width: 24px;
+        height: 24px;
+
+        path {
+            fill: color.$main-color;
+        }
+    }
+
+    > span {
+        @extend .font-style-9;
+    }
+
+    &:active {
+        background-color: color.$icon-hover-gray;
+
+        > svg path {
+            fill: color.$hover-light-blue;
+        }
+
+        > span {
+            color: color.$hover-light-blue;
+            font-weight: 700;
+        }
+    }
+}
+
+.d-Flex {
+    display: flex !important;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .contact-list-section {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    
+    .single-contact-section {
+        padding: 48px 16px 16px 48px;
+    }
+}
+
+@media(max-width: 1300px) {
+    .contact-list-section {
+        padding-left: 24px;
+        padding-right: 24px;
+        width: 350px;
+    }
+    
+    .single-contact-section {
+        padding-left: 24px;
+    }
+}
+
+@media(max-width: 1100px) {
+    .headline-container {
+        gap: 16px;
+    }
+
+    h3 {
+        font-size: 47px;
+    }
+
+    .selected-contact-header {
+        gap: 24px;
+    }
+
+    h4 {
+        font-size: 32px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .contact-list-section {
+        padding: 16px 16px 8px 16px;
+    }
+    
+    .single-contact-section {
+        padding: 16px;
+    }
+}
+
+@media(max-width: 850px) {
+    .contact-list-section {
+        width: 300px;
+    }
+
+    .contact-container {
+        gap: 16px;
+    }
+
+    .headline-container {
+        gap: 12px;
+    }
+
+    h5 {
+        font-size: 22px;
+    }
+}
+
+@media(max-width: 750px) {
+    .contact-list-section {
+        width: 100%;
+        padding: 24px 24px 8px 24px;
+        position: relative;
+    }
+
+    .btn-3 {
+        display: none;
+    }
+
+    .contact-list {
+        padding-right: 16px;
+    }
+
+    .contact-container {
+        gap: 35px;
+    }
+    
+    .single-contact-section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: color.$bg-gray;
+        padding: 24px;
+        gap: 48px;
+        display: none;
+    }
+
+    .headline-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+        background-image: linear-gradient(color.$hover-light-blue);
+        background-position: bottom left;
+        background-size: 90px 3px;
+        background-repeat: no-repeat;
+        padding-bottom: 16px;
+    }
+
+    .headline-title-container {
+        width: 100%;
+
+        > img {
+            display: block;
+        }
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    .headline-separator {
+        display: none;
+    }
+
+    .selected-contact-container {
+        transform: unset;
+        animation: unset;
+    }
+
+    .selected-contact-header {
+        gap: 20px;
+    }
+
+    .big-initials {
+        width: 80px;
+        height: 80px;
+        font-size: 27px;
+    }
+
+    h4 {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .header-icon-container {
+        display: none;
+    }
+
+    .contact-information {
+        margin: 0;
+    }
+
+    .fab-mobile {
+        display: flex;
+    }
+}
+
+@media(max-width: 450px) {
+    .contact-list-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .contact-list {
+        padding-right: 8px;
+    }
+
+    .contact-container {
+        gap: 16px;
+    }
+
+    .single-contact-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .big-initials {
+        width: 70px;
+        height: 70px;
+    }
+
+    h4 {
+        font-size: 32px;
+    }
+}

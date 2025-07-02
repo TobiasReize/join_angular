@@ -1,0 +1,155 @@
+@use '../../../../styles/layout';
+@use '../../../../styles/helper';
+@use '../../../../styles/variable';
+@use '../../../../styles/color';
+
+.login-header {
+    @extend .dF-jc-sb;
+    max-width: 1920px;
+    width: 100%;
+}
+
+.login-logo {
+    width: variable.$logo-end-width;
+    height: variable.$logo-end-height;
+}
+
+.signup-container {
+    @extend .dF-row-cc;
+    gap: 32px;
+}
+
+.main-header {
+    @extend .dF-jc-sb;
+    max-width: calc(1920px - variable.$sidenav-width);
+    width: 100%;
+    height: 96px;
+    padding: 20px 40px 20px 116px;
+}
+
+.mobile-logo {
+    height: 40px;
+    width: auto;
+    display: none;
+}
+
+.header-title {
+    color: black;
+}
+
+.help-container {
+    @extend .dF-row-cc;
+    gap: 16px;
+    position: relative;
+}
+
+.icon-help {
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.2;
+    }
+}
+
+.initials {
+    @extend .dF-row-cc;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid color.$main-color;
+    background-color: white;
+    font-weight: 700;
+    line-height: 1;
+    color: color.$hover-light-blue;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(12, 46, 98, 0.12);
+    }
+}
+
+.overlay {
+    @extend .dF-column-ai-fs;
+    padding: 10px;
+    border-radius: 20px 0 20px 20px;
+    background-color: color.$main-color;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    position: absolute;
+    right: 0;
+    top: 76px;
+    z-index: 5;
+
+    > span {
+        @extend .font-style-9;
+        color: color.$icon-gray;
+        padding: 13px 16px;
+        border-radius: 8px;
+        white-space: nowrap;
+        width: 100%;
+
+        &:hover {
+            cursor: pointer;
+            background-color: color.$hover-dark-blue;
+        }
+    }
+
+    > span:first-child {
+        display: none;
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1500px), (max-height: 1000px) and (min-width: 1500px) {
+    .main-header {
+        padding-right: 16px;
+        padding-left: 48px;
+        max-width: unset;
+    }
+}
+
+@media(max-width: 1300px) {
+    .main-header {
+        padding-left: 24px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .signup-container {
+        display: none;
+    }
+
+    .login-logo {
+        width: variable.$logo-mobile-end-width;
+        height: variable.$logo-mobile-end-height;
+    }
+
+    .main-header {
+        height: 80px;
+        padding: 0 16px;
+    }
+
+    .mobile-logo {
+        display: block;
+    }
+
+    .header-title, .icon-help {
+        display: none;
+    }
+
+    .initials {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+        font-size: 17px;
+    }
+
+    .overlay {
+        top: 60px;
+
+        > span:first-child {
+            display: block;
+        }
+    }
+}

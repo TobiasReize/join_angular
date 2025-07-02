@@ -1,0 +1,104 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .host;
+    position: relative;
+    overflow: hidden;
+}
+
+app-header {
+    @extend .dF-row-cc;
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100%;
+}
+
+.headline-container {
+    @extend .dF-jc-sb;
+    width: 100%;
+
+    > img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+
+        &:hover {
+            cursor: pointer;
+            background-color: color.$icon-hover-gray;
+            scale: 1.1;
+        }
+    }
+
+    > .spacer {
+        width: 32px;
+    }
+}
+
+h3 {
+    background-image: linear-gradient(color.$hover-light-blue);
+    background-position: bottom center;
+    background-size: 150px 3px;
+    background-repeat: no-repeat;
+    padding-bottom: 16px
+}
+
+.input-container {
+    @extend .dF-column-cc;
+    width: 100%;
+}
+
+.privacy-policy-container {
+    @extend .dF-row-cc;
+    gap: 8px;
+
+    &:hover > img {
+        background-color: color.$icon-hover-gray;
+    }
+
+    > img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    > p {
+        @extend .font-style-9;
+        color: color.$form-icon-gray;
+
+        > span {
+            @extend .font-style-9;
+            color: color.$hover-light-blue;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1952px) {
+    app-header {
+        padding: 0 16px;
+    }
+}
+
+@media(max-width: 1024px) {
+    :host {
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px 16px;
+        gap: 16px;
+    }
+
+    app-header {
+        position: unset;
+        padding: 0;
+    }
+}

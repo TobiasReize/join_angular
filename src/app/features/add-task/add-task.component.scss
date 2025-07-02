@@ -1,0 +1,25 @@
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/layout';
+@use '../../../../styles/typography';
+@use '../../../../styles/distance';
+@use '../../../../styles/variable';
+
+:host {
+    @extend .host;
+    position: relative;
+}
+
+app-header {
+    @extend .dF-jc-fs;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1024px) {
+    app-add-task-form, h3 {
+        width: 100%;
+    }
+}

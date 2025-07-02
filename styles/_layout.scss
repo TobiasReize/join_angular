@@ -1,0 +1,58 @@
+@mixin dFlex($fd: row, $jc: center, $ai: center) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.dF-row-cc {
+    @include dFlex();
+}
+
+.dF-jc-fs {
+    @include dFlex($jc: flex-start);
+}
+
+.dF-ai-fs {
+    @include dFlex($ai: flex-start);
+}
+
+.dF-jc-fe {
+    @include dFlex($jc: flex-end);
+}
+
+.dF-jc-sb {
+    @include dFlex($jc: space-between);
+}
+
+.dF-jc-sb-ai-fe {
+    @include dFlex($jc: space-between, $ai: flex-end);
+}
+
+.dF-column-cc {
+    @include dFlex($fd: column);
+}
+
+.dF-column-jc-fs {
+    @include dFlex($fd: column, $jc: flex-start);
+}
+
+.dF-column-jc-fe {
+    @include dFlex($fd: column, $jc: flex-end);
+}
+
+.dF-column-ai-fs {
+    @include dFlex($fd: column, $ai: flex-start);
+}
+
+.dF-column-fs {
+    @include dFlex($fd: column, $jc: flex-start, $ai: flex-start);
+}
+
+.dF-column-jc-fs-ai-fe {
+    @include dFlex($fd: column, $jc: flex-start, $ai: flex-end);
+}
+
+.dF-column-jc-sb {
+    @include dFlex($fd: column, $jc: space-between);
+}

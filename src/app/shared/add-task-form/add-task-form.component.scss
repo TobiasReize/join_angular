@@ -1,0 +1,414 @@
+@use '../../../../styles/layout';
+@use '../../../../styles/helper';
+@use '../../../../styles/color';
+@use '../../../../styles/distance';
+
+:host {
+    @extend .dF-column-cc;
+}
+
+.addtask-form {
+    @extend .dF-column-fs;
+    height: 640px;
+}
+
+.content-container {
+    @extend .dF-ai-fs;
+    gap: 48px;
+    width: 100%;
+}
+
+.addtask-left {
+    @extend .dF-column-cc;
+    gap: 16px;
+    width: 440px;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.title-container, .description-container, .date-container {
+    @extend .dF-column-ai-fs;
+}
+
+.input-style {
+    @extend .general-input-style;
+
+    &::placeholder {
+        color: color.$form-gray;
+    }
+}
+
+.separator {
+    width: 1px;
+    max-height: 490px;
+    height: 100%;
+    background-color: color.$form-gray;
+}
+
+.addtask-right {
+    @extend .dF-column-cc;
+    gap: 16px;
+    width: 440px;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.priority-container, .assigned-container, .category-container, .subtask-container {
+    @extend .dF-column-ai-fs;
+}
+
+.priority-buttons {
+    @extend .dF-row-cc;
+    gap: 16px;
+    width: 100%;
+}
+
+.priority-btn {
+    @extend .dF-row-cc;
+    gap: 8px;
+    height: 56px;
+    flex: 1;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+
+    > span {
+        color: black;
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+}
+
+.priority-icon {
+    width: 20px;
+    height: auto;
+}
+
+.icon-urgent {
+    path {
+        fill: color.$urgent-red;
+    }
+}
+
+.icon-medium {
+    path {
+        fill: color.$medium-orange;
+    }
+}
+
+.icon-low {
+    path {
+        fill: color.$low-green;
+    }
+}
+
+.selected-priority-btn {
+    > span {
+        @extend .font-style-6;
+        color: white;
+    }
+
+    path {
+        fill: white;
+    }
+}
+
+.btn-urgent-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$urgent-red;
+}
+
+.btn-medium-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$medium-orange;
+}
+
+.btn-low-selected {
+    @extend .selected-priority-btn;
+    background-color: color.$low-green;
+}
+
+.icon-input-hover:hover {
+    border: 1px solid color.$form-icon-gray;
+}
+
+.input-icon-style {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+}
+
+.assigned-container, .category-container {
+    position: relative;
+}
+
+.selected-contacts-container {
+    @extend .dF-jc-fs;
+    gap: 8px;
+    width: 100%;
+    height: 42px;
+}
+
+.initial-style {
+    @extend .dF-row-cc;
+    @extend .font-style-10;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: white; 
+}
+
+.remaining-contacts {
+    @extend .initial-style;
+    background-color: color.$icon-gray;
+}
+
+.overlay-style {
+    @extend .dF-column-jc-fs;
+    position: absolute;
+    top: 82px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    z-index: 5;
+    transition: max-height 80ms ease-in-out;
+}
+
+.contact-overlay {
+    @extend .overlay-style;
+    overflow-y: auto;
+}
+
+.overlay-item {
+    @extend .dF-jc-fs;
+    width: 100%;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: color.$icon-hover-gray;
+    }
+}
+
+.contact-card {
+    @extend .overlay-item;
+    padding: 7px 16px;
+}
+
+.contact-name {
+    margin-left: 16px;
+    margin-right: auto;
+}
+
+.checkbox-checked, .checkbox-unchecked {
+    width: 24px;
+    height: 24px;
+}
+
+.checkbox-unchecked {
+    rect {
+        stroke: color.$main-color;
+    }
+}
+
+.checkbox-checked {
+    path {
+        stroke: white;
+    }
+}
+
+.contact-selected {
+    background-color: color.$main-color;
+    
+    > .contact-name {
+        color: white;
+    }
+
+    &:hover {
+        background-color: color.$click-blue;
+    }
+}
+
+.category-overlay {
+    @extend .overlay-style;
+    overflow-y: hidden;
+}
+
+.category-item {
+    @extend .overlay-item;
+    padding: 12px 16px;
+}
+
+.small-separator {
+    width: 1px;
+    height: 24px;
+    background-color: color.$form-gray;
+}
+
+.added-subtasks-container {
+    width: 100%;
+    max-height: 109px;
+    overflow-y: auto;
+}
+
+.subtask-item {
+    @extend .dF-row-cc;
+    padding: 6px 21px;
+    width: 100%;
+    border-radius: 10px;
+
+    &::before {
+        content: '•';
+        color: black;
+        margin-right: 8px;
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    &:hover {
+        background-color: color.$icon-hover-gray;
+
+        > .edit-icon-container {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.subtask-content {
+    @extend .font-style-9;
+    flex: 1;
+}
+
+.subtask-icon-container-style {
+    @extend .dF-row-cc;
+    gap: 4px;
+
+    > .small-separator {
+        background-color: color.$form-icon-gray;
+    }
+}
+
+.edit-icon-container {
+    @extend .subtask-icon-container-style;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
+}
+
+.subtask-edit-item {
+    @extend .dF-row-cc;
+    padding: 6px 21px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid color.$hover-light-blue;
+}
+
+.edit-subtask-input {
+    @extend .font-style-9;
+    background-color: white;
+    flex: 1;
+}
+
+.bottom-section {
+    @extend .dF-jc-sb-ai-fe;
+    width: 100%;
+    margin-top: auto;
+}
+
+.btn-container {
+    @extend .dF-row-cc;
+    gap: 16px;
+}
+
+// -------------------------- Responsive Design --------------------------- \\
+@media(max-width: 1300px) {
+    .addtask-left, .addtask-right {
+        width: 350px;
+    }
+
+    .priority-buttons {
+        gap: 8px;
+    }
+
+    .priority-btn {
+        gap: 4px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .addtask-form {
+        width: 100%;
+    }
+    
+    .content-container {
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .addtask-left, .addtask-right {
+        width: unset;
+        flex: 1;
+    }
+}
+
+@media(max-width: 750px) {
+    .addtask-form {
+        gap: 24px;
+        height: unset;
+    }
+
+    .content-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .addtask-left, .addtask-right {
+        width: 100%;
+    }
+
+    .separator {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .priority-btn {
+        > span {
+            font-size: 16px;
+        }
+    }
+
+    .selected-contacts-container {
+        gap: 4px;
+    }
+
+    .bottom-section {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .btn-container {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
